@@ -1,4 +1,4 @@
-namespace ConstructionFlowAPI
+namespace ConstructionFlow.Api
 {
     public class WeatherForecast
     {

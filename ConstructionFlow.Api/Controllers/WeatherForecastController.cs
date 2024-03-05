@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConstructionFlowAPI.Controllers
+namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

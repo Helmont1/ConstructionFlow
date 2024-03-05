@@ -8,17 +8,17 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ConstructionFlowAPI/ConstructionFlowAPI.csproj", "ConstructionFlowAPI/"]
-RUN dotnet restore "./ConstructionFlowAPI/ConstructionFlowAPI.csproj"
+COPY ["ConstructionFlow.Api/ConstructionFlow.Api.csproj", "ConstructionFlow.Api/"]
+RUN dotnet restore "./ConstructionFlow.Api/ConstructionFlow.Api.csproj"
 COPY . .
-WORKDIR "/src/ConstructionFlowAPI"
-RUN dotnet build "./ConstructionFlowAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/ConstructionFlow.Api"
+RUN dotnet build "./ConstructionFlow.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ConstructionFlowAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ConstructionFlow.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ConstructionFlowAPI.dll"]
+ENTRYPOINT ["dotnet", "ConstructionFlow.Api.dll"]
