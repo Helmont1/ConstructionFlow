@@ -3,17 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ConstructionFlow.UI": {
+    "construction-flow.ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
+          "style": "scss"
         }
       },
       "root": "",
@@ -30,14 +24,20 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ConstructionFlow.UI:build:production"
+              "buildTarget": "construction-flow.ui:build:production"
             },
             "development": {
-              "buildTarget": "ConstructionFlow.UI:build:development"
+              "buildTarget": "construction-flow.ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ConstructionFlow.UI:build"
+            "buildTarget": "construction-flow.ui:build"
           }
         },
         "test": {
@@ -89,15 +89,15 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": [],
-            "karmaConfig": "karma.conf.js"
+            "scripts": []
           }
         }
       }

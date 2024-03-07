@@ -1,16 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [AppComponent],
     }).compileComponents();
   });
 
@@ -20,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ConstructionFlow.UI'`, () => {
+  it(`should have the 'construction-flow.ui' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ConstructionFlow.UI');
+    expect(app.title).toEqual('construction-flow.ui');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ConstructionFlow.UI');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, construction-flow.ui');
   });
 });
