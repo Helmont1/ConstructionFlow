@@ -7,7 +7,7 @@ An application that connects a construction company with its customers, providin
 
 **Server:** .NET Core, SQL Server, Swagger UI
 
-**Code Quality:** SonarQube, Jasmine, Nunit
+**Quality Assurance:** SonarQube, Jasmine, Nunit
 
 
 ## Run Locally
