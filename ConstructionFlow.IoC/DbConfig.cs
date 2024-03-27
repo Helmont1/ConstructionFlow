@@ -10,7 +10,7 @@ namespace ConstructionFlow.IoC
         public static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ConstructionFlowDbContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                options => options.UseSqlServer(Environment.GetEnvironmentVariable("DEFAULT_CONNECTION"))
                 );
 
             return services;
