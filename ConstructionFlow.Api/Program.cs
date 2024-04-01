@@ -13,6 +13,7 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder => builder.AllowAn
 builder.Services.AddDatabaseConfig(configuration);
 builder.Services.AddUnitOfWork(configuration);
 builder.Services.AddAutomapper(configuration);
+builder.Services.AddBusinesses(configuration);
 builder.Configuration.AddEnvironmentVariables();
 
 var app = builder.Build();

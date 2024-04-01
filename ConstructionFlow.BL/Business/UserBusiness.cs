@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ConstructionFlow.Domain.Model;
+using ConstructionFlow.Domain.Payload;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -12,5 +14,41 @@ namespace ConstructionFlow.BL.Business
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+
+        public UserBusiness(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetUsers()
+        {
+            var users = await unitOfWork.UserRepository.GetAllAsync();
+            return mapper.Map<IEnumerable<UserDTO>>(users);
+        }
+
+        public UserDTO GetUser(Guid userId)
+        {
+            var user = unitOfWork.UserRepository.Get(x => x.UserId == userId);
+            return mapper.Map<UserDTO>(user);
+        }
+        
+        public Task AddUser(UserDTO user)
+        {
+            unitOfWork.UserRepository.Insert(mapper.Map<User>(user));
+            return unitOfWork.SaveAsync();
+        }
+
+        public Task UpdateUser(UserDTO user)
+        {
+            unitOfWork.UserRepository.Update(mapper.Map<User>(user));
+            return unitOfWork.SaveAsync();
+        }
+
+        public Task DeleteUser(Guid userId)
+        {
+            unitOfWork.UserRepository.Delete(userId);
+            return unitOfWork.SaveAsync();
+        }
     }
 }
