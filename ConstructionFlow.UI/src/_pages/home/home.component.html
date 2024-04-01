@@ -16,26 +16,40 @@
 
   <main class="search">
     <div class="search-header">
-        <button>
-            <p>Buscar por ID</p>
-        </button>
-        <button>
-            <p>Buscar por CPF/CNPJ</p>
-        </button>
+      <button>
+        <p
+          [ngStyle]="{
+            'background-color': findById ? hActivedButton : hDeactivatedButton
+          }"
+          (click)="setFindById(true)"
+        >
+          Buscar por ID
+        </p>
+      </button>
+      <button>
+        <p
+          [ngStyle]="{
+            'background-color': !findById ? hActivedButton : hDeactivatedButton
+          }"
+          (click)="setFindById(false)"
+        >
+          Buscar por CPF/CNPJ
+        </p>
+      </button>
     </div>
     <div class="search-field">
-        <input type="text" placeholder="Digite o id da obra" />
-        <button>
-            <img src="assets/imgs/search-icon.png" alt="Pesquisar" />
-        </button>
+      <input type="text" placeholder="Digite o id da obra" />
+      <button>
+        <img src="assets/imgs/search-icon.png" alt="Pesquisar" />
+      </button>
     </div>
     <div class="search-footer">
-        <button>
-            <p>Sobre o Construction Flow</p>
-        </button>
-        <button>
-            <p>Precisa de ajuda? Contate-nos</p>
-        </button>
+      <button>
+        <p>Sobre o Construction Flow</p>
+      </button>
+      <button>
+        <p>Precisa de ajuda? Contate-nos</p>
+      </button>
     </div>
   </main>
 </section>
