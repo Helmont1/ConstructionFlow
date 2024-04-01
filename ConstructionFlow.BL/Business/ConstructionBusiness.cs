@@ -50,6 +50,17 @@ namespace ConstructionFlow.BL.Business
             _unitOfWork.ConstructionRepository.Delete(constructionId);
             return _unitOfWork.SaveAsync();
         }
-      
+
+        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByUser(Guid userId)
+        {
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.User.UserId == userId);
+            return _mapper.Map<IEnumerable<ConstructionDTO>>(constructions);
+        }
+
+        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByCustomer(Guid customerId)
+        {
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.Customer.CustomerId == customerId);
+            return _mapper.Map<IEnumerable<ConstructionDTO>>(constructions);
+        }
     }
 }

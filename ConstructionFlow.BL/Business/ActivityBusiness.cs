@@ -51,5 +51,12 @@ namespace ConstructionFlow.BL.Business
             _unitOfWork.ActivityRepository.Delete(activityId);
             return _unitOfWork.SaveAsync();
         }
+
+        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(Guid constructionId)
+        {
+            var activities = await _unitOfWork.ActivityRepository.GetAllAsync(x => x.Construction.ConstructionId == constructionId);
+            return _mapper.Map<IEnumerable<ActivityDTO>>(activities);
+            
+        }
     }
 }
