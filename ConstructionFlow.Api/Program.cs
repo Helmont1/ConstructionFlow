@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 builder.Services.AddDatabaseConfig(configuration);
 builder.Services.AddUnitOfWork(configuration);
+builder.Services.AddAutomapper(configuration);
 builder.Configuration.AddEnvironmentVariables();
 
 var app = builder.Build();
