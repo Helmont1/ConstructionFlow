@@ -10,7 +10,15 @@ namespace ConstructionFlow.BL.Business
 {
     public class UserBusiness
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public UserBusiness(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
+        }
+
+
     }
 }
