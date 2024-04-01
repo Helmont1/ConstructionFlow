@@ -1,0 +1,124 @@
+@import "../../variables.scss";
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+
+    &-logo {
+      img {
+        width: 5vw;
+      }
+    }
+
+    &-menu {
+      ul {
+        list-style: none;
+
+        li {
+          display: inline;
+          margin-right: 20px;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+
+          a {
+            text-decoration: none;
+            color: white;
+            font-weight: normal;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        li:nth-child(2) {
+          background-color: $h-background-button;
+          padding: 10px 20px;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+
+  .search {
+
+    &-header {
+        display: flex;
+        flex-direction: row;
+
+        button {
+            border: none;
+            cursor: pointer;
+            
+            p {
+                color: white;
+                background-color: $h-background-button;
+                padding: 10px 20px;
+                border-right: 1px solid #475967;
+            }
+        }
+
+    }
+
+    &-field {
+        display: flex;
+        flex-direction: row;
+    
+        input {
+            width: 35vw;
+            padding: 2% 3%;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+        }
+    
+        button {
+            background-color: $h-search-background;
+            border: none;
+            padding: 1.4%;
+            padding-top: 1.5%;
+            cursor: pointer;
+            width: 3.4vw;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    &-footer {
+        display: flex;
+        flex-direction: row;
+        width: 38.4vw;
+        background-color: $h-background-button;
+
+        button {
+            border: none;
+            cursor: pointer;
+            
+            p {
+                color: white;
+                background-color: $h-background-button;
+                padding: 10px 20px;
+                border-right: 1px solid #475967;
+            }
+        }
+    }
+  }
+}
