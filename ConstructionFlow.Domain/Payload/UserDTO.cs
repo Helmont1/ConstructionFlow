@@ -15,8 +15,6 @@ namespace ConstructionFlow.Domain.Payload
 
         public required string UserEmail { get; set; }
 
-        public required string UserPassword { get; set; }
-
         public required string UserCnpj { get; set; }
     }
 }
