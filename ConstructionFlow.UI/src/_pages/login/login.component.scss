@@ -1,0 +1,49 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+
+  &-container {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 20%;
+
+    .login-field {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .input {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .input i {
+      position: absolute;
+      left: 5px;
+      top: 60%;
+      transform: translateY(-50%);
+    }
+
+    .input input {
+      margin-top: 10px;
+      padding-left: 30px;
+      padding-block: 5px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      width: 100%;
+    }
+  }
+}
