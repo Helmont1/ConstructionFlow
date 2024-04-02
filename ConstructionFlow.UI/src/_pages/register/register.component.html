@@ -1,47 +1,143 @@
 <section class="register" style="background-image: url('assets/imgs/home-background.jpg')">
     <div class="navbar">
-        <div class="navbar-logo">
-            <img src="assets/imgs/logo.png" alt="Logo"/>
-        </div>
+        <a routerLink="/home">
+            <div class="navbar-logo">
+              <img src="assets/imgs/logo.png" alt="Logo" />
+            </div>
+        </a>
         <div class="navbar-menu">
           <ul>
-            <li><a RouterLink="/login">Entrar</a></li>
+            <li><a routerLink="/home">Ínicio</a></li>
+            <li><a routerLink="/login">Entrar</a></li>
+          </ul>
+        </div>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="register-container">
+        <h1>Cadastro</h1>
+        <h6>Página direcionada para cadastro de empresas</h6>
+        <div class="form-group">
+            <div class="input">
+                <label for="email" class="register-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    Email:
+                </label>
+                <input type="email" formControlName="email" id="email" class="form-control" placeholder="Digite seu email" required>
+                <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                    <div *ngIf="registerForm.get('email').errors.required">
+                        <small class="text-danger">Campo obrigatório</small>
+                    </div>
+                    <div *ngIf="registerForm.get('email').errors.email">
+                        <small class="text-danger">Email inválido</small>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="name" class="register-field">
+                <i class="fa-regular fa-user"></i>
+                Nome:
+            </label>
+            <input type="text" formControlName="name" id="name" class="form-control" required>
+            <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+                <div *ngIf="registerForm.get('name').errors.required">
+                    <small class="text-danger">Campo obrigatório</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cnpj" class="register-field">
+                <i class="fa-regular fa-building"></i>
+                CNPJ:
+            </label>
+            <input type="number" formControlName="cnpj" id="cnpj" class="form-control" required>
+            <div *ngIf="registerForm.get('cnpj').invalid && (registerForm.get('cnpj').dirty || registerForm.get('cnpj').touched)">
+                <div *ngIf="registerForm.get('cnpj').errors.required">
+                    <small class="text-danger">Campo obrigatório</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" class="register-field">
+            <label for="password">
+                <i class="fas fa-lock"></i>
+                Senha:
+            </label>
+            <input type="password" formControlName="password" id="password" class="form-control" required>
+            <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                <div *ngIf="registerForm.get('password').errors.required">
+                    <small class="text-danger">Campo obrigatório</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" class="login-field">
+            <label for="confirmPassword" class="input">
+                <i class="fas fa-lock"></i>
+                Confirme sua senha:
+            </label>
+            <input type="password" formControlName="confirmPassword" id="confirmPassword" class="form-control" required>
+            <div *ngIf="registerForm.get('confirmPassword').invalid && (registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched)">
+                <div *ngIf="registerForm.get('confirmPassword').errors.required">
+                    <small class="text-danger">Campo obrigatório</small>
+                </div>
+            </div>
+    <!-- <div class="navbar">
+        <a routerLink="/home">
+            <div class="navbar-logo">
+              <img src="assets/imgs/logo.png" alt="Logo" />
+            </div>
+        </a>
+        <div class="navbar-menu">
+          <ul>
+            <li><a routerLink="/home">Ínicio</a></li>
+            <li><a routerLink="/login">Entrar</a></li>
           </ul>
         </div>
       </div>
-      
+
     <div class="register-container">
         <h1>Cadastro</h1>
-        <h6>Pagina direcionada para cadastro de empresas</h6>
+        <h6>Página direcionada para cadastro de empresas</h6>
         <div class="register-field">
             <p>Email:</p>
             <div class="input">
-                <i class="fas fa-envelope"></i>
+                <i class="fa-regular fa-envelope"></i>
                 <input type="text" placeholder="Digite seu email" />
             </div>
+        </div>
+        <div class="register-field">
             <p>Nome:</p>
             <div class="input">
-                <i class="fas fa-envelope"></i>
+                <i class="fa-regular fa-envelope"></i>
                 <input type="text" placeholder="Digite o nome da empresa" />
             </div>
+        </div>
+        <div class="register-field">
             <p>CNPJ:</p>
             <div class="input">
-                <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Digite o CNPJ" />
+                <i class="fa-regular fa-building"></i>
+                <input type="number" placeholder="Digite o CNPJ" />
             </div>
+        </div>
+        <div class="register-field">
             <p>Senha:</p>
             <div class="input">
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Digite sua senha" />
             </div>
+        </div>
+        <div class="register-field">
             <p>Confirme sua senha:</p>
             <div class="input">
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Confirme sua senha" />
-            </div>
-            <button class="">
+            </div> -->
+        </div>
+        <div>
+            <button class="btn">
                 <p>Cadastrar</p>
             </button>
         </div>
-    </div>
+     
+    </form>
 </section>
