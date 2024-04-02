@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-register',
@@ -9,8 +10,11 @@ import { NgIf } from '@angular/common';
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgxMaskDirective, 
+    NgxMaskPipe
   ],
+  providers: [provideNgxMask()],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -24,7 +28,7 @@ export class RegisterComponent {
       cnpj: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern("^[0-9]*$")]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    });
+    }, { validator: passwordsMatchValidator('password', 'confirmPassword') });
   }
   onSubmit() {
     console.log(this.registerForm.value);
@@ -33,4 +37,19 @@ export class RegisterComponent {
 }
 
 
+
+function passwordsMatchValidator(passwordKey: string, confirmPasswordKey: string): ValidatorFn {
+  return (formGroup: AbstractControl<any, any>): ValidationErrors | null => {
+    const passwordControl = formGroup.get(passwordKey);
+    const confirmPasswordControl = formGroup.get(confirmPasswordKey);
+
+    if (passwordControl && confirmPasswordControl && passwordControl.value !== confirmPasswordControl.value) {
+      confirmPasswordControl?.setErrors({ notEqual: true });
+    } else {
+      confirmPasswordControl?.setErrors(null);
+    }
+
+    return null;
+  };
+}
 
