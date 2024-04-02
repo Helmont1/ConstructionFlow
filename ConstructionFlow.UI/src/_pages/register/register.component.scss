@@ -1,0 +1,111 @@
+@import "../../variables.scss";
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+
+    &-logo {
+        img {
+            width: 5vw;
+        }
+    }
+
+
+
+    &-menu {
+        ul {
+            list-style: none;
+
+            li {
+                display: inline;
+                margin-right: 20px;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                    font-weight: normal;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            li:nth-child(2) {
+                background-color: $h-background-button;
+                padding: 10px 20px;
+                border-radius: 100px;
+            }
+        }
+    }
+}
+
+.register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+
+    &-container {
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20%;
+
+        h1 {
+            color: $h-background-button;
+        }
+
+        
+
+        .register-field {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        h6 {
+            color: rgb(156, 16, 16);
+
+        }
+
+        .input {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .input i {
+            position: absolute;
+            left: 5px;
+            top: 60%;
+            transform: translateY(-50%);
+        }
+
+        .input input {
+            margin-top: 10px;
+            padding-left: 30px;
+            padding-block: 5px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            width: 100%;
+        }
+    }
+
+    
+}

@@ -1,23 +1,47 @@
-<section class="register">
+<section class="register" style="background-image: url('assets/imgs/home-background.jpg')">
     <div class="navbar">
         <div class="navbar-logo">
-            <img src="assets/imgs/logo.png" alt="Logo" />
+            <img src="assets/imgs/logo.png" alt="Logo"/>
         </div>
         <div class="navbar-menu">
-            <ul>
-                <li><a href="#about">Entrar</a></li>
-                <li><a href="#services">Cadastre-se</a></li>
-            </ul>
+          <ul>
+            <li><a RouterLink="/login">Entrar</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    <div class="register-container">
+        <h1>Cadastro</h1>
+        <h6>Pagina direcionada para cadastro de empresas</h6>
+        <div class="register-field">
+            <p>Email:</p>
+            <div class="input">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Digite seu email" />
+            </div>
+            <p>Nome:</p>
+            <div class="input">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Digite o nome da empresa" />
+            </div>
+            <p>CNPJ:</p>
+            <div class="input">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Digite o CNPJ" />
+            </div>
+            <p>Senha:</p>
+            <div class="input">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Digite sua senha" />
+            </div>
+            <p>Confirme sua senha:</p>
+            <div class="input">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Confirme sua senha" />
+            </div>
+            <button class="">
+                <p>Cadastrar</p>
+            </button>
         </div>
     </div>
-
-    <div class="register-header">
-        <h1>Cadastre-se</h1>
-    </div>
-    <div class="register-form">
-        <form>
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input type="text" id="name" />
-            </div>
-            <p>register works!</p>
+</section>
