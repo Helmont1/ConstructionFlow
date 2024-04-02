@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms'
-import { get } from 'http';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
@@ -10,7 +9,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule,
     ReactiveFormsModule,
     NgIf,
     NgxMaskDirective, 
@@ -32,12 +30,6 @@ export class RegisterComponent {
       confirmPassword: ['', Validators.required]
     }, { validator: passwordsMatchValidator('password', 'confirmPassword') });
   }
-
-  get email() { return this.registerForm.get('email'); }
-  get name() { return this.registerForm.get('name'); }
-  get cnpj() { return this.registerForm.get('cnpj'); }
-  get password() { return this.registerForm.get('password'); } 
-  get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   onSubmit() {
     console.log(this.registerForm.value);
   }

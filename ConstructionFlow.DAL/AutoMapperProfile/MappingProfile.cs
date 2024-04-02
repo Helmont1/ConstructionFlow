@@ -27,6 +27,7 @@ namespace ConstructionFlow.DAL.AutoMapperProfile
             CreateMap<UserDTO, User>();
             CreateMap<Activity, ActivityDTO>();
             CreateMap<ActivityDTO, Activity>();
+            CreateMap<UserLoginDTO, User>();
             
         }
     }

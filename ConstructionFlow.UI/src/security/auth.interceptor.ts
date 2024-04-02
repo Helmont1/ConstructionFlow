@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const request = req.clone({
       url: environment.apiUrl + `${req.url}`
     });
-
     return next.handle(request);
   }
 }

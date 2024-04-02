@@ -1,14 +1,14 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     RouterLink,
-    CommonModule,
     ReactiveFormsModule,
     NgIf
   ],
@@ -16,21 +16,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginForm;
-  constructor(private formBuilder: FormBuilder) {
+  loginForm: FormGroup;
+  constructor(private formBuilder: FormBuilder, private userService: UserService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
   }
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.userService.getUser('3b8b20f9-019a-4d9d-3f9e-08dc5365e5bb').subscribe((user) => {
+      sessionStorage.setItem('user', JSON.stringify(user));
+    });
   }
 
   debugEmailErrors() {
