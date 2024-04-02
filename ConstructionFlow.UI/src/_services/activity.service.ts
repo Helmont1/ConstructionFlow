@@ -22,4 +22,18 @@ export class ActivityService {
     return this.http.post(this.url, activity);
   }
 
+  editActivity(activity: Activity) {
+    return this.http.put(`${this.url}/${activity.activityId}`, activity);
+  }
+
+  deleteActivity(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getActivitiesByConstruction(constructionId: number) {
+    return this.http.get(`${this.url}/construction/${constructionId}`);
+  }
+
+
+
 }
