@@ -2,14 +2,36 @@
   class="login"
   style="background-image: url('assets/imgs/home-background.jpg')"
 >
+  <div class="navbar">
+    <a routerLink="/home">
+        <div class="navbar-logo">
+          <img src="assets/imgs/logo.png" alt="Logo" />
+        </div>
+    </a>
+    <div class="navbar-menu">
+      <ul>
+        <li><a routerLink="/home">Ínicio</a></li>
+        <li><a routerLink="/register">Cadastre-se</a></li>
+      </ul>
+    </div>
+  </div>
   <div class="login-container">
     <h1>Login</h1>
     <div class="login-field">
-      <p>Email:</p>
+      <p>Email</p>
       <div class="input">
-        <i class="fas fa-envelope"></i>
+        <i class="fa-regular fa-envelope"></i>
         <input type="text" placeholder="Digite seu email" />
       </div>
     </div>
+    <div class="login-field">
+      <p>Senha</p>
+      <div class="input">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Digite sua senha" />
+      </div>
+    </div>
+    <button class="btn">Entrar</button>
+    <a href="#" class="register">Cadastre-se</a>
   </div>
 </section>
