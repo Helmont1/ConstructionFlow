@@ -1,7 +1,4 @@
-<section
-  class="home"
-  style="background-image: url('assets/imgs/home-background.jpg')"
->
+<section class="home" style="background-image: url('assets/imgs/home-background.jpg')">
   <div class="navbar">
     <div class="navbar-logo">
       <img src="assets/imgs/logo.png" alt="Logo" />
@@ -9,7 +6,7 @@
     <div class="navbar-menu">
       <ul>
         <li><a href="#about">Entrar</a></li>
-        <li><a href="#services">Cadastre-se</a></li>
+        <li><a href="/register">Cadastre-se</a></li>
       </ul>
     </div>
   </div>
@@ -17,22 +14,16 @@
   <main class="search">
     <div class="search-header">
       <button>
-        <p
-          [ngStyle]="{
+        <p [ngStyle]="{
             'background-color': findById ? hActivedButton : hDeactivatedButton
-          }"
-          (click)="setFindById(true)"
-        >
+          }" (click)="setFindById(true)">
           Buscar por ID
         </p>
       </button>
       <button>
-        <p
-          [ngStyle]="{
+        <p [ngStyle]="{
             'background-color': !findById ? hActivedButton : hDeactivatedButton
-          }"
-          (click)="setFindById(false)"
-        >
+          }" (click)="setFindById(false)">
           Buscar por CPF/CNPJ
         </p>
       </button>
@@ -44,9 +35,11 @@
       </button>
     </div>
     <div class="search-footer">
-      <button>
-        <p>Sobre o Construction Flow</p>
-      </button>
+      <a href="https://github.com/Helmont1/ConstructionFlow">
+        <button>
+          <p>Sobre o Construction Flow</p>
+        </button>
+      </a>
       <button>
         <p>Precisa de ajuda? Contate-nos</p>
       </button>
