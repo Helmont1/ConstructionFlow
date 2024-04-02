@@ -28,7 +28,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddUser(UserDTO user)
+        public Task AddUser(UserLoginDTO user)
         {
             return _userBusiness.AddUser(user);
         }

@@ -33,7 +33,7 @@ namespace ConstructionFlow.BL.Business
             return mapper.Map<UserDTO>(user);
         }
         
-        public Task AddUser(UserDTO user)
+        public Task AddUser(UserLoginDTO user)
         {
             unitOfWork.UserRepository.Insert(mapper.Map<User>(user));
             return unitOfWork.SaveAsync();
