@@ -4,9 +4,9 @@
 >
   <div class="navbar">
     <a routerLink="/home">
-        <div class="navbar-logo">
-          <img src="assets/imgs/logo.png" alt="Logo" />
-        </div>
+      <div class="navbar-logo">
+        <img src="assets/imgs/logo.png" alt="Logo" />
+      </div>
     </a>
     <div class="navbar-menu">
       <ul>
@@ -17,21 +17,61 @@
   </div>
   <div class="login-container">
     <h1>Login</h1>
-    <div class="login-field">
-      <p>Email</p>
-      <div class="input">
-        <i class="fa-regular fa-envelope"></i>
-        <input type="text" placeholder="Digite seu email" />
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%">
+      <div class="login-field">
+        <p>Email</p>
+        <div class="input">
+          <i class="fa-regular fa-envelope"></i>
+          <input
+            type="text"
+            placeholder="Digite seu email"
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            !loginForm.get('email')?.valid &&
+            (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+          "
+        >
+          <p *ngIf="loginForm.get('email')?.errors?.required">
+            Email é obrigatório
+          </p>
+          <p *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.email">Email inválido</p>
+        </div>
       </div>
-    </div>
-    <div class="login-field">
-      <p>Senha</p>
-      <div class="input">
-        <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Digite sua senha" />
+      <div class="login-field">
+        <p>Senha</p>
+        <div class="input">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            id="password"
+            name="password"
+            formControlName="password"
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            !loginForm.get('password')?.valid &&
+            (loginForm.get('password')?.dirty ||
+              loginForm.get('password')?.touched)
+          "
+        >
+          <p *ngIf="loginForm.get('password')?.errors?.required">
+            Senha é obrigatória
+          </p>
+        </div>
       </div>
-    </div>
-    <button class="btn">Entrar</button>
-    <a href="#" class="register">Cadastre-se</a>
+      <button class="btn" type="submit" [disabled]="!loginForm.valid">
+        Entrar
+      </button>
+      <a routerLink="/register" class="register">Cadastre-se</a>
+    </form>
   </div>
 </section>
