@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms'
-import { get } from 'http';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -9,7 +8,6 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule,
     ReactiveFormsModule,
     NgIf
   ],
@@ -28,12 +26,6 @@ export class RegisterComponent {
       confirmPassword: ['', Validators.required]
     });
   }
-
-  get email() { return this.registerForm.get('email'); }
-  get name() { return this.registerForm.get('name'); }
-  get cnpj() { return this.registerForm.get('cnpj'); }
-  get password() { return this.registerForm.get('password'); } 
-  get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   onSubmit() {
     console.log(this.registerForm.value);
   }
