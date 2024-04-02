@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]/constructionphoto/")]
+    [Route("[controller]/")]
     public class ConstructionPhotoController
     {
         private readonly ConstructionPhotoBusiness _constructionPhotoBusiness;

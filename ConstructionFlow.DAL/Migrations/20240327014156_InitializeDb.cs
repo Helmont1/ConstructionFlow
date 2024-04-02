@@ -82,20 +82,17 @@ namespace ConstructionFlow.DAL.Migrations
                         name: "FK_Construction_Customer_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customer",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CustomerId");
                     table.ForeignKey(
                         name: "FK_Construction_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
-                        principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "StatusId");
                     table.ForeignKey(
                         name: "FK_Construction_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -118,8 +115,7 @@ namespace ConstructionFlow.DAL.Migrations
                         name: "FK_Activity_Construction_ConstructionId",
                         column: x => x.ConstructionId,
                         principalTable: "Construction",
-                        principalColumn: "ConstructionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ConstructionId");
                     table.ForeignKey(
                         name: "FK_Activity_DefaultActivity_DefaultActivityId",
                         column: x => x.DefaultActivityId,
@@ -129,8 +125,7 @@ namespace ConstructionFlow.DAL.Migrations
                         name: "FK_Activity_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
-                        principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "StatusId");
                 });
 
             migrationBuilder.CreateTable(
@@ -148,8 +143,7 @@ namespace ConstructionFlow.DAL.Migrations
                         name: "FK_ConstructionPhoto_Construction_ConstructionId",
                         column: x => x.ConstructionId,
                         principalTable: "Construction",
-                        principalColumn: "ConstructionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ConstructionId");
                 });
 
             migrationBuilder.CreateIndex(
