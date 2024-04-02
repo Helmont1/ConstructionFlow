@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms'
 import { get } from 'http';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,8 @@ import { get } from 'http';
   imports: [
     RouterLink,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -19,24 +21,19 @@ export class RegisterComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({
-      email: [''],
-      name: [''],
-      cnpj: [''],
-      senha: [''],
-    });
-
-    this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.maxLength(15), Validators.pattern("^[a-zA-Z]+$")]],
       cnpj: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern("^[0-9]*$")]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
     });
   }
 
   get email() { return this.registerForm.get('email'); }
   get name() { return this.registerForm.get('name'); }
   get cnpj() { return this.registerForm.get('cnpj'); }
-  get senha() { return this.registerForm.get('senha'); } 
+  get password() { return this.registerForm.get('password'); } 
+  get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   onSubmit() {
     console.log(this.registerForm.value);
   }

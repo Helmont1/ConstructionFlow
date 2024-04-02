@@ -90,7 +90,13 @@
           color: $h-background-button;
         }
 
-        
+        .warning p {
+          color: rgb(156, 16, 16);
+          font-size: 12px;
+          padding-left: 5px;
+          margin-top: 1px;
+        }
+
         .input {
           position: relative;
           display: inline-block;
