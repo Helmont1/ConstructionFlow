@@ -25,7 +25,7 @@ export class LoginComponent {
 
   }
   onSubmit() {
-    this.userService.getUser(1).subscribe((user) => {
+    this.userService.getUser('3b8b20f9-019a-4d9d-3f9e-08dc5365e5bb').subscribe((user) => {
       sessionStorage.setItem('user', JSON.stringify(user));
     });
   }

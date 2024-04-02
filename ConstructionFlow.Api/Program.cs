@@ -9,7 +9,18 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+// remove cors security
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowLocalhost",
+               builder =>
+               {
+            builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddDatabaseConfig(configuration);
 builder.Services.AddUnitOfWork(configuration);
 builder.Services.AddAutomapper(configuration);
@@ -25,6 +36,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.UseCors("AllowLocalhost");
 app.MapControllers();
 app.Run();
