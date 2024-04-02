@@ -50,5 +50,11 @@ namespace ConstructionFlow.BL.Business
             unitOfWork.UserRepository.Delete(userId);
             return unitOfWork.SaveAsync();
         }
+
+        public UserDTO GetUsersByCNPJ(string userCNPJ)
+        {
+            var user = unitOfWork.UserRepository.Get(x => x.UserCnpj == userCNPJ);
+            return mapper.Map<UserDTO>(user);
+        }
     }
 }
