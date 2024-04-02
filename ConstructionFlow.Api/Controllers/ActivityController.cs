@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]/activity/")]
+    [Route("[controller]/")]
     public class ActivityController: ControllerBase 
     {
         private readonly ActivityBusiness _activityBusiness;

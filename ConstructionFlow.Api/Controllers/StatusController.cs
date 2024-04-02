@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]/status/")]
+    [Route("[controller]/")]
     public class StatusController
     {
         private readonly StatusBusiness _statusBusiness;
