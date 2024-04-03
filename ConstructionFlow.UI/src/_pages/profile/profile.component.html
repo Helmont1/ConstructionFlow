@@ -1,16 +1,37 @@
-<div>
-    <h1>Nome da Empresa</h1>
-    <p>CNPJ: 45.151.515/1515-15</p>
-    <div>
-        <i class="fa-regular fa-envelope"></i>
-        <p>email'a'email.com</p>
+<div class="left-nav">
+    <a routerLink="/home">
+        <img src="assets/imgs/logo.png" alt="logo">
+    </a>
+    <div class="logout">
+        <i class="fa-solid fa-sign-out-alt"></i>
+        <p>sair</p>
     </div>
 </div>
-<div style="height: 300px">
-    @if (showPending){
-        <app-carousel [carouselItems]="items"></app-carousel>
-    }
-    @else{
-        <p>Construído</p>
-    }
+<div>
+    <div class="header">
+        <h1>Nome da Empresa</h1>
+        <p>CNPJ: 45.151.515/1515-15</p>
+        <div class="email">
+            <i class="fa-regular fa-envelope"></i>
+            <a href="mailto:email@email.com">email&#64;email.com</a>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="tab" [class.active]="showPending" (click)="setShowPending(true)">
+            <i class="fa-solid fa-hammer"></i>
+            <p>Obras em andamento</p>
+        </div>
+        <div class="tab" [class.active]="!showPending" (click)="setShowPending(false)">
+            <i class="fa-solid fa-flag-checkered"></i>
+            <p>Obras finalizadas</p>
+        </div>
+    </div>
+    <div class="carousel">
+        @if (showPending){
+            <app-carousel [carouselItems]="items"></app-carousel>
+        }
+        @else{
+            <app-carousel [carouselItems]="items.slice(2, items.length)"></app-carousel>
+        }
+    </div>
 </div>

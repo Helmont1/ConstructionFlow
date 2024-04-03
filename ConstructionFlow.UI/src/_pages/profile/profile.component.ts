@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../_models/user.model';
 import { CarouselComponent, carouselItem } from '../../_components/carousel/carousel.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
-    CarouselComponent
+    CarouselComponent,
+    RouterLink
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
@@ -86,8 +87,8 @@ export class ProfileComponent implements OnInit {
   ];
 
 
-  togglePending() {
-    this.showPending = !this.showPending;
+  setShowPending( showPending: boolean ) {
+    this.showPending = showPending;
   }
 }
 
