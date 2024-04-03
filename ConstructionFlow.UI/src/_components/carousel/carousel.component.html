@@ -1,0 +1,31 @@
+@if (carouselItems && carouselItems.length > 0){
+    <div class="carousel-container">
+        @for (item of carouselItems; track item.constructionId; let i = $index; let last = $last){
+            <a href="" [ngClass]="getActiveClass(i)" class="item">
+                <img src="{{carouselItems[i].image}}" alt="{{carouselItems[i].title}}">
+                <div>
+                    <h3>{{carouselItems[i].title}}</h3>
+                    <p>Id: #{{carouselItems[i].constructionId}}</p>
+                    <p>Ínicio em: {{carouselItems[i].startDate | date:'dd/MM/yyyy'}}</p>
+                    <p>Término previsto: {{carouselItems[i].endDate | date:'dd/MM/yyyy'}}</p>
+                    <p>Cliente: {{carouselItems[i].customer.name}}</p>
+                </div>
+            </a>
+        }
+        @if (indicators){
+            <div class="dots-container">
+                @for (dot of carouselItems.slice(0, calculateSliceLength()); track dot.constructionId; let i = $index){
+                    <span class="dot" [ngClass]="{'dot-active': selectedIndex === (i * itemsPerSlide)}" (click)="selectItem(i * itemsPerSlide)"></span>
+                }
+            </div>
+        }
+        @if (controls) {
+            <button class="btn-carousel btn-prev" (click)="onPrevClick()">
+                <i class="fa-solid fa-chevron-left icon-carousel icon-prev"></i>
+            </button>
+            <button class="btn-carousel btn-next" (click)="onNextClick()">
+                <i class="fa-solid fa-chevron-right icon-carousel icon-next"></i>
+            </button>
+        }
+    </div>
+}

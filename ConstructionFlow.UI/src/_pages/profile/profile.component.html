@@ -1,1 +1,16 @@
-<!-- <h1>{{user.userName}}</h1> -->
+<div>
+    <h1>Nome da Empresa</h1>
+    <p>CNPJ: 45.151.515/1515-15</p>
+    <div>
+        <i class="fa-regular fa-envelope"></i>
+        <p>email'a'email.com</p>
+    </div>
+</div>
+<div style="height: 300px">
+    @if (showPending){
+        <app-carousel [carouselItems]="items"></app-carousel>
+    }
+    @else{
+        <p>Construído</p>
+    }
+</div>
