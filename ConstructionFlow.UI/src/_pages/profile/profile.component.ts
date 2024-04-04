@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, afterRender } from '@angular/core';
 import { CarouselComponent, carouselItem } from '../../_components/carousel/carousel.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Construction } from '../../_models/construction.model';
+import { User } from '../../_models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +14,23 @@ import { RouterLink } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit{
   // user: User = {} as User;
   showPending: boolean = true;
+
+  constructor(private router: Router) { 
+    afterRender(() => {
+      this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    });
+  }
+
+  user: User = {} as User;
+  constructions: Construction[] = []
   ngOnInit() {
-  //   this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+  }
+
+  createConstruction() {
+    this.router.navigate(['construction']);
   }
 
   items: carouselItem[] = [
@@ -89,6 +103,13 @@ export class ProfileComponent implements OnInit {
 
   setShowPending( showPending: boolean ) {
     this.showPending = showPending;
+  }
+
+  formatCnpj(cnpj: string): string {
+    if (!cnpj || cnpj.length !== 14) {
+      return cnpj;
+    }
+    return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(5, 8)}/${cnpj.substring(8, 12)}-${cnpj.substring(12)}`;
   }
 }
 

@@ -9,8 +9,8 @@
 </div>
 <div>
     <div class="header">
-        <h1>Nome da Empresa</h1>
-        <p>CNPJ: 45.151.515/1515-15</p>
+        <h1>{{user.userName}}</h1>
+        <p style="margin-right: 2%;">CNPJ: {{formatCnpj(user.userCnpj)}}</p>
         <div class="email">
             <i class="fa-regular fa-envelope"></i>
             <a href="mailto:email@email.com">email&#64;email.com</a>
@@ -24,6 +24,10 @@
         <div class="tab" [class.active]="!showPending" (click)="setShowPending(false)">
             <i class="fa-solid fa-flag-checkered"></i>
             <p>Obras finalizadas</p>
+        </div>
+        <div class="tab" (click)="createConstruction()">
+            <i class="fa-solid fa-plus"></i>
+            <p>Adicionar obra</p>
         </div>
     </div>
     <div class="carousel">

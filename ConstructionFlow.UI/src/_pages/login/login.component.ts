@@ -1,7 +1,7 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../_services/user.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { UserService } from '../../_services/user.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private routerService: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -28,6 +28,8 @@ export class LoginComponent {
     this.userService.getUser('3b8b20f9-019a-4d9d-3f9e-08dc5365e5bb').subscribe((user) => {
       sessionStorage.setItem('user', JSON.stringify(user));
     });
+    this.routerService.navigate(['/profile']);
+    
   }
 
   debugEmailErrors() {

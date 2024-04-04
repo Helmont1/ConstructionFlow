@@ -1,0 +1,125 @@
+<div class="left-nav">
+    <a routerLink="/home">
+        <img src="assets/imgs/logo.png" alt="logo">
+    </a>
+    <div class="logout">
+        <i class="fa-solid fa-sign-out-alt"></i>
+        <p>sair</p>
+    </div>
+</div>
+<section
+  class="register"
+  style="background-color: lightgray;"
+>
+  <div class="navbar">
+    <a routerLink="/home">
+      <!-- <div class="navbar-logo">
+        <img src="assets/imgs/logo.png" alt="Logo" />
+      </div> -->
+    </a>
+    <div class="navbar-menu">
+      <!-- <ul>
+        <li><a routerLink="/home">Ínicio</a></li>
+        <li><a routerLink="/login">Entrar</a></li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="register-container" >
+    <h1>Cadastrar nova obra</h1>
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="saveConstruction()"
+      novalidate
+      style="width: 100%"
+    >
+      <div class="register-field">
+        <p>Data de ínicio:</p>
+        <div class="input">
+          <i class="fa-regular fa-calendar"></i>
+          <input
+            type="date"
+            formControlName="startDate"
+            id="startDate"
+            class="form-control"
+            placeholder="Digite a data de ínicio"
+            required
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            !registerForm.get('customer')?.valid &&
+            (registerForm.get('customer')?.dirty ||
+              registerForm.get('customer')?.touched)
+          "
+        >
+          <p *ngIf="registerForm.get('customer')?.errors?.required">
+            cliente é obrigatório
+          </p>
+          <p
+            *ngIf="
+              registerForm.get('customer')?.touched &&
+              registerForm.get('customer')?.errors?.customer
+            "
+          >
+            cliente inválido
+          </p>
+        </div>
+      </div>
+      <div class="register-field">
+        <p>Data de fim:</p>
+        <div class="input">
+            <i class="fa-regular fa-calendar"></i>
+          <input
+            type="date"
+            formControlName="endDate"
+            id="endDate"
+            placeholder="Digite a data de fim"
+            required
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            registerForm.get('endDate')?.invalid &&
+            (registerForm.get('endDate')?.dirty ||
+              registerForm.get('endDate')?.touched)
+          "
+        >
+          <p *ngIf="registerForm.get('endDate')?.errors?.required">
+            Campo obrigatório
+          </p>
+        </div>
+      </div>
+      <div class="register-field">
+        <p>CNPJ / CPF:</p>
+        <div class="input">
+          <i class="fa-regular fa-building"></i>
+          <input
+            type="text"
+            formControlName="customer"
+            id="customer"
+            placeholder="Digite o CNPJ/CPF do cliente"
+            mask="00.000.000/0000-00"
+            required
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            registerForm.get('cnpj')?.invalid &&
+            (registerForm.get('cnpj')?.dirty ||
+              registerForm.get('cnpj')?.touched)
+          "
+        >
+          <p *ngIf="registerForm.get('cnpj')?.errors?.required">
+            Campo obrigatório
+          </p>
+        </div>
+        <button class="btn" type="submit" [disabled]="!registerForm.valid" routerLink="/login">
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
