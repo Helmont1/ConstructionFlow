@@ -27,9 +27,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<StatusDTO>>(status);
         }
 
-        public StatusDTO GetStatus(Guid statusId)
+        public StatusDTO GetStatus(string statusName)
         {
-            var status =  _unitOfWork.StatusRepository.Get(x => x.StatusId == statusId);
+            var status =  _unitOfWork.StatusRepository.Get(x => x.StatusName == statusName);
             return _mapper.Map<StatusDTO>(status);
         }
 

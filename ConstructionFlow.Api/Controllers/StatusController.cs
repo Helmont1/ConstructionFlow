@@ -21,10 +21,10 @@ namespace ConstructionFlow.Api.Controllers
             return await _statusBusiness.GetStatuses();
         }
 
-        [HttpGet("{statusId}")]
-        public StatusDTO GetStatus(Guid statusId)
+        [HttpGet("{statusName}")]
+        public StatusDTO GetStatus(string statusName)
         {
-            return _statusBusiness.GetStatus(statusId);
+            return _statusBusiness.GetStatus(statusName);
         }
 
         [HttpPost]
