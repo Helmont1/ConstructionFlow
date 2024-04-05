@@ -11,9 +11,9 @@ export class AuthService {
     localStorage.removeItem('user');
   }
   login(): void {
-    this.userService.getUser('3b8b20f9-019a-4d9d-3f9e-08dc5365e5bb').subscribe((user) => {
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('isLoggedIn', 'true');
-      });
+    this.userService.getUser(1).subscribe((user) => {
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('isLoggedIn', 'true');
+    });
   }
 }
