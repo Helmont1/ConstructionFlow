@@ -23,7 +23,7 @@ namespace ConstructionFlow.Api.Controllers
 
         [HttpGet("{activityId}")]
 
-        public ActivityDTO GetActivity(Guid activityId)
+        public ActivityDTO GetActivity(int activityId)
         {
             return _activityBusiness.GetActivity(activityId);
         }
@@ -41,14 +41,14 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpDelete("{activityId}")]
-        public Task DeleteActivity(Guid activityId)
+        public Task DeleteActivity(int activityId)
         {
             return _activityBusiness.DeleteActivity(activityId);
         }
 
         [HttpGet("{activityId}/construction/{constructionId}")]
 
-        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(Guid constructionId)
+        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(int constructionId)
         {
             return await _activityBusiness.GetActivitiesByConstruction(constructionId);
         }

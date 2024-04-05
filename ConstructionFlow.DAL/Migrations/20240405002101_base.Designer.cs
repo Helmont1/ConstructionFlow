@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConstructionFlow.DAL.Migrations
 {
     [DbContext(typeof(ConstructionFlowDbContext))]
-    [Migration("20240327014156_InitializeDb")]
-    partial class InitializeDb
+    [Migration("20240405002101_base")]
+    partial class @base
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,18 +27,20 @@ namespace ConstructionFlow.DAL.Migrations
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.Activity", b =>
                 {
-                    b.Property<Guid>("ActivityId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Budget")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("ConstructionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ConstructionId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("DefaultActivityId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("DefaultActivityId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -49,10 +51,10 @@ namespace ConstructionFlow.DAL.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("StatusId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
-                    b.HasKey("ActivityId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ConstructionId");
 
@@ -65,12 +67,14 @@ namespace ConstructionFlow.DAL.Migrations
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.Construction", b =>
                 {
-                    b.Property<Guid>("ConstructionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -78,13 +82,13 @@ namespace ConstructionFlow.DAL.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("StatusId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasKey("ConstructionId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -97,18 +101,20 @@ namespace ConstructionFlow.DAL.Migrations
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.ConstructionPhoto", b =>
                 {
-                    b.Property<Guid>("ConstructionPhotoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("ConstructionId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConstructionId")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("Photo")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.HasKey("ConstructionPhotoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ConstructionId");
 
@@ -117,9 +123,11 @@ namespace ConstructionFlow.DAL.Migrations
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.Customer", b =>
                 {
-                    b.Property<Guid>("CustomerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CustomerCnpj")
                         .HasMaxLength(14)
@@ -129,16 +137,18 @@ namespace ConstructionFlow.DAL.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.DefaultActivity", b =>
                 {
-                    b.Property<Guid>("DefaultActivityId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DefaultActivityName")
                         .IsRequired()
@@ -148,31 +158,35 @@ namespace ConstructionFlow.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DefaultActivityId");
+                    b.HasKey("Id");
 
                     b.ToTable("DefaultActivity");
                 });
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.Status", b =>
                 {
-                    b.Property<Guid>("StatusId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("StatusName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("StatusId");
+                    b.HasKey("Id");
 
                     b.ToTable("Status");
                 });
 
             modelBuilder.Entity("ConstructionFlow.Domain.Model.User", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("UserCnpj")
                         .IsRequired()
@@ -192,7 +206,7 @@ namespace ConstructionFlow.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });

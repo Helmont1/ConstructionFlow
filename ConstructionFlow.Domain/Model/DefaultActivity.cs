@@ -11,7 +11,7 @@ namespace ConstructionFlow.Domain.Model
     public class DefaultActivity
     {
         [Key]
-        public Guid DefaultActivityId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public required string Icon { get; set; }

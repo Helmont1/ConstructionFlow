@@ -8,14 +8,14 @@ namespace ConstructionFlow.Domain.Payload
 {
     public class UserLoginDTO
     {      
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
 
-        public required string UserName { get; set; }
+        public string UserName { get; set; }
 
-        public required string UserEmail { get; set; }
-        public required string UserPassword { get; set; }
+        public string UserEmail { get; set; }
+        public string UserPassword { get; set; }
 
-        public required string UserCnpj { get; set; }
+        public string UserCnpj { get; set; }
     }
 
 }

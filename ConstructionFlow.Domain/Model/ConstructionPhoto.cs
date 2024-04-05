@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,12 @@ namespace ConstructionFlow.Domain.Model
     public class ConstructionPhoto
     {
         [Key]
-        public Guid ConstructionPhotoId { get; set; }
+        public int Id { get; set; }
         [Required]
-        public required Byte[] Photo { get; set; }
+        public byte[] Photo { get; set; }
         [Required]
-        public required Construction Construction { get; set; }
+        public int ConstructionId { get; set; }
+        [ForeignKey("ConstructionId")]
+        public Construction Construction { get; set; }
     }
 }

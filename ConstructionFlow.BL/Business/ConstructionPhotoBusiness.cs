@@ -27,9 +27,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<ConstructionPhotoDTO>>(constructionPhotos);
         }
 
-        public ConstructionPhotoDTO GetConstructionPhoto(Guid constructionPhotoId)
+        public ConstructionPhotoDTO GetConstructionPhoto(int constructionPhotoId)
         {
-            var constructionPhoto = _unitOfWork.ConstructionPhotoRepository.Get(x => x.ConstructionPhotoId == constructionPhotoId);
+            var constructionPhoto = _unitOfWork.ConstructionPhotoRepository.Get(x => x.Id == constructionPhotoId);
             return _mapper.Map<ConstructionPhotoDTO>(constructionPhoto);
         }
 
@@ -45,15 +45,15 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteConstructionPhoto(Guid constructionPhotoId)
+        public Task DeleteConstructionPhoto(int constructionPhotoId)
         {
             _unitOfWork.ConstructionPhotoRepository.Delete(constructionPhotoId);
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotosByConstruction(Guid constructionId)
+        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotosByConstruction(int constructionId)
         {
-            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(x => x.Construction.ConstructionId == constructionId);
+            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(x => x.ConstructionId == constructionId);
             return _mapper.Map<IEnumerable<ConstructionPhotoDTO>>(constructionPhotos);
         }
     }

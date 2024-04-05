@@ -27,9 +27,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<DefaultActivityDTO>>(defaultActivity);
         }
 
-        public DefaultActivityDTO GetDefaultActivity(Guid defaultActivityId)
+        public DefaultActivityDTO GetDefaultActivity(int defaultActivityId)
         {
-            var defaultActivity =  _unitOfWork.DefaultActivityRepository.Get(x => x.DefaultActivityId == defaultActivityId);
+            var defaultActivity =  _unitOfWork.DefaultActivityRepository.Get(x => x.Id == defaultActivityId);
             return _mapper.Map<DefaultActivityDTO>(defaultActivity);
         }
 
@@ -45,7 +45,7 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteDefaultActivity(Guid defaultActivityId)
+        public Task DeleteDefaultActivity(int defaultActivityId)
         {
             _unitOfWork.DefaultActivityRepository.Delete(defaultActivityId);
             return _unitOfWork.SaveAsync();

@@ -45,7 +45,7 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteStatus(Guid statusId)
+        public Task DeleteStatus(int statusId)
         {
             _unitOfWork.StatusRepository.Delete(statusId);
             return _unitOfWork.SaveAsync();

@@ -1,21 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConstructionFlow.Domain.Model
 {
     public class Construction
     {
         [Key]
-        public Guid ConstructionId { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public required Status Status { get; set; }
+        public int StatusId { get; set; }
+        [ForeignKey("StatusId")]
+        [Required]
+        public Status Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
         [Required]
-        public required Customer Customer { get; set; }
+        public int CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
+        public Customer Customer { get; set; }
 
         [Required]
-        public required User User { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

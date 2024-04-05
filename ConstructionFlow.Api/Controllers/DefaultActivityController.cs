@@ -22,7 +22,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("{defaultActivityId}")]
-        public DefaultActivityDTO GetDefaultActivity(Guid defaultActivityId)
+        public DefaultActivityDTO GetDefaultActivity(int defaultActivityId)
         {
             return _defaultActivityBusiness.GetDefaultActivity(defaultActivityId);
         }
@@ -40,7 +40,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpDelete("{defaultActivityId}")]
-        public Task DeleteDefaultActivity(Guid defaultActivityId)
+        public Task DeleteDefaultActivity(int defaultActivityId)
         {
             return _defaultActivityBusiness.DeleteDefaultActivity(defaultActivityId);
         }

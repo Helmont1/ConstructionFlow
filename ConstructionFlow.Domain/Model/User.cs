@@ -10,7 +10,7 @@ namespace ConstructionFlow.Domain.Model
     public class User
     {
         [Key]
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]

@@ -22,7 +22,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("{customerId}")]
-        public CustomerDTO GetCustomer(Guid customerId)
+        public CustomerDTO GetCustomer(int customerId)
         {
             return _customerBusiness.GetCustomer(customerId);
         }
@@ -40,7 +40,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpDelete("{customerId}")]
-        public Task DeleteCustomer(Guid customerId)
+        public Task DeleteCustomer(int customerId)
         {
             return _customerBusiness.DeleteCustomer(customerId);
         }

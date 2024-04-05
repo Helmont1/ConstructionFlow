@@ -27,9 +27,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<ConstructionDTO>>(construction);
         }
 
-        public ConstructionDTO GetConstruction(Guid constructionId)
+        public ConstructionDTO GetConstruction(int constructionId)
         {
-            var construction =  _unitOfWork.ConstructionRepository.Get(x => x.ConstructionId == constructionId);
+            var construction =  _unitOfWork.ConstructionRepository.Get(x => x.Id == constructionId);
             return _mapper.Map<ConstructionDTO>(construction);
         }
 
@@ -45,21 +45,21 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteConstruction(Guid constructionId)
+        public Task DeleteConstruction(int constructionId)
         {
             _unitOfWork.ConstructionRepository.Delete(constructionId);
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByUser(Guid userId)
+        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByUser(int userId)
         {
-            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.User.UserId == userId);
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.UserId == userId);
             return _mapper.Map<IEnumerable<ConstructionDTO>>(constructions);
         }
 
-        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByCustomer(Guid customerId)
+        public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByCustomer(int customerId)
         {
-            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.Customer.CustomerId == customerId);
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.CustomerId == customerId);
             return _mapper.Map<IEnumerable<ConstructionDTO>>(constructions);
         }
     }

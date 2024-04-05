@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ConstructionFlow.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDb : Migration
+    public partial class @base : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,45 +15,49 @@ namespace ConstructionFlow.DAL.Migrations
                 name: "Customer",
                 columns: table => new
                 {
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerCpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     CustomerCnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerId);
+                    table.PrimaryKey("PK_Customer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DefaultActivity",
                 columns: table => new
                 {
-                    DefaultActivityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DefaultActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DefaultActivity", x => x.DefaultActivityId);
+                    table.PrimaryKey("PK_DefaultActivity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Status",
                 columns: table => new
                 {
-                    StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.StatusId);
+                    table.PrimaryKey("PK_Status", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     UserEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -61,89 +65,98 @@ namespace ConstructionFlow.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Construction",
                 columns: table => new
                 {
-                    ConstructionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Construction", x => x.ConstructionId);
+                    table.PrimaryKey("PK_Construction", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Construction_Customer_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customer",
-                        principalColumn: "CustomerId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Construction_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
-                        principalColumn: "StatusId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Construction_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "UserId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Activity",
                 columns: table => new
                 {
-                    ActivityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Budget = table.Column<double>(type: "float", nullable: false),
-                    StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConstructionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    ConstructionId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DefaultActivityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DefaultActivityId = table.Column<int>(type: "int", nullable: true),
                     Order = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Activity", x => x.ActivityId);
+                    table.PrimaryKey("PK_Activity", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Activity_Construction_ConstructionId",
                         column: x => x.ConstructionId,
                         principalTable: "Construction",
-                        principalColumn: "ConstructionId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Activity_DefaultActivity_DefaultActivityId",
                         column: x => x.DefaultActivityId,
                         principalTable: "DefaultActivity",
-                        principalColumn: "DefaultActivityId");
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Activity_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
-                        principalColumn: "StatusId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ConstructionPhoto",
                 columns: table => new
                 {
-                    ConstructionPhotoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    ConstructionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ConstructionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConstructionPhoto", x => x.ConstructionPhotoId);
+                    table.PrimaryKey("PK_ConstructionPhoto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ConstructionPhoto_Construction_ConstructionId",
                         column: x => x.ConstructionId,
                         principalTable: "Construction",
-                        principalColumn: "ConstructionId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

@@ -10,7 +10,7 @@ namespace ConstructionFlow.Domain.Model
     public class Status
     {
         [Key]
-        public Guid StatusId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public required string StatusName { get; set; }

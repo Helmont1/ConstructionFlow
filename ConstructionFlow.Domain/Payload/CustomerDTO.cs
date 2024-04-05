@@ -8,7 +8,7 @@ namespace ConstructionFlow.Domain.Payload
 {
     public class CustomerDTO
     {
-        public Guid CustomerId { get; set; }
+        public int Id { get; set; }
 
         
         public string? CustomerCpf { get; set; }

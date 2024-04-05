@@ -8,8 +8,8 @@ namespace ConstructionFlow.Domain.Payload
 {
     public class DefaultActivityDTO
     {
-        public Guid DefaultActivityId { get; set; }
-        public required string Icon { get; set; }
-        public required string DefaultActivityName { get; set; }
+        public int Id { get; set; }
+        public string Icon { get; set; }
+        public string DefaultActivityName { get; set; }
     }
 }
