@@ -10,7 +10,7 @@ namespace ConstructionFlow.Domain.Model
     public class Customer
     {
         [Key]
-        public Guid CustomerId { get; set; }
+        public int Id { get; set; }
 
         [MaxLength(11)]
         public string? CustomerCpf { get; set; }

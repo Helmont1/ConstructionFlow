@@ -22,7 +22,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("{constructionPhotoId}")]
-        public ConstructionPhotoDTO GetConstructionPhoto(Guid constructionPhotoId)
+        public ConstructionPhotoDTO GetConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.GetConstructionPhoto(constructionPhotoId);
         }
@@ -40,13 +40,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpDelete("{constructionPhotoId}")]
-        public Task DeleteConstructionPhoto(Guid constructionPhotoId)
+        public Task DeleteConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.DeleteConstructionPhoto(constructionPhotoId);
         }
 
         [HttpGet("{constructionPhotoId}/construction/{constructionId}")]
-        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotosByConstruction(Guid constructionId)
+        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotosByConstruction(int constructionId)
         {
             return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
         }

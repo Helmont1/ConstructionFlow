@@ -9,8 +9,8 @@ namespace ConstructionFlow.Domain.Payload
     public class StatusDTO
     {
         
-        public Guid StatusId { get; set; }
+        public int Id { get; set; }
 
-        public required string StatusName { get; set; }
+        public string StatusName { get; set; }
     }
 }

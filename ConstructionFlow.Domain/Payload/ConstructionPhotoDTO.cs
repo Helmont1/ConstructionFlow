@@ -8,10 +8,10 @@ namespace ConstructionFlow.Domain.Payload
 {
     public class ConstructionPhotoDTO
     {
-        public Guid ConstructionPhotoId { get; set; }
+        public int Id { get; set; }
         
-        public required Byte[] Photo { get; set; }
+        public  byte[] Photo { get; set; }
         
-        public required ConstructionDTO Construction { get; set; }
+        public int ConstructionId { get; set; }
     }
 }

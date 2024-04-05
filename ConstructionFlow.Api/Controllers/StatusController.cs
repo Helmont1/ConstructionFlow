@@ -40,7 +40,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpDelete("{statusId}")]
-        public Task DeleteStatus(Guid statusId)
+        public Task DeleteStatus(int statusId)
         {
             return _statusBusiness.DeleteStatus(statusId);
         }

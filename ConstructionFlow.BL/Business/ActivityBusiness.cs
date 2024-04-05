@@ -28,9 +28,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<ActivityDTO>>(activities);
         }
 
-        public ActivityDTO GetActivity(Guid activityId)
+        public ActivityDTO GetActivity(int activityId)
         {
-            var activity = _unitOfWork.ActivityRepository.Get(x => x.ActivityId == activityId);
+            var activity = _unitOfWork.ActivityRepository.Get(x => x.Id == activityId);
             return _mapper.Map<ActivityDTO>(activity);
         }
 
@@ -46,15 +46,15 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteActivity(Guid activityId)
+        public Task DeleteActivity(int activityId)
         {
             _unitOfWork.ActivityRepository.Delete(activityId);
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(Guid constructionId)
+        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(int constructionId)
         {
-            var activities = await _unitOfWork.ActivityRepository.GetAllAsync(x => x.Construction.ConstructionId == constructionId);
+            var activities = await _unitOfWork.ActivityRepository.GetAllAsync(x => x.ConstructionId == constructionId);
             return _mapper.Map<IEnumerable<ActivityDTO>>(activities);
             
         }

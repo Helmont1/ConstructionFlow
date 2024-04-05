@@ -27,9 +27,9 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<IEnumerable<CustomerDTO>>(customers);
         }
 
-        public CustomerDTO GetCustomer(Guid customerId)
+        public CustomerDTO GetCustomer(int customerId)
         {
-            var customer = _unitOfWork.CustomerRepository.Get(x => x.CustomerId == customerId);
+            var customer = _unitOfWork.CustomerRepository.Get(x => x.Id == customerId);
             return _mapper.Map<CustomerDTO>(customer);
         }
 
@@ -45,7 +45,7 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public Task DeleteCustomer(Guid customerId)
+        public Task DeleteCustomer(int customerId)
         {
             _unitOfWork.CustomerRepository.Delete(customerId);
             return _unitOfWork.SaveAsync();
