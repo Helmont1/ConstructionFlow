@@ -1,16 +1,13 @@
 <div class="left-nav">
-    <a routerLink="/home">
-        <img src="assets/imgs/logo.png" alt="logo">
-    </a>
-    <div class="logout">
-        <i class="fa-solid fa-sign-out-alt"></i>
-        <p>sair</p>
-    </div>
+  <a routerLink="/home">
+    <img src="assets/imgs/logo.png" alt="logo" />
+  </a>
+  <div class="logout">
+    <i class="fa-solid fa-sign-out-alt"></i>
+    <p>sair</p>
+  </div>
 </div>
-<section
-  class="register"
-  style="background-color: lightgray;"
->
+<section class="register" style="background-color: lightgray">
   <div class="navbar">
     <a routerLink="/home">
       <!-- <div class="navbar-logo">
@@ -24,7 +21,7 @@
       </ul> -->
     </div>
   </div>
-  <div class="register-container" >
+  <div class="register-container">
     <h1>Cadastrar nova obra</h1>
     <form
       [formGroup]="registerForm"
@@ -32,6 +29,19 @@
       novalidate
       style="width: 100%"
     >
+      <div class="register-field">
+        <p>Nome da obra</p>
+        <div class="input">
+          <i class="fa-regular fa-building"></i>
+          <input
+            type="text"
+            placeholder="Digite o nome da obra"
+            id="name"
+            name="name"
+            formControlName="name"
+          />
+        </div>
+      </div>
       <div class="register-field">
         <p>Data de ínicio:</p>
         <div class="input">
@@ -69,7 +79,7 @@
       <div class="register-field">
         <p>Data de fim:</p>
         <div class="input">
-            <i class="fa-regular fa-calendar"></i>
+          <i class="fa-regular fa-calendar"></i>
           <input
             type="date"
             formControlName="endDate"
@@ -116,9 +126,7 @@
             Campo obrigatório
           </p>
         </div>
-        <button class="btn" type="submit" [disabled]="!registerForm.valid" routerLink="/login">
-          Cadastrar
-        </button>
+        <button class="btn" type="submit" routerLink="/login">Cadastrar</button>
       </div>
     </form>
   </div>
