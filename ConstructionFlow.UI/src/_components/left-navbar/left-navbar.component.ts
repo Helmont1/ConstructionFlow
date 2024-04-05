@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../security/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-left-navbar',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './left-navbar.component.html',
   styleUrl: './left-navbar.component.scss'
 })
