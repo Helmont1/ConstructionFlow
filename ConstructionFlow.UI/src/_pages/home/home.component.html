@@ -1,12 +1,20 @@
-<section class="home" style="background-image: url('assets/imgs/home-background.jpg')">
+<section
+  class="home"
+  style="background-image: url('assets/imgs/home-background.jpg')"
+>
   <div class="navbar">
     <div class="navbar-logo">
       <img src="assets/imgs/logo.png" alt="Logo" />
     </div>
     <div class="navbar-menu">
       <ul>
-        <li><a routerLink="/login">Entrar</a></li>
-        <li><a routerLink="/register">Cadastre-se</a></li>
+        @if (!isLogged){
+        <li (click)="goTo('login')"><a>Entrar</a></li>
+        <li (click)="goTo('register')"><a>Cadastre-se</a></li>
+        } @else {
+          <li (click)="logout()"><a>Encerrar sessão</a></li>
+        <li (click)="goTo('profile')"><a>Ver Perfil</a></li>
+        }
       </ul>
     </div>
   </div>
@@ -14,16 +22,22 @@
   <main class="search">
     <div class="search-header">
       <button>
-        <p [ngStyle]="{
+        <p
+          [ngStyle]="{
             'background-color': findById ? hActivedButton : hDeactivatedButton
-          }" (click)="setFindById(true)">
+          }"
+          (click)="setFindById(true)"
+        >
           Buscar por ID
         </p>
       </button>
       <button>
-        <p [ngStyle]="{
+        <p
+          [ngStyle]="{
             'background-color': !findById ? hActivedButton : hDeactivatedButton
-          }" (click)="setFindById(false)">
+          }"
+          (click)="setFindById(false)"
+        >
           Buscar por CPF/CNPJ
         </p>
       </button>

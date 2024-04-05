@@ -5,13 +5,16 @@ import { ProfileComponent } from '../_pages/profile/profile.component';
 import { ConstructionComponent } from '../_pages/construction/construction.component';
 import { authGuard } from '../security/auth.guard';
 import { Routes } from '@angular/router';
+import { loginGuard } from '../security/login.guard';
+
+const isAuthenticaded: boolean = localStorage.getItem('isLoggedIn') == 'true';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: isAuthenticaded ? 'profile' : 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'register', component:RegisterComponent},
-    { path: 'login', component: LoginComponent},
+    { path: 'register', component:RegisterComponent, canActivate: [loginGuard]},
+    { path: 'login', component: LoginComponent, canActivate: [loginGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     { path: 'construction', component: ConstructionComponent, canActivate: [authGuard]},
-    { path: '**', redirectTo: 'home' }
+    { path: '**', redirectTo: isAuthenticaded ? 'profile' : 'home' }
 ];
