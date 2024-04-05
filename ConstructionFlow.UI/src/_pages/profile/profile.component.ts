@@ -6,23 +6,23 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { Construction } from '../../_models/construction.model';
 import { User } from '../../_models/user.model';
+import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CarouselComponent, RouterLink],
+  imports: [CarouselComponent, RouterLink, LeftNavbarComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  // user: User = {} as User;
   showPending: boolean = true;
+  user: User = {} as User;
+  constructions: Construction[] = [];
 
   constructor(private router: Router) {
   }
-
-  user: User = {} as User;
-  constructions: Construction[] = [];
+  
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user') ?? '{}');
   }

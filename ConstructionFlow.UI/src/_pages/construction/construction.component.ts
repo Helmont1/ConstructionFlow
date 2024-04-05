@@ -7,11 +7,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivityService } from '../../_services/activity.service';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 
 @Component({
   selector: 'app-construction',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf],
+  imports: [FormsModule, ReactiveFormsModule, NgIf, LeftNavbarComponent],
   templateUrl: './construction.component.html',
   styleUrl: './construction.component.scss'
 })
