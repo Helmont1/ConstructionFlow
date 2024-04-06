@@ -1,6 +1,6 @@
 <app-alert></app-alert>
 
-<!-- (✿◡‿◡)   (^◕.◕^) -->   
+<!-- (✿◡‿◡)   (^◕.◕^) -->
 <app-left-navbar></app-left-navbar>
 <section class="register" style="background-color: lightgray">
   <div class="register-container">
@@ -37,6 +37,16 @@
             required
           />
         </div>
+        <div
+          class="warning"
+          *ngIf="
+            registerForm.get('startDate')?.invalid &&
+            (registerForm.get('startDate')?.dirty ||
+              registerForm.get('startDate')?.touched)
+          "
+        >
+          <p>Campo obrigatório</p>
+        </div>
       </div>
       <div class="register-field">
         <p>Data de fim:</p>
@@ -58,44 +68,49 @@
               registerForm.get('endDate')?.touched)
           "
         >
-          <p *ngIf="registerForm.get('endDate')?.errors?.required">
-            Campo obrigatório
-          </p>
+          <p>Campo obrigatório</p>
         </div>
       </div>
-      <mat-radio-group aria-label="Selecione o tipo de cliente:" [(ngModel)]="company">
-        <mat-radio-button value="true">Empresa</mat-radio-button>
-        <mat-radio-button value="false">Pessoa fisica</mat-radio-button>
-      </mat-radio-group>
-      @if (company) {
-        <div class="register-field">
-          <p>CNPJ:</p>
-          <div class="input">
-            <i class="fa-regular fa-building"></i>
-            <input
-              type="text"
-              formControlName="cnpj"
-              id="customer"
-              placeholder="Digite o CNPJ/CPF do cliente"
-              mask="00.000.000/0000-00"
-              required
-            />
-          </div>
+      <div class="register-field">
+        <p>CNPJ/CPF:</p>
+        <div class="input">
+          <i class="fa-regular fa-building"></i>
+          <input
+            type="text"
+            formControlName="register"
+            id="register"
+            placeholder="Digite o CNPJ ou CPF do cliente"
+            [mask]="
+              registerForm.get('register')?.value &&
+              registerForm.get('register')?.value.length <= 11
+                ? '000.000.000-009'
+                : '00.000.000/0000-00'
+            "
+            required
+          />
         </div>
-      }
         <div
           class="warning"
           *ngIf="
-            registerForm.get('cnpj')?.invalid &&
-            (registerForm.get('cnpj')?.dirty ||
-              registerForm.get('cnpj')?.touched)
+            registerForm.get('register')?.invalid &&
+            (registerForm.get('register')?.dirty ||
+              registerForm.get('register')?.touched)
           "
         >
-          <p *ngIf="registerForm.get('cnpj')?.errors?.required">
+          <p *ngIf="registerForm.get('register')?.errors?.required">
             Campo obrigatório
           </p>
+          <p
+            *ngIf="
+              registerForm.get('register')?.errors?.mask &&
+              registerForm.get('register')?.touched
+            "
+          >
+            CNPJ/CPF inválido
+          </p>
         </div>
-        <button class="btn" type="submit" routerLink="/login">Cadastrar</button>
+      </div>
+      <button class="btn" type="submit" routerLink="/login">Cadastrar</button>
     </form>
   </div>
 </section>

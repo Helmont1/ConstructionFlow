@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
 import { AlertComponent } from '../../_components/alert/alert.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-construction',
@@ -32,8 +33,11 @@ import { AlertComponent } from '../../_components/alert/alert.component';
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
-    AlertComponent
+    AlertComponent,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
+  providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
   styleUrl: './construction.component.scss',
 })
@@ -58,43 +62,34 @@ export class ConstructionComponent{
     private customerService: CustomerService,
   ) {
     this.registerForm = this.formBuilder.group({
-      startDate: ['', [Validators.required, Validators.email]],
+      startDate: ['', [Validators.required]],
       endDate: [
         '',
         [
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern('^[a-zA-Z]+$'),
-        ],
+          Validators.required
+        ]
       ],
-      cpf: [
+      register: [
         '',
         [
           Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('^[0-9]*$'),
-        ],
+          Validators.minLength(11)
+        ]
       ],
-      cnpj: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('^[0-9]*$'),
-        ],
-      ],
-      user: ['', [Validators.required]],
       name: ['', [Validators.required]],
+      userId: [0],
+      statusId: [1],
+      customerId: [1],
     });
   }
 
   saveConstruction() {
+    const user = JSON.parse(localStorage.getItem('user') ?? '{}');
     this.routerService.navigate(['/profile']);
     this.registerForm.patchValue({
-      user: JSON.parse(sessionStorage.getItem('user') || '{}'),
+      userId: user.id,
     });
+    console.log(this.registerForm.getRawValue());
     this.constructionService
       .createConstruction(this.registerForm.getRawValue())
       .subscribe(() => {
