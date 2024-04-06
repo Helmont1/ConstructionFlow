@@ -32,6 +32,11 @@ namespace ConstructionFlow.BL.Business
             var customer = _unitOfWork.CustomerRepository.Get(x => x.Id == customerId);
             return _mapper.Map<CustomerDTO>(customer);
         }
+        public CustomerDTO GetCustomerByRegister(string customerRegister)
+        {
+            var customer = _unitOfWork.CustomerRepository.Get(x => (x.CustomerCnpj == customerRegister) || (x.CustomerCpf == customerRegister));
+            return _mapper.Map<CustomerDTO>(customer);
+        }
 
         public Task AddCustomer(CustomerDTO customer)
         {

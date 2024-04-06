@@ -27,6 +27,12 @@ namespace ConstructionFlow.Api.Controllers
             return _customerBusiness.GetCustomer(customerId);
         }
 
+        [HttpGet("register/{customerRegisterNumber}")]
+        public CustomerDTO GetCustomerByRegisterNumber(string customerRegisterNumber)
+        {
+            return _customerBusiness.GetCustomerByRegister(customerRegisterNumber);
+        }
+
         [HttpPost]
         public Task AddCustomer(CustomerDTO customer)
         {
