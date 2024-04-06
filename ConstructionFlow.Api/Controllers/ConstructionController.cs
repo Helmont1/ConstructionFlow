@@ -46,13 +46,13 @@ namespace ConstructionFlow.Api.Controllers
             return _constructionBusiness.DeleteConstruction(constructionId);
         }
 
-        [HttpGet("{constructionId}/user/{userId}")]
+        [HttpGet("users/{userId}")]
         public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByUser(int userId)
         {
             return await _constructionBusiness.GetConstructionsByUser(userId);
         }
 
-        [HttpGet("{constructionId}/customer/{customerId}")]
+        [HttpGet("customer/{customerId}")]
         public async Task<IEnumerable<ConstructionDTO>> GetConstructionsByCustomer(int customerId)
         {
             return await _constructionBusiness.GetConstructionsByCustomer(customerId);
