@@ -1,3 +1,6 @@
+<app-alert></app-alert>
+
+<!-- (✿◡‿◡)   (^◕.◕^) -->   
 <app-left-navbar></app-left-navbar>
 <section class="register" style="background-color: lightgray">
   <div class="register-container">
@@ -34,26 +37,6 @@
             required
           />
         </div>
-        <div
-          class="warning"
-          *ngIf="
-            !registerForm.get('customer')?.valid &&
-            (registerForm.get('customer')?.dirty ||
-              registerForm.get('customer')?.touched)
-          "
-        >
-          <p *ngIf="registerForm.get('customer')?.errors?.required">
-            cliente é obrigatório
-          </p>
-          <p
-            *ngIf="
-              registerForm.get('customer')?.touched &&
-              registerForm.get('customer')?.errors?.customer
-            "
-          >
-            cliente inválido
-          </p>
-        </div>
       </div>
       <div class="register-field">
         <p>Data de fim:</p>
@@ -80,19 +63,26 @@
           </p>
         </div>
       </div>
-      <div class="register-field">
-        <p>CNPJ / CPF:</p>
-        <div class="input">
-          <i class="fa-regular fa-building"></i>
-          <input
-            type="text"
-            formControlName="customer"
-            id="customer"
-            placeholder="Digite o CNPJ/CPF do cliente"
-            mask="00.000.000/0000-00"
-            required
-          />
+      <mat-radio-group aria-label="Selecione o tipo de cliente:" [(ngModel)]="company">
+        <mat-radio-button value="true">Empresa</mat-radio-button>
+        <mat-radio-button value="false">Pessoa fisica</mat-radio-button>
+      </mat-radio-group>
+      @if (company) {
+        <div class="register-field">
+          <p>CNPJ:</p>
+          <div class="input">
+            <i class="fa-regular fa-building"></i>
+            <input
+              type="text"
+              formControlName="cnpj"
+              id="customer"
+              placeholder="Digite o CNPJ/CPF do cliente"
+              mask="00.000.000/0000-00"
+              required
+            />
+          </div>
         </div>
+      }
         <div
           class="warning"
           *ngIf="
@@ -106,7 +96,6 @@
           </p>
         </div>
         <button class="btn" type="submit" routerLink="/login">Cadastrar</button>
-      </div>
     </form>
   </div>
 </section>

@@ -2,6 +2,7 @@ import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../security/auth.service';
+import { CustomerService } from '../../_services/customer.service';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,10 @@ export class HomeComponent implements OnInit{
   hActivedButton: string = '#5C97CF';
   hDeactivatedButton: string = '#2B3D49';
   isLogged: boolean = false;
+  searchText: string = "Digite o ID da obra"
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.isLogged = localStorage.getItem('isLoggedIn') == 'true';
@@ -36,5 +39,7 @@ export class HomeComponent implements OnInit{
 
   setFindById( findById: boolean ) {
     this.findById = findById;
+    this.searchText = findById ? "Digite o id da obra" : "Digite o CPF/CNPJ"
   }
+
 }

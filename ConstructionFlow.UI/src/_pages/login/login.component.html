@@ -68,7 +68,7 @@
           </p>
         </div>
       </div>
-      <button class="btn" type="submit" [disabled]="!loginForm.valid">
+      <button class="btn" type="submit" [disabled]="!loginForm.valid || loading" [ngStyle]="loading ? {'background-color': 'gray'} : {'background-color': '#2B3D49'}">
         Entrar
       </button>
       <a routerLink="/register" class="register">Cadastre-se</a>

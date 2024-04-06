@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +12,13 @@ export class AuthService {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('user');
   }
-  login(): void {
-    this.userService.getUser(1).subscribe((user) => {
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('isLoggedIn', 'true');
-    });
+
+  login() {
+    return this.userService.getUser(1).pipe(
+      tap((user) => {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('user', JSON.stringify(user));
+      })
+    );
   }
 }
