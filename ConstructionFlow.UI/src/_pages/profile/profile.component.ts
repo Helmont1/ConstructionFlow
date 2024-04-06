@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild, input } from '@angular/core';
 import {
   CarouselComponent,
   carouselItem,
@@ -7,18 +7,21 @@ import { Router, RouterLink } from '@angular/router';
 import { Construction } from '../../_models/construction.model';
 import { User } from '../../_models/user.model';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
+import { Alert, AlertComponent } from '../../_components/alert/alert.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CarouselComponent, RouterLink, LeftNavbarComponent],
+  imports: [CarouselComponent, RouterLink, LeftNavbarComponent, AlertComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   showPending: boolean = true;
   user: User = {} as User;
   constructions: Construction[] = [];
+  @ViewChild(AlertComponent) alertComponent!: AlertComponent;
+  @Input('data') alerts: any;
 
   constructor(private router: Router) {
   }
@@ -26,8 +29,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user') ?? '{}');
   }
+  
+  ngAfterViewInit(): void {
+    setTimeout(() => {
     console.log(this.alertComponent);
     console.log(this.alerts);
+    this.alertComponent.show(JSON.parse(this.alerts));
+    });
+  }
 
   createConstruction() {
     this.router.navigate(['construction']);
