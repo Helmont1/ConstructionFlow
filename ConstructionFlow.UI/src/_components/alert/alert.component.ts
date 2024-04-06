@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
-interface Alert {
+export interface Alert {
 	type: string;
 	message: string;
 }
@@ -17,8 +17,9 @@ interface Alert {
 })
 export class AlertComponent {
   alerts: Alert[] = [];
-  @Input() show(alert: Alert) {
-    this.alerts.push(alert);
+  
+  show(alerts: Alert[]) {
+    this.alerts = alerts;
   }
   
   close(alert: Alert) {

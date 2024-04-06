@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, ViewChild } from '@angular/core';
 import { Construction } from '../../_models/construction.model';
 import { Status } from '../../_models/status.model';
 import { StatusService } from '../../_services/status.service';
@@ -18,8 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
-import { AlertComponent } from '../../_components/alert/alert.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { Alert } from '../../_components/alert/alert.component';
 
 @Component({
   selector: 'app-construction',
@@ -33,7 +33,6 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
-    AlertComponent,
     NgxMaskDirective,
     NgxMaskPipe
   ],
@@ -46,13 +45,13 @@ export class ConstructionComponent{
   defaultStatus!: Status;
   findById: boolean = true;
   company: boolean = false;
-  alerts= [
+  alerts: Alert[]= [
     {
       type: 'success',
-      message: 'Construction created successfully!',
+      message: 'Construção criada com sucesso!',
     },
   ];
-
+  
   registerForm: FormGroup;
 
   constructor(
@@ -85,7 +84,6 @@ export class ConstructionComponent{
 
   saveConstruction() {
     const user = JSON.parse(localStorage.getItem('user') ?? '{}');
-    this.routerService.navigate(['/profile']);
     this.registerForm.patchValue({
       userId: user.id,
     });
@@ -93,6 +91,7 @@ export class ConstructionComponent{
     this.constructionService
       .createConstruction(this.registerForm.getRawValue())
       .subscribe(() => {
+        this.routerService.navigate(['/profile'], { queryParams: {data: JSON.stringify(this.alerts)}});
         console.log('Construction created successfully!');
       });
   }
