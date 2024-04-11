@@ -15,7 +15,7 @@ namespace ConstructionFlow.DAL.AutoMapperProfile
         {
             CreateMap<DefaultActivity, DefaultActivityDTO>();
             CreateMap<DefaultActivityDTO, DefaultActivity>();
-            CreateMap<Construction, ConstructionDTO>();
+            CreateMap<Construction, ConstructionResponseDTO>();
             CreateMap<ConstructionDTO, Construction>();
             CreateMap<ConstructionPhoto, ConstructionPhotoDTO>();
             CreateMap<ConstructionPhotoDTO, ConstructionPhoto>();
