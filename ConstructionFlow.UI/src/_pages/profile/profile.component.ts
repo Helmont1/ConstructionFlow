@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild, input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   CarouselComponent,
   carouselItem,
 } from '../../_components/carousel/carousel.component';
 import { Router, RouterLink } from '@angular/router';
-import { Construction } from '../../_models/construction.model';
 import { User } from '../../_models/user.model';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
-import { Alert, AlertComponent } from '../../_components/alert/alert.component';
+import { AlertComponent } from '../../_components/alert/alert.component';
+import { ConstructionService } from '../../_services/construction.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,18 +19,22 @@ import { Alert, AlertComponent } from '../../_components/alert/alert.component';
 export class ProfileComponent implements OnInit, AfterViewInit {
   showPending: boolean = true;
   user: User = {} as User;
-  constructions: Construction[] = [];
+  constructions: any;
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private constructionService: ConstructionService) {
   }
   
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    this.constructionService.getConstructionsByUser(this.user).subscribe((data) => {
+      this.constructions = data;
+    });
   }
   
   ngAfterViewInit(): void {
+    if (this.alerts)
     setTimeout(() => {
     console.log(this.alertComponent);
     console.log(this.alerts);
