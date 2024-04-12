@@ -1,5 +1,5 @@
 export interface DefaultActivity {
-  defaultActivityId: string;
+  id: string;
   icon: string;
   defaultActivityName: string;
 }

@@ -1,7 +1,7 @@
 import { Construction } from "./construction.model";
 
 export interface ConstructionPhoto {
-  constructionPhotoId: string,
+  id: string,
   construction: Construction,
   photo: string
 }

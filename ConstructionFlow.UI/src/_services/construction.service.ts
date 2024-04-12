@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Construction } from "../_models/construction.model";
+import { User } from "../_models/user.model";
 
 @Injectable(
   { providedIn: 'root' }
@@ -10,8 +11,9 @@ export class ConstructionService {
 
   constructor(private http: HttpClient) { }
 
-  getConstructionsByUser() {
-    return this.http.get(`${this.url}/user`);
+  getConstructionsByUser(user: User) {
+    console.log(`${JSON.stringify(user)}`);
+    return this.http.get(`${this.url}/users/${user.id}`);
   }
 
   createConstruction(construction: Construction) {
@@ -19,7 +21,7 @@ export class ConstructionService {
   }
 
   editConstruction(construction: Construction) {
-    return this.http.put(`${this.url}/${construction.constructionId}`, construction);
+    return this.http.put(`${this.url}/${construction.id}`, construction);
   }
 
   deleteConstruction(id: number) {

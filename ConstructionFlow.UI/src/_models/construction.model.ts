@@ -3,7 +3,7 @@ import { Status } from "./status.model";
 import { User } from "./user.model";
 
 export interface Construction {
-  constructionId: number,
+  id: number,
   statusId: number,
   startDate: Date,
   endDate: Date,

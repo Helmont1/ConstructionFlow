@@ -23,7 +23,7 @@ export class ActivityService {
   }
 
   editActivity(activity: Activity) {
-    return this.http.put(`${this.url}/${activity.activityId}`, activity);
+    return this.http.put(`${this.url}/${activity.id}`, activity);
   }
 
   deleteActivity(id: number) {

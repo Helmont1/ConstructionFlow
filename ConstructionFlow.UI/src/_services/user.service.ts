@@ -23,7 +23,7 @@ export class UserService {
   }
 
   editUser(user: User) {
-    return this.http.put(`${this.url}/${user.userId}`, user);
+    return this.http.put(`${this.url}/${user.id}`, user);
   }
 
   deleteUser(id: number) {
