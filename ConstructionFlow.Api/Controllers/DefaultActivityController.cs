@@ -1,5 +1,5 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DefaultActivityDTO>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityRequestDTO>> GetDefaultActivities()
         {
             return await _defaultActivityBusiness.GetDefaultActivities();
         }
 
         [HttpGet("{defaultActivityId}")]
-        public DefaultActivityDTO GetDefaultActivity(int defaultActivityId)
+        public DefaultActivityRequestDTO GetDefaultActivity(int defaultActivityId)
         {
             return _defaultActivityBusiness.GetDefaultActivity(defaultActivityId);
         }
 
         [HttpPost]
-        public Task AddDefaultActivity(DefaultActivityDTO defaultActivity)
+        public Task AddDefaultActivity(DefaultActivityRequestDTO defaultActivity)
         {
             return _defaultActivityBusiness.AddDefaultActivity(defaultActivity);
         }
 
         [HttpPut]
-        public Task UpdateDefaultActivity(DefaultActivityDTO defaultActivity)
+        public Task UpdateDefaultActivity(DefaultActivityRequestDTO defaultActivity)
         {
             return _defaultActivityBusiness.UpdateDefaultActivity(defaultActivity);
         }

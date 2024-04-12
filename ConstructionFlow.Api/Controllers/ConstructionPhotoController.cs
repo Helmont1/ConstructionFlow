@@ -1,5 +1,5 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotos()
+        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotos()
         {
             return await _constructionPhotoBusiness.GetConstructionPhotos();
         }
 
         [HttpGet("{constructionPhotoId}")]
-        public ConstructionPhotoDTO GetConstructionPhoto(int constructionPhotoId)
+        public ConstructionPhotoRequestDTO GetConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.GetConstructionPhoto(constructionPhotoId);
         }
 
         [HttpPost]
-        public Task AddConstructionPhoto(ConstructionPhotoDTO constructionPhoto)
+        public Task AddConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
         {
             return _constructionPhotoBusiness.AddConstructionPhoto(constructionPhoto);
         }
 
         [HttpPut]
-        public Task UpdateConstructionPhoto(ConstructionPhotoDTO constructionPhoto)
+        public Task UpdateConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
         {
             return _constructionPhotoBusiness.UpdateConstructionPhoto(constructionPhoto);
         }
@@ -46,7 +46,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("{constructionPhotoId}/construction/{constructionId}")]
-        public async Task<IEnumerable<ConstructionPhotoDTO>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotosByConstruction(int constructionId)
         {
             return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
         }

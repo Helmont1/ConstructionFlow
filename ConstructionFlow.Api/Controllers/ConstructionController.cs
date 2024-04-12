@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -29,13 +30,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddConstruction(ConstructionDTO construction)
+        public Task AddConstruction(ConstructionRequestDTO construction)
         {
             return _constructionBusiness.AddConstruction(construction);
         }
 
         [HttpPut]
-        public Task UpdateConstruction(ConstructionDTO construction)
+        public Task UpdateConstruction(ConstructionRequestDTO construction)
         {
             return _constructionBusiness.UpdateConstruction(construction);
         }

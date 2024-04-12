@@ -1,5 +1,5 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,26 +16,26 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ActivityDTO>> GetActivities()
+        public async Task<IEnumerable<ActivityRequestDTO>> GetActivities()
         {
             return await _activityBusiness.GetActivities();
         }
 
         [HttpGet("{activityId}")]
 
-        public ActivityDTO GetActivity(int activityId)
+        public ActivityRequestDTO GetActivity(int activityId)
         {
             return _activityBusiness.GetActivity(activityId);
         }
 
         [HttpPost]
-        public Task AddActivity(ActivityDTO activity)
+        public Task AddActivity(ActivityRequestDTO activity)
         {
             return _activityBusiness.AddActivity(activity);
         }
 
         [HttpPut]
-        public Task UpdateActivity(ActivityDTO activity)
+        public Task UpdateActivity(ActivityRequestDTO activity)
         {
             return _activityBusiness.UpdateActivity(activity);
         }
@@ -48,7 +48,7 @@ namespace ConstructionFlow.Api.Controllers
 
         [HttpGet("{activityId}/construction/{constructionId}")]
 
-        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(int constructionId)
+        public async Task<IEnumerable<ActivityRequestDTO>> GetActivitiesByConstruction(int constructionId)
         {
             return await _activityBusiness.GetActivitiesByConstruction(constructionId);
         }

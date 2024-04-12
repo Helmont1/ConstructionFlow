@@ -1,5 +1,5 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,31 +16,31 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CustomerDTO>> GetCustomers()
+        public async Task<IEnumerable<CustomerRequestDTO>> GetCustomers()
         {
             return await _customerBusiness.GetCustomers();
         }
 
         [HttpGet("{customerId}")]
-        public CustomerDTO GetCustomer(int customerId)
+        public CustomerRequestDTO GetCustomer(int customerId)
         {
             return _customerBusiness.GetCustomer(customerId);
         }
 
         [HttpGet("register/{customerRegisterNumber}")]
-        public CustomerDTO GetCustomerByRegisterNumber(string customerRegisterNumber)
+        public CustomerRequestDTO GetCustomerByRegisterNumber(string customerRegisterNumber)
         {
             return _customerBusiness.GetCustomerByRegister(customerRegisterNumber);
         }
 
         [HttpPost]
-        public Task AddCustomer(CustomerDTO customer)
+        public Task AddCustomer(CustomerRequestDTO customer)
         {
             return _customerBusiness.AddCustomer(customer);
         }
 
         [HttpPut]
-        public Task UpdateCustomer(CustomerDTO customer)
+        public Task UpdateCustomer(CustomerRequestDTO customer)
         {
             return _customerBusiness.UpdateCustomer(customer);
         }

@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,13 +17,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserDTO>> GetUsers()
+        public async Task<IEnumerable<UserRequestDTO>> GetUsers()
         {
             return await _userBusiness.GetUsers();
         }
 
         [HttpGet("{userId}")]
-        public UserDTO GetUser(int userId)
+        public UserRequestDTO GetUser(int userId)
         {
             return _userBusiness.GetUser(userId);
         }
@@ -34,7 +35,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPut]
-        public Task UpdateUser(UserDTO user)
+        public Task UpdateUser(UserRequestDTO user)
         {
             return _userBusiness.UpdateUser(user);
         }
@@ -46,7 +47,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("/CNPJ/{userCNPJ}")]
-        public UserDTO GetUsersByCNPJ(string userCNPJ)
+        public UserRequestDTO GetUsersByCNPJ(string userCNPJ)
         {
             return _userBusiness.GetUsersByCNPJ(userCNPJ);
         }

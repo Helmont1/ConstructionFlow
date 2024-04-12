@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload
+namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class StatusDTO
+    public class StatusRequestDTO
     {
-        
+
         public int Id { get; set; }
 
         public string StatusName { get; set; }

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload
+namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class ConstructionPhotoDTO
+    public class ConstructionPhotoRequestDTO
     {
         public int Id { get; set; }
-        
-        public  byte[] Photo { get; set; }
-        
+
+        public byte[] Photo { get; set; }
+
         public int ConstructionId { get; set; }
     }
 }

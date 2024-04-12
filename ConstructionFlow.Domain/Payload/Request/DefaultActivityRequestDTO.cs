@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload
+namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class DefaultActivityDTO
+    public class DefaultActivityRequestDTO
     {
         public int Id { get; set; }
         public string Icon { get; set; }

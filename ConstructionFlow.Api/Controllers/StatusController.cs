@@ -1,5 +1,5 @@
 ﻿using ConstructionFlow.BL.Business;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StatusDTO>> GetStatuses()
+        public async Task<IEnumerable<StatusRequestDTO>> GetStatuses()
         {
             return await _statusBusiness.GetStatuses();
         }
 
         [HttpGet("{statusName}")]
-        public StatusDTO GetStatus(string statusName)
+        public StatusRequestDTO GetStatus(string statusName)
         {
             return _statusBusiness.GetStatus(statusName);
         }
 
         [HttpPost]
-        public Task AddStatus(StatusDTO status)
+        public Task AddStatus(StatusRequestDTO status)
         {
             return _statusBusiness.AddStatus(status);
         }
 
         [HttpPut]
-        public Task UpdateStatus(StatusDTO status)
+        public Task UpdateStatus(StatusRequestDTO status)
         {
             return _statusBusiness.UpdateStatus(status);
         }

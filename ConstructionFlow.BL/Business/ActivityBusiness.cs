@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -22,25 +22,25 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
         
-        public async Task<IEnumerable<ActivityDTO>> GetActivities()
+        public async Task<IEnumerable<ActivityRequestDTO>> GetActivities()
         {
             var activities = await _unitOfWork.ActivityRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ActivityDTO>>(activities);
+            return _mapper.Map<IEnumerable<ActivityRequestDTO>>(activities);
         }
 
-        public ActivityDTO GetActivity(int activityId)
+        public ActivityRequestDTO GetActivity(int activityId)
         {
             var activity = _unitOfWork.ActivityRepository.Get(x => x.Id == activityId);
-            return _mapper.Map<ActivityDTO>(activity);
+            return _mapper.Map<ActivityRequestDTO>(activity);
         }
 
-        public Task AddActivity(ActivityDTO activity)
+        public Task AddActivity(ActivityRequestDTO activity)
         {
             _unitOfWork.ActivityRepository.Insert(_mapper.Map<Activity>(activity));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateActivity(ActivityDTO activity)
+        public Task UpdateActivity(ActivityRequestDTO activity)
         {
             _unitOfWork.ActivityRepository.Update(_mapper.Map<Activity>(activity));
             return _unitOfWork.SaveAsync();
@@ -52,10 +52,10 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ActivityDTO>> GetActivitiesByConstruction(int constructionId)
+        public async Task<IEnumerable<ActivityRequestDTO>> GetActivitiesByConstruction(int constructionId)
         {
             var activities = await _unitOfWork.ActivityRepository.GetAllAsync(x => x.ConstructionId == constructionId);
-            return _mapper.Map<IEnumerable<ActivityDTO>>(activities);
+            return _mapper.Map<IEnumerable<ActivityRequestDTO>>(activities);
             
         }
     }

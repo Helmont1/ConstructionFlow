@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
-using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -21,25 +21,25 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DefaultActivityDTO>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityRequestDTO>> GetDefaultActivities()
         {
             var defaultActivity =  await _unitOfWork.DefaultActivityRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<DefaultActivityDTO>>(defaultActivity);
+            return _mapper.Map<IEnumerable<DefaultActivityRequestDTO>>(defaultActivity);
         }
 
-        public DefaultActivityDTO GetDefaultActivity(int defaultActivityId)
+        public DefaultActivityRequestDTO GetDefaultActivity(int defaultActivityId)
         {
             var defaultActivity =  _unitOfWork.DefaultActivityRepository.Get(x => x.Id == defaultActivityId);
-            return _mapper.Map<DefaultActivityDTO>(defaultActivity);
+            return _mapper.Map<DefaultActivityRequestDTO>(defaultActivity);
         }
 
-        public Task AddDefaultActivity(DefaultActivityDTO defaultActivity)
+        public Task AddDefaultActivity(DefaultActivityRequestDTO defaultActivity)
         {
             _unitOfWork.DefaultActivityRepository.Insert(_mapper.Map<DefaultActivity>(defaultActivity));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateDefaultActivity(DefaultActivityDTO defaultActivity)
+        public Task UpdateDefaultActivity(DefaultActivityRequestDTO defaultActivity)
         {
             _unitOfWork.DefaultActivityRepository.Update(_mapper.Map<DefaultActivity>(defaultActivity));
             return _unitOfWork.SaveAsync();

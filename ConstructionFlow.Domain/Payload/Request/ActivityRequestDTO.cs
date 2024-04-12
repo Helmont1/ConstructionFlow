@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload
+namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class ActivityDTO
+    public class ActivityRequestDTO
     {
         public int Id { get; set; }
-        
+
         public double Budget { get; set; }
 
         public int StatusId { get; set; }
@@ -19,7 +19,7 @@ namespace ConstructionFlow.Domain.Payload
         public DateTime EndDate { get; set; }
         public int? DefaultActivityId { get; set; }
 
-        public int Order {  get; set; }
+        public int Order { get; set; }
 
     }
 }

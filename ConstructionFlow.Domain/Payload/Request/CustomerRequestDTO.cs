@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload
+namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class CustomerDTO
+    public class CustomerRequestDTO
     {
         public int Id { get; set; }
 
-        
+
         public string? CustomerCpf { get; set; }
 
-       
+
         public string? CustomerCnpj { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +15,20 @@ namespace ConstructionFlow.DAL.AutoMapperProfile
     {
         public MappingProfile()
         {
-            CreateMap<DefaultActivity, DefaultActivityDTO>();
-            CreateMap<DefaultActivityDTO, DefaultActivity>();
+            CreateMap<DefaultActivity, DefaultActivityRequestDTO>();
+            CreateMap<DefaultActivityRequestDTO, DefaultActivity>();
             CreateMap<Construction, ConstructionResponseDTO>();
-            CreateMap<ConstructionDTO, Construction>();
-            CreateMap<ConstructionPhoto, ConstructionPhotoDTO>();
-            CreateMap<ConstructionPhotoDTO, ConstructionPhoto>();
-            CreateMap<Customer, CustomerDTO>();
-            CreateMap<CustomerDTO, Customer>();
-            CreateMap<Status, StatusDTO>();
-            CreateMap<StatusDTO, Status>();
-            CreateMap<User, UserDTO>();
-            CreateMap<UserDTO, User>();
-            CreateMap<Activity, ActivityDTO>();
-            CreateMap<ActivityDTO, Activity>();
+            CreateMap<ConstructionRequestDTO, Construction>();
+            CreateMap<ConstructionPhoto, ConstructionPhotoRequestDTO>();
+            CreateMap<ConstructionPhotoRequestDTO, ConstructionPhoto>();
+            CreateMap<Customer, CustomerRequestDTO>();
+            CreateMap<CustomerRequestDTO, Customer>();
+            CreateMap<Status, StatusRequestDTO>();
+            CreateMap<StatusRequestDTO, Status>();
+            CreateMap<User, UserRequestDTO>();
+            CreateMap<UserRequestDTO, User>();
+            CreateMap<Activity, ActivityRequestDTO>();
+            CreateMap<ActivityRequestDTO, Activity>();
             CreateMap<UserLoginDTO, User>();
             
         }

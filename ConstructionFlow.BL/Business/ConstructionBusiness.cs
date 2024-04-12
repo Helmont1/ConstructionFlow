@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload;
+using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -33,13 +34,13 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<ConstructionResponseDTO>(construction);
         }
 
-        public Task AddConstruction(ConstructionDTO construction)
+        public Task AddConstruction(ConstructionRequestDTO construction)
         {
             _unitOfWork.ConstructionRepository.Insert(_mapper.Map<Construction>(construction));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateConstruction(ConstructionDTO construction)
+        public Task UpdateConstruction(ConstructionRequestDTO construction)
         {
             _unitOfWork.ConstructionRepository.Update(_mapper.Map<Construction>(construction));
             return _unitOfWork.SaveAsync();
