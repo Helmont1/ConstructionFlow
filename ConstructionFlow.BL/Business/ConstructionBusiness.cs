@@ -21,16 +21,16 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ConstructionDTO>> GetConstructions()
+        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructions()
         {
             var construction =  await _unitOfWork.ConstructionRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConstructionDTO>>(construction);
+            return _mapper.Map<IEnumerable<ConstructionResponseDTO>>(construction);
         }
 
-        public ConstructionDTO GetConstruction(int constructionId)
+        public ConstructionResponseDTO GetConstruction(int constructionId)
         {
             var construction =  _unitOfWork.ConstructionRepository.Get(x => x.Id == constructionId);
-            return _mapper.Map<ConstructionDTO>(construction);
+            return _mapper.Map<ConstructionResponseDTO>(construction);
         }
 
         public Task AddConstruction(ConstructionDTO construction)

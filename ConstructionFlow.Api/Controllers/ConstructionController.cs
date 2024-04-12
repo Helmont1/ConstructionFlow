@@ -17,13 +17,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ConstructionDTO>> GetConstructions()
+        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructions()
         {
             return await _constructionBusiness.GetConstructions();
         }
 
         [HttpGet("{constructionId}")]
-        public ConstructionDTO GetConstruction(int constructionId)
+        public ConstructionResponseDTO GetConstruction(int constructionId)
         {
             return _constructionBusiness.GetConstruction(constructionId);
         }
