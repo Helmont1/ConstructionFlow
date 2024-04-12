@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConstructionFlow.DAL.Map;
 using ConstructionFlow.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,5 +21,11 @@ namespace ConstructionFlow.DAL.DatabaseContext
         public DbSet<DefaultActivity> DefaultActivity { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ConstructionMap());
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

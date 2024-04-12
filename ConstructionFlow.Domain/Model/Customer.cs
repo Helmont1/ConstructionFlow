@@ -17,5 +17,7 @@ namespace ConstructionFlow.Domain.Model
 
         [MaxLength(14)]
         public string? CustomerCnpj { get; set; }
+
+        public ICollection<Construction> Constructions { get; set; }
     }
 }

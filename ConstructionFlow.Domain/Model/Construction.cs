@@ -10,7 +10,6 @@ namespace ConstructionFlow.Domain.Model
 
         [Required]
         public int StatusId { get; set; }
-        [ForeignKey("StatusId")]
         [Required]
         public Status Status { get; set; }
         public DateTime StartDate { get; set; }
@@ -18,12 +17,10 @@ namespace ConstructionFlow.Domain.Model
 
         [Required]
         public int CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
 
         [Required]
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }
