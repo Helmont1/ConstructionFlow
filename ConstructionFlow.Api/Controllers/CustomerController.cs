@@ -16,31 +16,31 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CustomerRequestDTO>> GetCustomers()
+        public async Task<IEnumerable<CustomerRequest>> GetCustomers()
         {
             return await _customerBusiness.GetCustomers();
         }
 
         [HttpGet("{customerId}")]
-        public CustomerRequestDTO GetCustomer(int customerId)
+        public CustomerRequest GetCustomer(int customerId)
         {
             return _customerBusiness.GetCustomer(customerId);
         }
 
         [HttpGet("register/{customerRegisterNumber}")]
-        public CustomerRequestDTO GetCustomerByRegisterNumber(string customerRegisterNumber)
+        public CustomerRequest GetCustomerByRegisterNumber(string customerRegisterNumber)
         {
             return _customerBusiness.GetCustomerByRegister(customerRegisterNumber);
         }
 
         [HttpPost]
-        public Task AddCustomer(CustomerRequestDTO customer)
+        public Task AddCustomer(CustomerRequest customer)
         {
             return _customerBusiness.AddCustomer(customer);
         }
 
         [HttpPut]
-        public Task UpdateCustomer(CustomerRequestDTO customer)
+        public Task UpdateCustomer(CustomerRequest customer)
         {
             return _customerBusiness.UpdateCustomer(customer);
         }

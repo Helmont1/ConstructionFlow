@@ -26,7 +26,7 @@ namespace ConstructionFlow.DAL.UnitOfWork
             _db.RemoveRange(entities);
         }
 
-        public T Get(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        public Task<T> Get(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = _db;
             if (include != null)
@@ -34,7 +34,7 @@ namespace ConstructionFlow.DAL.UnitOfWork
                 query = include(query);
             }
 
-            return query?.FirstOrDefault(expression);
+            return query?.FirstOrDefaultAsync(expression);
         }
 
         public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)

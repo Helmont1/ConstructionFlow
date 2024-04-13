@@ -18,25 +18,37 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructions()
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructions()
         {
             return await _constructionBusiness.GetConstructions();
         }
 
         [HttpGet("{constructionId}")]
-        public ConstructionResponseDTO GetConstruction(int constructionId)
+        public Task<ConstructionResponse> GetConstruction(int constructionId)
         {
             return _constructionBusiness.GetConstruction(constructionId);
         }
 
+        [HttpGet("users/{userId}")]
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByUser(int userId)
+        {
+            return await _constructionBusiness.GetConstructionsByUser(userId);
+        }
+
+        [HttpGet("customer/{customerId}")]
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByCustomer(int customerId)
+        {
+            return await _constructionBusiness.GetConstructionsByCustomer(customerId);
+        }
+
         [HttpPost]
-        public Task AddConstruction(ConstructionRequestDTO construction)
+        public Task AddConstruction(ConstructionRequest construction)
         {
             return _constructionBusiness.AddConstruction(construction);
         }
 
         [HttpPut]
-        public Task UpdateConstruction(ConstructionRequestDTO construction)
+        public Task UpdateConstruction(ConstructionRequest construction)
         {
             return _constructionBusiness.UpdateConstruction(construction);
         }
@@ -46,18 +58,5 @@ namespace ConstructionFlow.Api.Controllers
         {
             return _constructionBusiness.DeleteConstruction(constructionId);
         }
-
-        [HttpGet("users/{userId}")]
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructionsByUser(int userId)
-        {
-            return await _constructionBusiness.GetConstructionsByUser(userId);
-        }
-
-        [HttpGet("customer/{customerId}")]
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructionsByCustomer(int customerId)
-        {
-            return await _constructionBusiness.GetConstructionsByCustomer(customerId);
-        }
-
     }
 }

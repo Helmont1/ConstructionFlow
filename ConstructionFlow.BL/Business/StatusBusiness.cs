@@ -21,25 +21,25 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<StatusRequestDTO>> GetStatuses()
+        public async Task<IEnumerable<StatusRequest>> GetStatuses()
         {
             var status =  await _unitOfWork.StatusRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<StatusRequestDTO>>(status);
+            return _mapper.Map<IEnumerable<StatusRequest>>(status);
         }
 
-        public StatusRequestDTO GetStatus(string statusName)
+        public StatusRequest GetStatus(string statusName)
         {
             var status =  _unitOfWork.StatusRepository.Get(x => x.StatusName == statusName);
-            return _mapper.Map<StatusRequestDTO>(status);
+            return _mapper.Map<StatusRequest>(status);
         }
 
-        public Task AddStatus(StatusRequestDTO status)
+        public Task AddStatus(StatusRequest status)
         {
             _unitOfWork.StatusRepository.Insert(_mapper.Map<Status>(status));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateStatus(StatusRequestDTO status)
+        public Task UpdateStatus(StatusRequest status)
         {
             _unitOfWork.StatusRepository.Update(_mapper.Map<Status>(status));
             return _unitOfWork.SaveAsync();

@@ -8,19 +8,21 @@ namespace ConstructionFlow.Domain.Model
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Status is required")]
         public int StatusId { get; set; }
-        [Required]
+        [ForeignKey("StatusId")]
         public Status Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Customer is required")]
         public int CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "User is required")]
         public int UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }

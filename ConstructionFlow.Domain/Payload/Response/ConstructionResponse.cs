@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 
 namespace ConstructionFlow.Domain.Payload
 {
-    public class ConstructionResponseDTO
+    public class ConstructionResponse
     {
         
         public int Id { get; set; }
 
-        public StatusRequestDTO ?Status { get; set; }
+        public StatusResponse? Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public CustomerRequestDTO ?Customer { get; set; }
+        public CustomerResponse? Customer { get; set; }
 
-        public UserRequestDTO ?User { get; set; }
+        public UserResponse? User { get; set; }
     }
 }

@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StatusRequestDTO>> GetStatuses()
+        public async Task<IEnumerable<StatusRequest>> GetStatuses()
         {
             return await _statusBusiness.GetStatuses();
         }
 
         [HttpGet("{statusName}")]
-        public StatusRequestDTO GetStatus(string statusName)
+        public StatusRequest GetStatus(string statusName)
         {
             return _statusBusiness.GetStatus(statusName);
         }
 
         [HttpPost]
-        public Task AddStatus(StatusRequestDTO status)
+        public Task AddStatus(StatusRequest status)
         {
             return _statusBusiness.AddStatus(status);
         }
 
         [HttpPut]
-        public Task UpdateStatus(StatusRequestDTO status)
+        public Task UpdateStatus(StatusRequest status)
         {
             return _statusBusiness.UpdateStatus(status);
         }

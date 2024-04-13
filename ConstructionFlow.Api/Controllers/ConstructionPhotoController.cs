@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotos()
+        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotos()
         {
             return await _constructionPhotoBusiness.GetConstructionPhotos();
         }
 
         [HttpGet("{constructionPhotoId}")]
-        public ConstructionPhotoRequestDTO GetConstructionPhoto(int constructionPhotoId)
+        public ConstructionPhotoRequest GetConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.GetConstructionPhoto(constructionPhotoId);
         }
 
         [HttpPost]
-        public Task AddConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
+        public Task AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
             return _constructionPhotoBusiness.AddConstructionPhoto(constructionPhoto);
         }
 
         [HttpPut]
-        public Task UpdateConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
+        public Task UpdateConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
             return _constructionPhotoBusiness.UpdateConstructionPhoto(constructionPhoto);
         }
@@ -46,7 +46,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("{constructionPhotoId}/construction/{constructionId}")]
-        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotosByConstruction(int constructionId)
         {
             return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
         }

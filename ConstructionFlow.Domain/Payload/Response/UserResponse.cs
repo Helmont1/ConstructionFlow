@@ -1,14 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructionFlow.Domain.Payload.Request
+namespace ConstructionFlow.Domain.Payload.Response
 {
-    public class UserRequestDTO
+    public class UserResponse
     {
-
         public int Id { get; set; }
 
         public string UserName { get; set; }

@@ -17,13 +17,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserRequestDTO>> GetUsers()
+        public async Task<IEnumerable<UserRequest>> GetUsers()
         {
             return await _userBusiness.GetUsers();
         }
 
         [HttpGet("{userId}")]
-        public UserRequestDTO GetUser(int userId)
+        public UserRequest GetUser(int userId)
         {
             return _userBusiness.GetUser(userId);
         }
@@ -35,7 +35,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPut]
-        public Task UpdateUser(UserRequestDTO user)
+        public Task UpdateUser(UserRequest user)
         {
             return _userBusiness.UpdateUser(user);
         }
@@ -47,7 +47,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("/CNPJ/{userCNPJ}")]
-        public UserRequestDTO GetUsersByCNPJ(string userCNPJ)
+        public UserRequest GetUsersByCNPJ(string userCNPJ)
         {
             return _userBusiness.GetUsersByCNPJ(userCNPJ);
         }

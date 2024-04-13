@@ -21,25 +21,25 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DefaultActivityRequestDTO>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityRequest>> GetDefaultActivities()
         {
             var defaultActivity =  await _unitOfWork.DefaultActivityRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<DefaultActivityRequestDTO>>(defaultActivity);
+            return _mapper.Map<IEnumerable<DefaultActivityRequest>>(defaultActivity);
         }
 
-        public DefaultActivityRequestDTO GetDefaultActivity(int defaultActivityId)
+        public DefaultActivityRequest GetDefaultActivity(int defaultActivityId)
         {
             var defaultActivity =  _unitOfWork.DefaultActivityRepository.Get(x => x.Id == defaultActivityId);
-            return _mapper.Map<DefaultActivityRequestDTO>(defaultActivity);
+            return _mapper.Map<DefaultActivityRequest>(defaultActivity);
         }
 
-        public Task AddDefaultActivity(DefaultActivityRequestDTO defaultActivity)
+        public Task AddDefaultActivity(DefaultActivityRequest defaultActivity)
         {
             _unitOfWork.DefaultActivityRepository.Insert(_mapper.Map<DefaultActivity>(defaultActivity));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateDefaultActivity(DefaultActivityRequestDTO defaultActivity)
+        public Task UpdateDefaultActivity(DefaultActivityRequest defaultActivity)
         {
             _unitOfWork.DefaultActivityRepository.Update(_mapper.Map<DefaultActivity>(defaultActivity));
             return _unitOfWork.SaveAsync();

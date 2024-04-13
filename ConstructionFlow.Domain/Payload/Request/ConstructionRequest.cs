@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class ConstructionRequestDTO
+    public class ConstructionRequest
     {
 
         public int Id { get; set; }

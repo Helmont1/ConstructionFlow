@@ -21,25 +21,25 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotos()
+        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotos()
         {
             var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConstructionPhotoRequestDTO>>(constructionPhotos);
+            return _mapper.Map<IEnumerable<ConstructionPhotoRequest>>(constructionPhotos);
         }
 
-        public ConstructionPhotoRequestDTO GetConstructionPhoto(int constructionPhotoId)
+        public ConstructionPhotoRequest GetConstructionPhoto(int constructionPhotoId)
         {
             var constructionPhoto = _unitOfWork.ConstructionPhotoRepository.Get(x => x.Id == constructionPhotoId);
-            return _mapper.Map<ConstructionPhotoRequestDTO>(constructionPhoto);
+            return _mapper.Map<ConstructionPhotoRequest>(constructionPhoto);
         }
 
-        public Task AddConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
+        public Task AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
             _unitOfWork.ConstructionPhotoRepository.Insert(_mapper.Map<ConstructionPhoto>(constructionPhoto));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateConstructionPhoto(ConstructionPhotoRequestDTO constructionPhoto)
+        public Task UpdateConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
             _unitOfWork.ConstructionPhotoRepository.Update(_mapper.Map<ConstructionPhoto>(constructionPhoto));
             return _unitOfWork.SaveAsync();
@@ -51,10 +51,10 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionPhotoRequestDTO>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotosByConstruction(int constructionId)
         {
             var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(x => x.ConstructionId == constructionId);
-            return _mapper.Map<IEnumerable<ConstructionPhotoRequestDTO>>(constructionPhotos);
+            return _mapper.Map<IEnumerable<ConstructionPhotoRequest>>(constructionPhotos);
         }
     }
 }

@@ -21,30 +21,30 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CustomerRequestDTO>> GetCustomers()
+        public async Task<IEnumerable<CustomerRequest>> GetCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CustomerRequestDTO>>(customers);
+            return _mapper.Map<IEnumerable<CustomerRequest>>(customers);
         }
 
-        public CustomerRequestDTO GetCustomer(int customerId)
+        public CustomerRequest GetCustomer(int customerId)
         {
             var customer = _unitOfWork.CustomerRepository.Get(x => x.Id == customerId);
-            return _mapper.Map<CustomerRequestDTO>(customer);
+            return _mapper.Map<CustomerRequest>(customer);
         }
-        public CustomerRequestDTO GetCustomerByRegister(string customerRegister)
+        public CustomerRequest GetCustomerByRegister(string customerRegister)
         {
             var customer = _unitOfWork.CustomerRepository.Get(x => (x.CustomerCnpj == customerRegister) || (x.CustomerCpf == customerRegister));
-            return _mapper.Map<CustomerRequestDTO>(customer);
+            return _mapper.Map<CustomerRequest>(customer);
         }
 
-        public Task AddCustomer(CustomerRequestDTO customer)
+        public Task AddCustomer(CustomerRequest customer)
         {
             _unitOfWork.CustomerRepository.Insert(_mapper.Map<Customer>(customer));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateCustomer(CustomerRequestDTO customer)
+        public Task UpdateCustomer(CustomerRequest customer)
         {
             _unitOfWork.CustomerRepository.Update(_mapper.Map<Customer>(customer));
             return _unitOfWork.SaveAsync();

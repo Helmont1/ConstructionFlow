@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConstructionFlow.Domain.Payload.Request
 {
-    public class CustomerRequestDTO
+    public class DefaultActivityRequest
     {
         public int Id { get; set; }
-
-
-        public string? CustomerCpf { get; set; }
-
-
-        public string? CustomerCnpj { get; set; }
+        public string Icon { get; set; }
+        public string DefaultActivityName { get; set; }
     }
 }
-

@@ -22,16 +22,16 @@ namespace ConstructionFlow.BL.Business
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<UserRequestDTO>> GetUsers()
+        public async Task<IEnumerable<UserRequest>> GetUsers()
         {
             var users = await unitOfWork.UserRepository.GetAllAsync();
-            return mapper.Map<IEnumerable<UserRequestDTO>>(users);
+            return mapper.Map<IEnumerable<UserRequest>>(users);
         }
 
-        public UserRequestDTO GetUser(int userId)
+        public UserRequest GetUser(int userId)
         {
             var user = unitOfWork.UserRepository.Get(x => x.Id == userId);
-            return mapper.Map<UserRequestDTO>(user);
+            return mapper.Map<UserRequest>(user);
         }
         
         public Task AddUser(UserLoginDTO user)
@@ -40,7 +40,7 @@ namespace ConstructionFlow.BL.Business
             return unitOfWork.SaveAsync();
         }
 
-        public Task UpdateUser(UserRequestDTO user)
+        public Task UpdateUser(UserRequest user)
         {
             unitOfWork.UserRepository.Update(mapper.Map<User>(user));
             return unitOfWork.SaveAsync();
@@ -52,10 +52,10 @@ namespace ConstructionFlow.BL.Business
             return unitOfWork.SaveAsync();
         }
 
-        public UserRequestDTO GetUsersByCNPJ(string userCNPJ)
+        public UserRequest GetUsersByCNPJ(string userCNPJ)
         {
             var user = unitOfWork.UserRepository.Get(x => x.UserCnpj == userCNPJ);
-            return mapper.Map<UserRequestDTO>(user);
+            return mapper.Map<UserRequest>(user);
         }
     }
 }

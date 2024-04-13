@@ -23,29 +23,29 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructions()
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructions()
         {
             var construction =  await _unitOfWork.ConstructionRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConstructionResponseDTO>>(construction);
+            return _mapper.Map<IEnumerable<ConstructionResponse>>(construction);
         }
 
-        public ConstructionResponseDTO GetConstruction(int constructionId)
+        public async Task<ConstructionResponse> GetConstruction(int constructionId)
         {
-            var construction =  _unitOfWork.ConstructionRepository.Get(
+            var construction =  await _unitOfWork.ConstructionRepository.Get(
                 x => x.Id == constructionId,
                 include: query => query.Include(x => x.Customer)
                                         .Include(c => c.User)
                                         .Include(c => c.Status));
-            return _mapper.Map<ConstructionResponseDTO>(construction);
+            return _mapper.Map<ConstructionResponse>(construction);
         }
 
-        public Task AddConstruction(ConstructionRequestDTO construction)
+        public Task AddConstruction(ConstructionRequest construction)
         {
             _unitOfWork.ConstructionRepository.Insert(_mapper.Map<Construction>(construction));
             return _unitOfWork.SaveAsync();
         }
 
-        public Task UpdateConstruction(ConstructionRequestDTO construction)
+        public Task UpdateConstruction(ConstructionRequest construction)
         {
             _unitOfWork.ConstructionRepository.Update(_mapper.Map<Construction>(construction));
             return _unitOfWork.SaveAsync();
@@ -57,16 +57,16 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructionsByUser(int userId)
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByUser(int userId)
         {
             var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.UserId == userId);
-            return _mapper.Map<IEnumerable<ConstructionResponseDTO>>(constructions);
+            return _mapper.Map<IEnumerable<ConstructionResponse>>(constructions);
         }
 
-        public async Task<IEnumerable<ConstructionResponseDTO>> GetConstructionsByCustomer(int customerId)
+        public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByCustomer(int customerId)
         {
             var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.CustomerId == customerId);
-            return _mapper.Map<IEnumerable<ConstructionResponseDTO>>(constructions);
+            return _mapper.Map<IEnumerable<ConstructionResponse>>(constructions);
         }
     }
 }

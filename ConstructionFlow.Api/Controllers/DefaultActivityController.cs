@@ -16,25 +16,25 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DefaultActivityRequestDTO>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityRequest>> GetDefaultActivities()
         {
             return await _defaultActivityBusiness.GetDefaultActivities();
         }
 
         [HttpGet("{defaultActivityId}")]
-        public DefaultActivityRequestDTO GetDefaultActivity(int defaultActivityId)
+        public DefaultActivityRequest GetDefaultActivity(int defaultActivityId)
         {
             return _defaultActivityBusiness.GetDefaultActivity(defaultActivityId);
         }
 
         [HttpPost]
-        public Task AddDefaultActivity(DefaultActivityRequestDTO defaultActivity)
+        public Task AddDefaultActivity(DefaultActivityRequest defaultActivity)
         {
             return _defaultActivityBusiness.AddDefaultActivity(defaultActivity);
         }
 
         [HttpPut]
-        public Task UpdateDefaultActivity(DefaultActivityRequestDTO defaultActivity)
+        public Task UpdateDefaultActivity(DefaultActivityRequest defaultActivity)
         {
             return _defaultActivityBusiness.UpdateDefaultActivity(defaultActivity);
         }

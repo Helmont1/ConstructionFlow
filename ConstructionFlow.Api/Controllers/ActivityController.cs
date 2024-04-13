@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,26 +17,33 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ActivityRequestDTO>> GetActivities()
+        public async Task<IEnumerable<ActivityResponse>> GetActivities()
         {
             return await _activityBusiness.GetActivities();
         }
 
         [HttpGet("{activityId}")]
 
-        public ActivityRequestDTO GetActivity(int activityId)
+        public Task<ActivityResponse> GetActivity(int activityId)
         {
             return _activityBusiness.GetActivity(activityId);
         }
 
+        [HttpGet("{activityId}/construction/{constructionId}")]
+
+        public async Task<IEnumerable<ActivityRequest>> GetActivitiesByConstruction(int constructionId)
+        {
+            return await _activityBusiness.GetActivitiesByConstruction(constructionId);
+        }
+
         [HttpPost]
-        public Task AddActivity(ActivityRequestDTO activity)
+        public Task AddActivity(ActivityRequest activity)
         {
             return _activityBusiness.AddActivity(activity);
         }
 
         [HttpPut]
-        public Task UpdateActivity(ActivityRequestDTO activity)
+        public Task UpdateActivity(ActivityRequest activity)
         {
             return _activityBusiness.UpdateActivity(activity);
         }
@@ -44,13 +52,6 @@ namespace ConstructionFlow.Api.Controllers
         public Task DeleteActivity(int activityId)
         {
             return _activityBusiness.DeleteActivity(activityId);
-        }
-
-        [HttpGet("{activityId}/construction/{constructionId}")]
-
-        public async Task<IEnumerable<ActivityRequestDTO>> GetActivitiesByConstruction(int constructionId)
-        {
-            return await _activityBusiness.GetActivitiesByConstruction(constructionId);
         }
     }
 }
