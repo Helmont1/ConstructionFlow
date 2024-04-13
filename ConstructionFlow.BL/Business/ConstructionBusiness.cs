@@ -8,6 +8,7 @@ using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload;
 using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Infrastructure.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionFlow.BL.Business
 {
@@ -30,7 +31,11 @@ namespace ConstructionFlow.BL.Business
 
         public ConstructionResponseDTO GetConstruction(int constructionId)
         {
-            var construction =  _unitOfWork.ConstructionRepository.Get(x => x.Id == constructionId);
+            var construction =  _unitOfWork.ConstructionRepository.Get(
+                x => x.Id == constructionId,
+                include: query => query.Include(x => x.Customer)
+                                        .Include(c => c.User)
+                                        .Include(c => c.Status));
             return _mapper.Map<ConstructionResponseDTO>(construction);
         }
 

@@ -22,10 +22,5 @@ namespace ConstructionFlow.DAL.DatabaseContext
         public DbSet<Status> Status { get; set; }
         public DbSet<User> User { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new ConstructionMap());
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
