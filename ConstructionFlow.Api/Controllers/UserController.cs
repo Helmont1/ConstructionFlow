@@ -3,6 +3,8 @@ using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Domain.Payload.Util;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ConstructionFlow.Api.Controllers
 {
@@ -23,6 +25,7 @@ namespace ConstructionFlow.Api.Controllers
             return await _userBusiness.GetUsers();
         }
 
+
         [HttpGet("{userId}")]
         public Task<UserResponse> GetUser(int userId)
         {
@@ -36,9 +39,22 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddUser(UserLoginDTO user)
+        public Task AddUser(CreateUserDto user)
         {
             return _userBusiness.AddUser(user);
+        }
+
+        [HttpPost("/login")]
+        public Task<string> Login(LoginDto login)
+        {
+            try
+            {
+                return _userBusiness.Login(login);
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult(e.Message);
+            }
         }
 
         [HttpPut]

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConstructionFlow.Domain.Payload.Util
 {
-    public class UserLoginDTO
+    public class CreateUserDto
     {
-        public int Id { get; set; }
-
         public string UserName { get; set; }
 
         public string UserEmail { get; set; }

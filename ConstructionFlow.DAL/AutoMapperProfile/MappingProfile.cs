@@ -3,6 +3,7 @@ using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload;
 using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Domain.Payload.Response;
+using ConstructionFlow.Domain.Payload.Util;
 
 namespace ConstructionFlow.DAL.AutoMapperProfile
 {
@@ -27,7 +28,7 @@ namespace ConstructionFlow.DAL.AutoMapperProfile
 
             CreateMap<User, UserResponse>();
             CreateMap<UserRequest, User>();
-            CreateMap<UserLoginDTO, User>();
+            CreateMap<CreateUserDto, User>();
 
             CreateMap<Activity, ActivityResponse>();
             CreateMap<ActivityRequest, Activity>();
