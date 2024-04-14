@@ -24,5 +24,8 @@ namespace ConstructionFlow.Domain.Model
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
+
+        [Required (ErrorMessage = "Title is required")]
+        public string Title { get; set; }
     }
 }

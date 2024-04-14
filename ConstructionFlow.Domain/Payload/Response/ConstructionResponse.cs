@@ -20,5 +20,6 @@ namespace ConstructionFlow.Domain.Payload
         public CustomerResponse? Customer { get; set; }
 
         public UserResponse? User { get; set; }
+        public string Title { get; set; }
     }
 }

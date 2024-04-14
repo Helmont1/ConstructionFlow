@@ -18,5 +18,6 @@ namespace ConstructionFlow.Domain.Payload.Request
         public int CustomerId { get; set; }
 
         public int UserId { get; set; }
+        public string Title { get; set; }
     }
 }

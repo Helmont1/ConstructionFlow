@@ -23,7 +23,7 @@ namespace ConstructionFlow.BL.Business
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        
+
         public async Task<IEnumerable<ActivityResponse>> GetActivities()
         {
             var activities = await _unitOfWork.ActivityRepository.GetAllAsync(
@@ -34,7 +34,8 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<ActivityResponse> GetActivity(int activityId)
         {
-            var activity = await _unitOfWork.ActivityRepository.Get(x => x.Id == activityId,
+            var activity = await _unitOfWork.ActivityRepository.Get(
+                x => x.Id == activityId,
                 include: query => query.Include(x => x.Construction).Include(x => x.DefaultActivity).Include(x => x.Status)
             );
             return _mapper.Map<ActivityResponse>(activity);
@@ -60,7 +61,10 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<IEnumerable<ActivityRequest>> GetActivitiesByConstruction(int constructionId)
         {
-            var activities = await _unitOfWork.ActivityRepository.GetAllAsync(x => x.ConstructionId == constructionId);
+            var activities = await _unitOfWork.ActivityRepository.GetAllAsync(
+                x => x.ConstructionId == constructionId,
+                include: query => query.Include(x => x.Construction).Include(x => x.DefaultActivity).Include(x => x.Status)
+                );
             return _mapper.Map<IEnumerable<ActivityRequest>>(activities);
         }
     }

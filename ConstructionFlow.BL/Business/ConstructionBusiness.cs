@@ -25,17 +25,22 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<IEnumerable<ConstructionResponse>> GetConstructions()
         {
-            var construction =  await _unitOfWork.ConstructionRepository.GetAllAsync();
+            var construction = await _unitOfWork.ConstructionRepository.GetAllAsync(
+                include: query => query.Include(x => x.Customer)
+                                        .Include(c => c.User)
+                                        .Include(c => c.Status)
+            );
             return _mapper.Map<IEnumerable<ConstructionResponse>>(construction);
         }
 
         public async Task<ConstructionResponse> GetConstruction(int constructionId)
         {
-            var construction =  await _unitOfWork.ConstructionRepository.Get(
+            var construction = await _unitOfWork.ConstructionRepository.Get(
                 x => x.Id == constructionId,
                 include: query => query.Include(x => x.Customer)
                                         .Include(c => c.User)
-                                        .Include(c => c.Status));
+                                        .Include(c => c.Status)
+            );
             return _mapper.Map<ConstructionResponse>(construction);
         }
 
@@ -59,13 +64,23 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByUser(int userId)
         {
-            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.UserId == userId);
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(
+                x => x.UserId == userId,
+                include: query => query.Include(x => x.Customer)
+                                            .Include(c => c.User)
+                                            .Include(c => c.Status)
+            );
             return _mapper.Map<IEnumerable<ConstructionResponse>>(constructions);
         }
 
         public async Task<IEnumerable<ConstructionResponse>> GetConstructionsByCustomer(int customerId)
         {
-            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(x => x.CustomerId == customerId);
+            var constructions = await _unitOfWork.ConstructionRepository.GetAllAsync(
+                x => x.CustomerId == customerId,
+                include: query => query.Include(x => x.Customer)
+                                        .Include(c => c.User)
+                                        .Include(c => c.Status)
+            );
             return _mapper.Map<IEnumerable<ConstructionResponse>>(constructions);
         }
     }

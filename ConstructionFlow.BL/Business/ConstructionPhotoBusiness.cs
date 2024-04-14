@@ -8,6 +8,7 @@ using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
 using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Infrastructure.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionFlow.BL.Business
 {
@@ -24,13 +25,18 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotos()
         {
-            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync();
+            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(
+                include: query => query.Include(x => x.Construction)
+            );
             return _mapper.Map<IEnumerable<ConstructionPhotoResponse>>(constructionPhotos);
         }
 
         public async Task<ConstructionPhotoResponse> GetConstructionPhoto(int constructionPhotoId)
         {
-            var constructionPhoto = await _unitOfWork.ConstructionPhotoRepository.Get(x => x.Id == constructionPhotoId);
+            var constructionPhoto = await _unitOfWork.ConstructionPhotoRepository.Get(
+                x => x.Id == constructionPhotoId,
+                include: query => query.Include(x => x.Construction)
+            );
             return _mapper.Map<ConstructionPhotoResponse>(constructionPhoto);
         }
 
@@ -54,7 +60,10 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotosByConstruction(int constructionId)
         {
-            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(x => x.ConstructionId == constructionId);
+            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(
+                x => x.ConstructionId == constructionId,
+                include: query => query.Include(x => x.Construction)
+            );
             return _mapper.Map<IEnumerable<ConstructionPhotoResponse>>(constructionPhotos);
         }
     }
