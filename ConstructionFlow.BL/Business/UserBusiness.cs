@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Domain.Payload.Util;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 using System;
@@ -22,16 +23,16 @@ namespace ConstructionFlow.BL.Business
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<UserRequest>> GetUsers()
+        public async Task<IEnumerable<UserResponse>> GetUsers()
         {
             var users = await unitOfWork.UserRepository.GetAllAsync();
-            return mapper.Map<IEnumerable<UserRequest>>(users);
+            return mapper.Map<IEnumerable<UserResponse>>(users);
         }
 
-        public UserRequest GetUser(int userId)
+        public async Task<UserResponse> GetUser(int userId)
         {
-            var user = unitOfWork.UserRepository.Get(x => x.Id == userId);
-            return mapper.Map<UserRequest>(user);
+            var user = await unitOfWork.UserRepository.Get(x => x.Id == userId);
+            return mapper.Map<UserResponse>(user);
         }
         
         public Task AddUser(UserLoginDTO user)
@@ -52,10 +53,10 @@ namespace ConstructionFlow.BL.Business
             return unitOfWork.SaveAsync();
         }
 
-        public UserRequest GetUsersByCNPJ(string userCNPJ)
+        public async Task<UserResponse> GetUsersByCNPJ(string userCNPJ)
         {
-            var user = unitOfWork.UserRepository.Get(x => x.UserCnpj == userCNPJ);
-            return mapper.Map<UserRequest>(user);
+            var user = await unitOfWork.UserRepository.Get(x => x.UserCnpj == userCNPJ);
+            return mapper.Map<UserResponse>(user);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -21,16 +22,16 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<StatusRequest>> GetStatuses()
+        public async Task<IEnumerable<StatusResponse>> GetStatuses()
         {
             var status =  await _unitOfWork.StatusRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<StatusRequest>>(status);
+            return _mapper.Map<IEnumerable<StatusResponse>>(status);
         }
 
-        public StatusRequest GetStatus(string statusName)
+        public async Task<StatusResponse> GetStatus(string statusName)
         {
-            var status =  _unitOfWork.StatusRepository.Get(x => x.StatusName == statusName);
-            return _mapper.Map<StatusRequest>(status);
+            var status =  await _unitOfWork.StatusRepository.Get(x => x.StatusName == statusName);
+            return _mapper.Map<StatusResponse>(status);
         }
 
         public Task AddStatus(StatusRequest status)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -21,21 +22,21 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CustomerRequest>> GetCustomers()
+        public async Task<IEnumerable<CustomerResponse>> GetCustomers()
         {
             var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CustomerRequest>>(customers);
+            return _mapper.Map<IEnumerable<CustomerResponse>>(customers);
         }
 
-        public CustomerRequest GetCustomer(int customerId)
+        public async Task<CustomerResponse> GetCustomer(int customerId)
         {
-            var customer = _unitOfWork.CustomerRepository.Get(x => x.Id == customerId);
-            return _mapper.Map<CustomerRequest>(customer);
+            var customer = await _unitOfWork.CustomerRepository.Get(x => x.Id == customerId);
+            return _mapper.Map<CustomerResponse>(customer);
         }
-        public CustomerRequest GetCustomerByRegister(string customerRegister)
+        public async Task<CustomerResponse> GetCustomerByRegister(string customerRegister)
         {
-            var customer = _unitOfWork.CustomerRepository.Get(x => (x.CustomerCnpj == customerRegister) || (x.CustomerCpf == customerRegister));
-            return _mapper.Map<CustomerRequest>(customer);
+            var customer = await _unitOfWork.CustomerRepository.Get(x => (x.CustomerCnpj == customerRegister) || (x.CustomerCpf == customerRegister));
+            return _mapper.Map<CustomerResponse>(customer);
         }
 
         public Task AddCustomer(CustomerRequest customer)

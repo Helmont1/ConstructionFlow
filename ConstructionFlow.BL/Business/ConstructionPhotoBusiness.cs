@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -21,16 +22,16 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotos()
+        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotos()
         {
             var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ConstructionPhotoRequest>>(constructionPhotos);
+            return _mapper.Map<IEnumerable<ConstructionPhotoResponse>>(constructionPhotos);
         }
 
-        public ConstructionPhotoRequest GetConstructionPhoto(int constructionPhotoId)
+        public async Task<ConstructionPhotoResponse> GetConstructionPhoto(int constructionPhotoId)
         {
-            var constructionPhoto = _unitOfWork.ConstructionPhotoRepository.Get(x => x.Id == constructionPhotoId);
-            return _mapper.Map<ConstructionPhotoRequest>(constructionPhoto);
+            var constructionPhoto = await _unitOfWork.ConstructionPhotoRepository.Get(x => x.Id == constructionPhotoId);
+            return _mapper.Map<ConstructionPhotoResponse>(constructionPhoto);
         }
 
         public Task AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
@@ -51,10 +52,10 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotosByConstruction(int constructionId)
         {
             var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(x => x.ConstructionId == constructionId);
-            return _mapper.Map<IEnumerable<ConstructionPhotoRequest>>(constructionPhotos);
+            return _mapper.Map<IEnumerable<ConstructionPhotoResponse>>(constructionPhotos);
         }
     }
 }

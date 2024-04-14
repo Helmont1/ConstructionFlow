@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Domain.Payload.Util;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +18,21 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserRequest>> GetUsers()
+        public async Task<IEnumerable<UserResponse>> GetUsers()
         {
             return await _userBusiness.GetUsers();
         }
 
         [HttpGet("{userId}")]
-        public UserRequest GetUser(int userId)
+        public Task<UserResponse> GetUser(int userId)
         {
             return _userBusiness.GetUser(userId);
+        }
+
+        [HttpGet("/CNPJ/{userCNPJ}")]
+        public Task<UserResponse> GetUsersByCNPJ(string userCNPJ)
+        {
+            return _userBusiness.GetUsersByCNPJ(userCNPJ);
         }
 
         [HttpPost]
@@ -44,12 +51,6 @@ namespace ConstructionFlow.Api.Controllers
         public Task DeleteUser(int userId)
         {
             return _userBusiness.DeleteUser(userId);
-        }
-
-        [HttpGet("/CNPJ/{userCNPJ}")]
-        public UserRequest GetUsersByCNPJ(string userCNPJ)
-        {
-            return _userBusiness.GetUsersByCNPJ(userCNPJ);
         }
     }
 }

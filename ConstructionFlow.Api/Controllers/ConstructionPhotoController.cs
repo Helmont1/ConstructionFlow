@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,15 +17,21 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotos()
+        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotos()
         {
             return await _constructionPhotoBusiness.GetConstructionPhotos();
         }
 
         [HttpGet("{constructionPhotoId}")]
-        public ConstructionPhotoRequest GetConstructionPhoto(int constructionPhotoId)
+        public Task<ConstructionPhotoResponse> GetConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.GetConstructionPhoto(constructionPhotoId);
+        }
+
+        [HttpGet("{constructionPhotoId}/construction/{constructionId}")]
+        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotosByConstruction(int constructionId)
+        {
+            return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
         }
 
         [HttpPost]
@@ -43,12 +50,6 @@ namespace ConstructionFlow.Api.Controllers
         public Task DeleteConstructionPhoto(int constructionPhotoId)
         {
             return _constructionPhotoBusiness.DeleteConstructionPhoto(constructionPhotoId);
-        }
-
-        [HttpGet("{constructionPhotoId}/construction/{constructionId}")]
-        public async Task<IEnumerable<ConstructionPhotoRequest>> GetConstructionPhotosByConstruction(int constructionId)
-        {
-            return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
         }
     
     }

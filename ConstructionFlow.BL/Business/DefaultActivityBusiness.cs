@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ConstructionFlow.Domain.Model;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using ConstructionFlow.Infrastructure.UnitOfWork;
 
 namespace ConstructionFlow.BL.Business
@@ -21,16 +22,16 @@ namespace ConstructionFlow.BL.Business
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DefaultActivityRequest>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityResponse>> GetDefaultActivities()
         {
             var defaultActivity =  await _unitOfWork.DefaultActivityRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<DefaultActivityRequest>>(defaultActivity);
+            return _mapper.Map<IEnumerable<DefaultActivityResponse>>(defaultActivity);
         }
 
-        public DefaultActivityRequest GetDefaultActivity(int defaultActivityId)
+        public async Task<DefaultActivityResponse> GetDefaultActivity(int defaultActivityId)
         {
-            var defaultActivity =  _unitOfWork.DefaultActivityRepository.Get(x => x.Id == defaultActivityId);
-            return _mapper.Map<DefaultActivityRequest>(defaultActivity);
+            var defaultActivity = await _unitOfWork.DefaultActivityRepository.Get(x => x.Id == defaultActivityId);
+            return _mapper.Map<DefaultActivityResponse>(defaultActivity);
         }
 
         public Task AddDefaultActivity(DefaultActivityRequest defaultActivity)

@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,19 +17,19 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CustomerRequest>> GetCustomers()
+        public async Task<IEnumerable<CustomerResponse>> GetCustomers()
         {
             return await _customerBusiness.GetCustomers();
         }
 
         [HttpGet("{customerId}")]
-        public CustomerRequest GetCustomer(int customerId)
+        public Task<CustomerResponse> GetCustomer(int customerId)
         {
             return _customerBusiness.GetCustomer(customerId);
         }
 
         [HttpGet("register/{customerRegisterNumber}")]
-        public CustomerRequest GetCustomerByRegisterNumber(string customerRegisterNumber)
+        public Task<CustomerResponse> GetCustomerByRegisterNumber(string customerRegisterNumber)
         {
             return _customerBusiness.GetCustomerByRegister(customerRegisterNumber);
         }

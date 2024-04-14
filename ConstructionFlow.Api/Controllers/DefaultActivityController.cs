@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,13 +17,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DefaultActivityRequest>> GetDefaultActivities()
+        public async Task<IEnumerable<DefaultActivityResponse>> GetDefaultActivities()
         {
             return await _defaultActivityBusiness.GetDefaultActivities();
         }
 
         [HttpGet("{defaultActivityId}")]
-        public DefaultActivityRequest GetDefaultActivity(int defaultActivityId)
+        public Task<DefaultActivityResponse> GetDefaultActivity(int defaultActivityId)
         {
             return _defaultActivityBusiness.GetDefaultActivity(defaultActivityId);
         }

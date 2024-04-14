@@ -1,5 +1,6 @@
 ﻿using ConstructionFlow.BL.Business;
 using ConstructionFlow.Domain.Payload.Request;
+using ConstructionFlow.Domain.Payload.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionFlow.Api.Controllers
@@ -16,13 +17,13 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StatusRequest>> GetStatuses()
+        public async Task<IEnumerable<StatusResponse>> GetStatuses()
         {
             return await _statusBusiness.GetStatuses();
         }
 
         [HttpGet("{statusName}")]
-        public StatusRequest GetStatus(string statusName)
+        public Task<StatusResponse> GetStatus(string statusName)
         {
             return _statusBusiness.GetStatus(statusName);
         }
