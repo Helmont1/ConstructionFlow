@@ -13,8 +13,8 @@ import { NgIf, NgStyle } from '@angular/common';
   selector: 'app-login',
   standalone: true,
   imports: [
-    RouterLink, 
-    ReactiveFormsModule, 
+    RouterLink,
+    ReactiveFormsModule,
     NgIf,
     NgStyle
   ],
@@ -35,10 +35,12 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
+
   onSubmit() {
-    this.authService.login().subscribe(() => {
-      this.routerService.navigate(['/home']);
-    });
+    this.authService.login(
+      this.loginForm.get('email')?.value,
+      this.loginForm.get('password')?.value
+    );
   }
 
   debugEmailErrors() {

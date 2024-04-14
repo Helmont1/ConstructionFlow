@@ -44,7 +44,7 @@ namespace ConstructionFlow.Api.Controllers
             return _userBusiness.AddUser(user);
         }
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public Task<string> Login(LoginDto login)
         {
             try

@@ -7,18 +7,31 @@ import { tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private routerService: Router) { }
   logout(): void {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('user');
   }
 
-  login() {
-    return this.userService.getUser(1).pipe(
-      tap((user) => {
+  login(userEmail: string, userPassword: string) {
+    return this.userService.login(userEmail, userPassword).subscribe({
+      next: (response) => {
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('user', JSON.stringify(user));
-      })
-    );
+        localStorage.setItem('token', response);
+        this.routerService.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error(error);
+        alert('Usuário ou senha inválidos');
+      }
+    });
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token') || '';
   }
 }

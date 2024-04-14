@@ -29,4 +29,8 @@ export class UserService {
   deleteUser(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  login(userEmail: string, userPassword: string) {
+    return this.http.post<string>(`${this.url}/login`, { userEmail, userPassword }, { responseType: 'text' as 'json' });
+  }
 }
