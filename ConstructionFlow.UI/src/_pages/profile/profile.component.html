@@ -25,10 +25,10 @@
     </div>
     <div class="carousel">
         @if (showPending){
-            <app-carousel [carouselItems]="items"></app-carousel>
+            <app-carousel [carouselItems]="constructions"></app-carousel>
         }
         @else{
-            <app-carousel [carouselItems]="items.slice(3, items.length-1)"></app-carousel>
+            <app-carousel [carouselItems]="constructions"></app-carousel>
         }
     </div>
 </div>
