@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { firstValueFrom, tap } from 'rxjs';
+import { User } from '../_models/user.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ export class AuthService {
   constructor(private userService: UserService, private routerService: Router) { }
   logout(): void {
     localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('user');
+    localStorage.w('user');
   }
 
   login(userEmail: string, userPassword: string) {
@@ -33,5 +35,10 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem('token') || '';
+  }
+
+  async getUser(): Promise<User>{
+    const userId = jwtDecode(localStorage.getItem('token') ?? '').sub;
+    return await firstValueFrom(this.userService.getUser(Number(userId)))
   }
 }
