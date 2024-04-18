@@ -17,9 +17,18 @@ import { CustomerService } from '../../_services/customer.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Alert } from '../../_components/alert/alert.component';
+import { DefaultActivity } from '../../_models/default-activity.model';
+import { DefaultActivityService } from '../../_services/default-activity.service';
+import { OnInit } from '@angular/core';
+import { AuthService } from '../../security/auth.service';
+import { User } from '../../_models/user.model';
+import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Activity } from '../../_models/activity.model';
+import { DialogRef } from '@angular/cdk/dialog';
+
 
 @Component({
   selector: 'app-construction',
@@ -34,31 +43,73 @@ import { Alert } from '../../_components/alert/alert.component';
     MatButtonModule,
     MatRadioModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    CdkDropList,
+    CdkDrag,
+    DialogRef
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
   styleUrl: './construction.component.scss',
 })
-export class ConstructionComponent{
+export class ConstructionComponent implements OnInit {
   construction!: Construction;
   defaultStatus!: Status;
   findById: boolean = true;
   company: boolean = false;
-  alerts: Alert[]= [
+  user: User = {} as User;
+  activities: Activity[] = [
+    {
+      defaultActivity: {
+        defaultActivityName: 'Jogar tudo fora',
+        icon: '😊'
+      } as DefaultActivity
+    } as Activity,
+    {
+      defaultActivity: {
+        defaultActivityName: 'Jogar tudo fora',
+        icon: '🏠'
+      } as DefaultActivity
+    } as Activity,
+    {
+      defaultActivity: {
+        defaultActivityName: 'Jogar tudo fora',
+        icon: '🐆'
+      } as DefaultActivity
+    } as Activity,
+    {
+      defaultActivity: {
+        defaultActivityName: 'Jogar tudo fora',
+        icon: '🤡'
+      } as DefaultActivity
+    } as Activity,
+    {
+      defaultActivity: {
+        defaultActivityName: 'Jogar tudo fora',
+        icon: '😊'
+      } as DefaultActivity
+    } as Activity,
+  ];
+
+
+  alerts: Alert[] = [
     {
       type: 'success',
       message: 'Construção criada com sucesso!',
     },
   ];
-  
+
   registerForm: FormGroup;
+
+  defaultActivities: DefaultActivity[] = [];
 
   constructor(
     private constructionService: ConstructionService,
     private formBuilder: FormBuilder,
     private routerService: Router,
     private customerService: CustomerService,
+    private defaultActivityService: DefaultActivityService,
+    private authService: AuthService
   ) {
     this.registerForm = this.formBuilder.group({
       startDate: ['', [Validators.required]],
@@ -82,35 +133,27 @@ export class ConstructionComponent{
     });
   }
 
-  saveConstruction() {
-    const user = JSON.parse(localStorage.getItem('user') ?? '{}');
-    this.registerForm.patchValue({
-      userId: user.id,
+  async ngOnInit() {
+    this.getDefaultActivities();
+    this.authService.getUser().then((user) => {
+      this.user = user;
     });
-    console.log(this.registerForm.getRawValue());
-    this.constructionService
-      .createConstruction(this.registerForm.getRawValue())
-      .subscribe(() => {
-        this.routerService.navigate(['/profile'], { queryParams: {data: JSON.stringify(this.alerts)}});
-        console.log('Construction created successfully!');
-      });
+  }
+
+  getDefaultActivities() {
+    this.defaultActivityService.getDefaultActivities().subscribe((data) => {
+      this.defaultActivities = data;
+    })
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.activities, event.previousIndex, event.currentIndex);
   }
 
   saveActivities() {
-    // this.activitiService.createActivity(this.registerForm.getRawValue()).subscribe(() => {
-    //   console.log('Activities created successfully!')
-    // });
-  }
-
-  searchCustomer(): void {
-    this.findById
-      ? this.customerService.getCustomerById(1).subscribe((data) => {
-          console.log(data);
-        })
-      : this.customerService
-          .getCustomerByCustomerRegister('123456789')
-          .subscribe((data) => {
-            console.log(data);
-          });
+    this.activities.forEach((activity, index) => {
+      activity.order = index + 1;
+    });
+    console.log(this.activities);
   }
 }
