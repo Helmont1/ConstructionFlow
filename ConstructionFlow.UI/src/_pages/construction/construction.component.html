@@ -2,46 +2,44 @@
 <section class="register" style="background-color: lightgray">
   <div class="register-container">
     <h1>Cadastrar nova obra</h1>
-    <form
-      [formGroup]="registerForm"
-      (ngSubmit)="saveConstruction()"
-      novalidate
-      style="width: 100%"
-    >
+    <form [formGroup]="registerForm" (ngSubmit)="saveActivities()" novalidate style="width: 100%">
       <div class="register-field">
         <p>Nome da obra</p>
         <div class="input">
           <i class="fa-regular fa-building"></i>
-          <input
-            type="text"
-            placeholder="Digite o nome da obra"
-            id="name"
-            name="name"
-            formControlName="name"
-          />
+          <input type="text" placeholder="Digite o nome da obra" id="name" name="name" formControlName="name" />
+        </div>
+      </div>
+      <div class="register-field">
+        <p>Atividades</p>
+        <button (submit)="">
+          <i class="fa-regular fa-plus"></i>
+          Adicionar atividade
+        </button>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+          <table>
+            @for (activity of activities; track activity) {
+            <tr>
+              <div class="example-box" cdkDrag>{{activity.defaultActivity?.icon}} -
+                {{activity.defaultActivity?.defaultActivityName}}</div>
+            </tr>
+
+            }
+          </table>
         </div>
       </div>
       <div class="register-field">
         <p>Data de ínicio:</p>
         <div class="input">
           <i class="fa-regular fa-calendar"></i>
-          <input
-            type="date"
-            formControlName="startDate"
-            id="startDate"
-            class="form-control"
-            placeholder="Digite a data de ínicio"
-            required
-          />
+          <input type="date" formControlName="startDate" id="startDate" class="form-control"
+            placeholder="Digite a data de ínicio" required />
         </div>
-        <div
-          class="warning"
-          *ngIf="
+        <div class="warning" *ngIf="
             registerForm.get('startDate')?.invalid &&
             (registerForm.get('startDate')?.dirty ||
               registerForm.get('startDate')?.touched)
-          "
-        >
+          ">
           <p>Campo obrigatório</p>
         </div>
       </div>
@@ -49,22 +47,13 @@
         <p>Data de fim:</p>
         <div class="input">
           <i class="fa-regular fa-calendar"></i>
-          <input
-            type="date"
-            formControlName="endDate"
-            id="endDate"
-            placeholder="Digite a data de fim"
-            required
-          />
+          <input type="date" formControlName="endDate" id="endDate" placeholder="Digite a data de fim" required />
         </div>
-        <div
-          class="warning"
-          *ngIf="
+        <div class="warning" *ngIf="
             registerForm.get('endDate')?.invalid &&
             (registerForm.get('endDate')?.dirty ||
               registerForm.get('endDate')?.touched)
-          "
-        >
+          ">
           <p>Campo obrigatório</p>
         </div>
       </div>
@@ -72,37 +61,26 @@
         <p>CNPJ/CPF:</p>
         <div class="input">
           <i class="fa-regular fa-building"></i>
-          <input
-            type="text"
-            formControlName="register"
-            id="register"
-            placeholder="Digite o CNPJ ou CPF do cliente"
+          <input type="text" formControlName="register" id="register" placeholder="Digite o CNPJ ou CPF do cliente"
             [mask]="
               registerForm.get('register')?.value &&
               registerForm.get('register')?.value.length <= 11
                 ? '000.000.000-009'
                 : '00.000.000/0000-00'
-            "
-            required
-          />
+            " required />
         </div>
-        <div
-          class="warning"
-          *ngIf="
+        <div class="warning" *ngIf="
             registerForm.get('register')?.invalid &&
             (registerForm.get('register')?.dirty ||
               registerForm.get('register')?.touched)
-          "
-        >
+          ">
           <p *ngIf="registerForm.get('register')?.errors?.required">
             Campo obrigatório
           </p>
-          <p
-            *ngIf="
+          <p *ngIf="
               registerForm.get('register')?.errors?.mask &&
               registerForm.get('register')?.touched
-            "
-          >
+            ">
             CNPJ/CPF inválido
           </p>
         </div>
