@@ -3,10 +3,10 @@
 <div>
     <div class="header">
         <h1>{{user.userName}}</h1>
-        <p style="margin-right: 2%;">CNPJ: {{formatCnpj(user.userCnpj)}}</p>
+        <p>CNPJ: {{formatCnpj(user.userCnpj)}}</p>
         <div class="email">
             <i class="fa-regular fa-envelope"></i>
-            <a href="mailto:email@email.com">email&#64;email.com</a>
+            <a>{{user.userEmail}}</a>
         </div>
     </div>
     <div class="tabs">
