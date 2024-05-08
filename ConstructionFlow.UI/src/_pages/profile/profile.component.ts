@@ -7,6 +7,7 @@ import { User } from '../../_models/user.model';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 import { AlertComponent } from '../../_components/alert/alert.component';
 import { ConstructionService } from '../../_services/construction.service';
+import { AuthService } from '../../security/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,16 +23,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
 
-  constructor(private router: Router, private constructionService: ConstructionService) {
+  constructor(private router: Router, private constructionService: ConstructionService, private authService: AuthService) {
   }
-  
+
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user') ?? '{}');
-    this.constructionService.getConstructionsByUser(this.user).subscribe((data) => {
-      this.constructions = data;
+    this.authService.getUser().then((user) => {
+      this.user = user;
+      this.constructionService.getConstructionsByUser(this.user).subscribe((data) => {
+        this.constructions = data;
+      });
     });
   }
-  
+
   ngAfterViewInit(): void {
     if (this.alerts)
     setTimeout(() => {
