@@ -12,10 +12,10 @@
       </div>
       <div class="register-field">
         <p>Atividades</p>
-        <button (submit)="">
+        <!-- <button (submit)="">
           <i class="fa-regular fa-plus"></i>
           Adicionar atividade
-        </button>
+        </button> -->
         <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
           <table>
             @for (activity of activities; track activity) {
