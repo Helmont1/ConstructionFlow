@@ -132,7 +132,12 @@
           <p *ngIf="registerForm.get('password')?.errors?.required">
             Campo obrigatório
           </p>
-          <p *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.minlength">
+          <p
+            *ngIf="
+              registerForm.get('password')?.touched &&
+              registerForm.get('password')?.errors?.minlength
+            "
+          >
             Sua senha deve ter no mínimo 6 caracteres
           </p>
         </div>
@@ -154,20 +159,18 @@
           *ngIf="
             registerForm.get('confirmPassword')?.invalid &&
             (registerForm.get('confirmPassword')?.dirty ||
-              registerForm.get('confirmPassword')?.touched) ||
-              registerForm.get('confirmPassword')?.errors?.notEqual
+              registerForm.get('confirmPassword')?.touched)
           "
         >
-          <p *ngIf="registerForm.get('confirmPassword')?.errors?.required">
-            Campo obrigatório
-          </p>
-          <div class="warning" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.notEqual">
-            <p>Senhas divergentes</p>
-          </div>
+          @if (registerForm.get('confirmPassword')?.errors?.required){
+          <p>Campo obrigatório</p>
+          } @if(registerForm.get('confirmPassword')?.errors?.notEqual){
+          <p>Senhas divergentes</p>
+          }
         </div>
       </div>
       <div>
-        <button class="btn" type="submit" [disabled]="!registerForm.valid" routerLink="/login">
+        <button class="btn" type="submit" [disabled]="!registerForm.valid">
           Cadastrar
         </button>
       </div>
