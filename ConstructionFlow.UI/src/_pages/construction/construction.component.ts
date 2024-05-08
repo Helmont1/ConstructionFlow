@@ -45,8 +45,7 @@ import { DialogRef } from '@angular/cdk/dialog';
     NgxMaskDirective,
     NgxMaskPipe,
     CdkDropList,
-    CdkDrag,
-    DialogRef
+    CdkDrag
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
