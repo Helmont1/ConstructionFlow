@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Cadastrar Atividade</h2>
+<mat-dialog-content>
+<p>Selecione uma atividade padrão</p>
+<mat-form-field>
+  <mat-label>Atividade</mat-label>
+  <mat-select [(value)]="activity">
+    <mat-option *ngFor="let activity of activities" [value]="activity">
+      {{activity.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</mat-dialog-content>
