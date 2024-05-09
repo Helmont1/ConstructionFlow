@@ -19,7 +19,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    return this.http.post(this.url, user);
+    return this.http.post<User>(this.url, user);
   }
 
   editUser(user: User) {
