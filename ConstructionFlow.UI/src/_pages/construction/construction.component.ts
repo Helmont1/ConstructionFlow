@@ -27,7 +27,7 @@ import { AuthService } from '../../security/auth.service';
 import { User } from '../../_models/user.model';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Activity } from '../../_models/activity.model';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DialogModule, DialogRef } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -46,7 +46,7 @@ import { DialogRef } from '@angular/cdk/dialog';
     NgxMaskPipe,
     CdkDropList,
     CdkDrag,
-    DialogRef
+    DialogModule
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
