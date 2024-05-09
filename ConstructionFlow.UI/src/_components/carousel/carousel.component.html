@@ -2,13 +2,18 @@
     <div class="carousel-container">
         @for (item of carouselItems; track item.constructionId; let i = $index; let last = $last){
             <a href="" [ngClass]="getActiveClass(i)" class="item">
-                <img src="{{carouselItems[i].image}}" alt="{{carouselItems[i].title}}">
+                @if(item.image){
+                    <img src="{{item.image}}" alt="{{item.title}}">
+                }
+                @else{
+                    <img src="{{defaultImage}}" alt="{{item.title}}">
+                }
                 <div>
                     <h3>{{carouselItems[i].title}}</h3>
-                    <p>Id: #{{carouselItems[i].constructionId}}</p>
+                    <p>Id: #{{carouselItems[i].id}}</p>
                     <p>Ínicio em: {{carouselItems[i].startDate | date:'dd/MM/yyyy'}}</p>
                     <p>Término previsto: {{carouselItems[i].endDate | date:'dd/MM/yyyy'}}</p>
-                    <p>Cliente: {{carouselItems[i].customer.name}}</p>
+                    <p>Cliente: {{format(carouselItems[i].customer.customerCnpj ?? carouselItems[i].customer.customerCpf)}}</p>
                 </div>
             </a>
         }

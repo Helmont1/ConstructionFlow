@@ -12,7 +12,6 @@ export class ConstructionService {
   constructor(private http: HttpClient) { }
 
   getConstructionsByUser(user: User) {
-    console.log(`${JSON.stringify(user)}`);
     return this.http.get(`${this.url}/users/${user.id}`);
   }
 
