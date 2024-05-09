@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private userService: UserService, private routerService: Router) { }
   logout(): void {
     localStorage.setItem('isLoggedIn', 'false');
-    localStorage.w('user');
+    localStorage.removeItem('token');
   }
 
   login(userEmail: string, userPassword: string) {
@@ -23,7 +23,6 @@ export class AuthService {
         this.routerService.navigate(['/home']);
       },
       error: (error) => {
-        console.error(error);
         alert('Usuário ou senha inválidos');
       }
     });
