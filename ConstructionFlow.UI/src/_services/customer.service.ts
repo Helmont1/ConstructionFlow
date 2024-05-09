@@ -14,7 +14,7 @@ export class CustomerService {
   }
 
   createCustomer(customer: Customer) {
-    return this.http.post('Customer', customer);
+    return this.http.post<Customer>('Customer', customer);
   }
 
   editCustomer(customer: Customer) {
@@ -29,8 +29,8 @@ export class CustomerService {
     return this.http.get(`Customer/${id}`);
   }
 
-  getCustomerByCustomerRegister(register: string) {
-    return this.http.get(`Customer/register/${register}`);
+  getCustomerByCustomerRegister(register: string)  {
+    return this.http.get<Customer>(`Customer/register/${register}`);
   }
-  
+
 }
