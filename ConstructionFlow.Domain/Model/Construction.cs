@@ -28,6 +28,6 @@ namespace ConstructionFlow.Domain.Model
         [Required (ErrorMessage = "Title is required")]
         public string Title { get; set; }
 
-        public string Search { get; set; }
+        public string? Search { get; set; }
     }
 }
