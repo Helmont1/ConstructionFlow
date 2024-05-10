@@ -10,7 +10,7 @@ namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/")]
-    public class UserController
+    public class UserController : ControllerBase
     {
         private readonly UserBusiness _userBusiness;
 
@@ -45,15 +45,17 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost("login")]
-        public Task<string> Login(LoginDto login)
+        public async Task<IActionResult>Login(LoginDto login)
         {
             try
             {
-                return _userBusiness.Login(login);
+                var result = await _userBusiness.Login(login);
+                return Ok(result);
             }
             catch (Exception e)
             {
-                return Task.FromResult(e.Message);
+
+                return BadRequest(Task.FromResult(e.Message));
             }
         }
 

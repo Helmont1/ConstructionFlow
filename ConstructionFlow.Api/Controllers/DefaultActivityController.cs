@@ -7,7 +7,7 @@ namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/")]
-    public class DefaultActivityController
+    public class DefaultActivityController : ControllerBase
     {
         private readonly DefaultActivityBusiness _defaultActivityBusiness;
 

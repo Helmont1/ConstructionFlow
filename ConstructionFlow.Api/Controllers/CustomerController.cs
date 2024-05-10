@@ -7,7 +7,7 @@ namespace ConstructionFlow.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/")]
-    public class CustomerController
+    public class CustomerController : ControllerBase
     {
         private readonly CustomerBusiness _customerBusiness;
 
