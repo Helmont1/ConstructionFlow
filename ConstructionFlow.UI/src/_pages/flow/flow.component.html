@@ -1,0 +1,22 @@
+<app-left-navbar></app-left-navbar>
+<div class="container">
+  <div class="path">
+    <h1>Praça pública - Jd Flor / Timeline</h1>
+  </div>
+  <div class="subpath">
+    <ul>
+      <li>
+        <button class="item" (click)="changePage('details')" [ngClass]="{'active': page=='details'}"><i class="fa-regular fa-square"></i>Detalhes</button>
+      </li>
+      <li>
+        <button class="item" (click)="changePage('timeline')" [ngClass]="{'active': page=='timeline'}"><i class="fa-regular fa-clock"></i>Linha do tempo</button>
+      </li>
+      <li>
+        <button class="item" (click)="changePage('history')" [ngClass]="{'active': page=='history'}"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</button>
+      </li>
+    </ul>
+  </div>
+  <div class="content-container">
+    <div class="content"></div>
+  </div>
+</div>

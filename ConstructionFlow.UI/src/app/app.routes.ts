@@ -6,6 +6,7 @@ import { ConstructionComponent } from '../_pages/construction/construction.compo
 import { authGuard } from '../security/auth.guard';
 import { Routes } from '@angular/router';
 import { loginGuard } from '../security/login.guard';
+import { FlowComponent } from '../_pages/flow/flow.component';
 
 const isAuthenticaded: boolean = localStorage.getItem('isLoggedIn') == 'true';
 
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [loginGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     { path: 'construction', component: ConstructionComponent, canActivate: [authGuard]},
+    { path: 'flow', component: FlowComponent},
     { path: '**', redirectTo: isAuthenticaded ? 'profile' : 'home' }
 ];
