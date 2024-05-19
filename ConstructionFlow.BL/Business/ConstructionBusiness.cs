@@ -41,6 +41,7 @@ namespace ConstructionFlow.BL.Business
                                         .Include(c => c.User)
                                         .Include(c => c.Status)
             );
+            construction.Search = new Guid().ToString();
             return _mapper.Map<ConstructionResponse>(construction);
         }
 
