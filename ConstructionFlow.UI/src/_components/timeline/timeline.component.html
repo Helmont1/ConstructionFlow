@@ -1,1 +1,22 @@
-<p>timeline works!</p>
+<p class="title">Fluxo da obra</p>
+@for (atividade of atividades; track atividade.id; let i = $index, f = $first, l = $last) {
+    @if(!l && atividade.startDate.getFullYear()!=atividades[i+1].startDate.getFullYear()){
+      <div class="timeline-separator"></div>
+    }
+    @if(!l){
+      @if (atividade.status.id == 2){
+        <!-- pinta metade -->
+      }
+      @if (atividade.status.id == 3){
+        <!-- pinta tudo -->
+      }
+      @else {
+        <!-- n pinta -->
+      }
+    }
+    @else {
+      <!-- nada -->
+    }
+
+}
+<app-activity></app-activity>
