@@ -1,22 +1,27 @@
 <app-left-navbar></app-left-navbar>
 <div class="container">
   <div class="path">
-    <h1>Praça pública - Jd Flor / Timeline</h1>
+    <h1>Praça pública - Jd Flor / {{page}}</h1>
   </div>
   <div class="subpath">
     <ul>
       <li>
-        <button class="item" (click)="changePage('details')" [ngClass]="{'active': page=='details'}"><i class="fa-regular fa-square"></i>Detalhes</button>
+        <div class="item" (click)="changePage('Detalhes')" [ngClass]="{'active': page=='Detalhes'}"><i class="fa-regular fa-square"></i>Detalhes</div>
       </li>
       <li>
-        <button class="item" (click)="changePage('timeline')" [ngClass]="{'active': page=='timeline'}"><i class="fa-regular fa-clock"></i>Linha do tempo</button>
+        <div class="item" (click)="changePage('Linha do tempo')" [ngClass]="{'active': page=='Linha do tempo'}"><i class="fa-regular fa-clock"></i>Linha do tempo</div>
       </li>
       <li>
-        <button class="item" (click)="changePage('history')" [ngClass]="{'active': page=='history'}"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</button>
+        <div class="item" (click)="changePage('Histórico')" [ngClass]="{'active': page=='Histórico'}"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</div>
       </li>
     </ul>
   </div>
-  <div class="content-container">
-    <div class="content"></div>
+  <div class="container-content">
+    <div class="content">
+      @if (page == 'Linha do tempo') {
+        <app-timeline></app-timeline>
+      }
+
+    </div>
   </div>
 </div>

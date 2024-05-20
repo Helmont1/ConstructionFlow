@@ -3,7 +3,7 @@
 
   .path {
     padding: 1.5rem;
-    width: 100vw;
+    width: 95vw;
     border-bottom: 1px solid #d4d4d4;
 
     h1 {
@@ -13,6 +13,7 @@
     }
   }
   .subpath {
+    width: 95vw;
     padding: 1.5rem;
     padding-block: 0;
     border-bottom: 1px solid #d4d4d4;
@@ -43,16 +44,23 @@
           margin-bottom: 0;
           border-bottom: 2px solid #005DB8;
         }
-
-        button{
-          border: none;
-          background: none;
-        }
       }
     }
 
     .item {
       cursor: pointer;
+    }
+  }
+
+  &-content {
+    width: 95vw;
+    background-color: #F8F9FD;
+    padding: 2rem;
+    height: 78vh;
+
+    .content {
+      height: 100%;
+      background-color: #fff;
     }
   }
 }
