@@ -1,7 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
-  CarouselComponent
-} from '../../_components/carousel/carousel.component';
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { CarouselComponent } from '../../_components/carousel/carousel.component';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../_models/user.model';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
@@ -20,28 +24,48 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   showPending: boolean = true;
   user: User = {} as User;
   constructions: any;
+  finishedConstructions: any;
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
 
-  constructor(private router: Router, private constructionService: ConstructionService, private authService: AuthService) {
-  }
+  constructor(
+    private router: Router,
+    private constructionService: ConstructionService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.authService.getUser().then((user) => {
       this.user = user;
-      this.constructionService.getConstructionsByUser(this.user).subscribe((data) => {
-        this.constructions = data;
-      });
+      this.constructionService
+        .getConstructionsByUser(this.user)
+        .subscribe((data) => {
+          let dataArray = data as Array<any>;
+          let { finishedConstructions, pendingConstructions } =
+            dataArray.reduce(
+              (acc, item) => {
+                if (item.status.id === 3) {
+                  acc.finishedConstructions.push(item);
+                } else {
+                  acc.pendingConstructions.push(item);
+                }
+                return acc;
+              },
+              { finishedConstructions: [], pendingConstructions: [] }
+            );
+          this.constructions = pendingConstructions;
+          this.finishedConstructions = finishedConstructions;
+        });
     });
   }
 
   ngAfterViewInit(): void {
     if (this.alerts)
-    setTimeout(() => {
-    console.log(this.alertComponent);
-    console.log(this.alerts);
-    this.alertComponent.show(JSON.parse(this.alerts));
-    });
+      setTimeout(() => {
+        console.log(this.alertComponent);
+        console.log(this.alerts);
+        this.alertComponent.show(JSON.parse(this.alerts));
+      });
   }
 
   createConstruction() {

@@ -72,4 +72,20 @@
     height: 40vh;
     margin-left: 3.5rem;
     width: calc(100vw - 3.5rem);
+
+    .empty{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #616161;
+
+        p {
+            font-size: 1.3rem;
+        }
+        i{
+          margin-right: 0.5rem;
+        }
+
+    }
 }

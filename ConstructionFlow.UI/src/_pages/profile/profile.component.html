@@ -1,34 +1,51 @@
 <app-alert></app-alert>
 <app-left-navbar></app-left-navbar>
 <div>
-    <div class="header">
-        <h1>{{user.userName}}</h1>
-        <p>CNPJ: {{formatCnpj(user.userCnpj)}}</p>
-        <div class="email">
-            <i class="fa-regular fa-envelope"></i>
-            <a>{{user.userEmail}}</a>
-        </div>
+  <div class="header">
+    <h1>{{ user.userName }}</h1>
+    <p>CNPJ: {{ formatCnpj(user.userCnpj) }}</p>
+    <div class="email">
+      <i class="fa-regular fa-envelope"></i>
+      <a>{{ user.userEmail }}</a>
     </div>
-    <div class="tabs">
-        <div class="tab" [class.active]="showPending" (click)="setShowPending(true)">
-            <i class="fa-solid fa-hammer"></i>
-            <p>Obras em andamento</p>
-        </div>
-        <div class="tab" [class.active]="!showPending" (click)="setShowPending(false)">
-            <i class="fa-solid fa-flag-checkered"></i>
-            <p>Obras finalizadas</p>
-        </div>
-        <div class="tab" (click)="createConstruction()">
-            <i class="fa-solid fa-plus"></i>
-            <p>Adicionar obra</p>
-        </div>
+  </div>
+  <div class="tabs">
+    <div
+      class="tab"
+      [class.active]="showPending"
+      (click)="setShowPending(true)"
+    >
+      <i class="fa-solid fa-hammer"></i>
+      <p>Obras em andamento</p>
     </div>
-    <div class="carousel">
-        @if (showPending){
-            <app-carousel [carouselItems]="constructions"></app-carousel>
-        }
-        @else{
-            <app-carousel [carouselItems]="constructions"></app-carousel>
-        }
+    <div
+      class="tab"
+      [class.active]="!showPending"
+      (click)="setShowPending(false)"
+    >
+      <i class="fa-solid fa-flag-checkered"></i>
+      <p>Obras finalizadas</p>
     </div>
+    <div class="tab" (click)="createConstruction()">
+      <i class="fa-solid fa-plus"></i>
+      <p>Adicionar obra</p>
+    </div>
+  </div>
+  <div class="carousel">
+    @if (showPending){ @if (constructions.length == 0){
+    <div class="empty">
+      <i class="fa-solid fa-ban"></i>
+      <p>Nada a mostrar</p>
+    </div>
+    } @else {
+    <app-carousel [carouselItems]="constructions"></app-carousel>
+    } } @else{ @if (finishedConstructions.length == 0){
+    <div class="empty">
+      <i class="fa-solid fa-ban"></i>
+      <p>Nada a mostrar</p>
+    </div>
+    } @else {
+    <app-carousel [carouselItems]="finishedConstructions"></app-carousel>
+    } }
+  </div>
 </div>
