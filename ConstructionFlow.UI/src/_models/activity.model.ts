@@ -3,7 +3,7 @@ import { DefaultActivity } from "./default-activity.model";
 import { Status } from "./status.model";
 
 export interface Activity {
-  id: string,
+  id: number,
   budget: number,
   status: Status,
   construction: Construction,
