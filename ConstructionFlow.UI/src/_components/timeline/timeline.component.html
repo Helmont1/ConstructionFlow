@@ -1,45 +1,16 @@
 <p class="title">Fluxo da obra</p>
 <div class="activies">
   @for (atividade of atividades; track atividade.id; let i = $index, f = $first,
-  l = $last) { @if(!l){ @if (atividade.status.id == 2){
+  l = $last) {
   <app-activity
-    [hasTimeLine]="hasTimeLine(atividade, atividades[i + 1])"
-    stage="half"
+    [hasTimeLine]="l? false: hasTimeLine(atividade, atividades[i + 1])"
+    [hasBar]="!l"
+    [stage]="atividade.statusId == 1? 'not started': atividade.statusId == 2? 'half': 'full'"
     [data]="{
       year: atividade.startDate.getFullYear(),
-      date: '' + atividade.startDate.getMonth() + atividade.startDate.getDay(),
-      name: 'Need Name A A A A'
+      date: '' + getMonthName(atividade.startDate.getMonth()) + ' '+atividade.startDate.getDate(),
+      name: 'Need Name'
     }"
   ></app-activity>
-  } @if (atividade.status.id == 3){
-  <app-activity
-    [hasTimeLine]="hasTimeLine(atividade, atividades[i + 1])"
-    stage="full"
-    [data]="{
-      year: atividade.startDate.getFullYear(),
-      date: '' + atividade.startDate.getMonth() + atividade.startDate.getDay(),
-      name: 'Need'
-    }"
-  ></app-activity>
-  } @else {
-  <app-activity
-    [hasTimeLine]="hasTimeLine(atividade, atividades[i + 1])"
-    stage="not started"
-    [data]="{
-      year: atividade.startDate.getFullYear(),
-      date: '' + atividade.startDate.getMonth() + atividade.startDate.getDay(),
-      name: 'Need'
-    }"
-  ></app-activity>
-  } } @else {
-  <app-activity
-    stage="not started"
-    [hasBar]="false"
-    [data]="{
-      year: atividade.startDate.getFullYear(),
-      date: '' + atividade.startDate.getMonth() + atividade.startDate.getDay(),
-      name: 'Need'
-    }"
-  ></app-activity>
-  } }
+}
 </div>

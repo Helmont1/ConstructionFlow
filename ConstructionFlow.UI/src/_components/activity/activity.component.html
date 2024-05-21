@@ -15,7 +15,7 @@
     <div class="progress-bar">
       @if(hasTimeLine){
         <div class="time-separator">
-          <p class="year">{{data.year}}</p>
+          <p class="year">{{data.year!=undefined?data.year+1:0}}</p>
           <div class="line"></div>
         </div>
       }

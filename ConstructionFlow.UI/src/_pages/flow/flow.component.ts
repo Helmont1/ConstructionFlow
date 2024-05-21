@@ -26,7 +26,6 @@ export class FlowComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = JSON.parse(this.data);
-    console.log(this.data);
     this.activityService
       .getActivitiesByConstruction(this.data.id)
       .subscribe((data) => {
