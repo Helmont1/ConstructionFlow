@@ -67,32 +67,27 @@ export class ConstructionComponent implements OnInit {
   activities: Activity[] = [
     {
       defaultActivity: {
-        defaultActivityName: 'Jogar tudo fora',
-        icon: '😊',
+        defaultActivityName: 'Análise do local e levantamento de informações.'
       } as DefaultActivity,
     } as Activity,
     {
       defaultActivity: {
-        defaultActivityName: 'Jogar tudo fora',
-        icon: '🏠',
+        defaultActivityName: 'Concepção do projeto arquitetônico.'
       } as DefaultActivity,
     } as Activity,
     {
       defaultActivity: {
-        defaultActivityName: 'Jogar tudo fora',
-        icon: '🐆',
+        defaultActivityName: 'Elaboração dos desenhos.'
       } as DefaultActivity,
     } as Activity,
     {
       defaultActivity: {
-        defaultActivityName: 'Jogar tudo fora',
-        icon: '🤡',
+        defaultActivityName: 'Revisão e aprovação.'
       } as DefaultActivity,
     } as Activity,
     {
       defaultActivity: {
-        defaultActivityName: 'Jogar tudo fora',
-        icon: '😊',
+        defaultActivityName: 'Legalização da obra.'
       } as DefaultActivity,
     } as Activity,
   ];

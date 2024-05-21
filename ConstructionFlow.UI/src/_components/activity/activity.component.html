@@ -1,21 +1,25 @@
 <div class="container">
   <div class="cover">
     <div class="date">
-      <p>Jan 12</p>
+      <p>{{data.date}}</p>
     </div>
-    <div class="circle">
+    <div class="circle" [ngClass]="{'circle-green': stage != 'not started'}">
       <i class="fa-solid fa-rocket"></i>
     </div>
     <div class="name">
       <div class="line"></div>
-      <p class="title">Início</p>
+      <p class="title">{{data.name}}</p>
     </div>
   </div>
-  <div class="progress-bar">
-    <div class="time-separator">
-      <p class="year">2013</p>
-      <div class="line"></div>
+  @if (hasBar) {
+    <div class="progress-bar">
+      @if(hasTimeLine){
+        <div class="time-separator">
+          <p class="year">{{data.year}}</p>
+          <div class="line"></div>
+        </div>
+      }
+      <div class="bar {{'bar-'+stage}}"></div>
     </div>
-    <div class="bar"></div>
-  </div>
+  }
 </div>

@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  padding: 0;
 
   .cover {
     display: block;
@@ -16,61 +17,93 @@
       }
     }
 
-    .circle{
+    .circle {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background-color: #41c397;
+      background-color: #aaaaaa;
       color: white;
       border: 1px solid black;
     }
 
-    .name{
+    .circle-green {
+      background-color: #41c397;
+    }
+
+    .name {
       display: flex;
       align-items: center;
       flex-direction: column;
+      max-width: 50px;
 
-      .line{
+
+      .line {
         border-left: 1px solid #41c397;
         height: 1rem;
         width: 1px;
       }
+
+      .title {
+        overflow: hidden;
+        max-width: 200%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
-  .progress-bar{
-    display: block;
-    margin-left: -1px;
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    margin-left: -2px;
     width: 5rem;
-    margin-top: 0.4rem;
+    margin-bottom: 4.5rem;
+    justify-content: end;
 
-    .time-separator{
+    .time-separator {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
 
-      .line{
+      .line {
         border-left: 1px solid black;
         height: 1rem;
         width: 1px;
       }
-      p{
+      p {
         margin: 0;
         font-size: 0.7rem;
-
       }
-
     }
 
-    .bar{
+    .bar {
       height: 1rem;
-      background-color: #41c397;
       width: 5rem;
       border-block: 1px solid black;
-      position: absolute;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 100%;
+
+        border-radius: 0 0.35rem 0.35rem 0;
+      }
+    }
+
+    .bar-half::before {
+      width: 55%;
+      background-color: #41c397;
+    }
+
+    .bar-full::before {
+      background-color: #41c397;
+      width: 100%;
+      border-radius: 0;
     }
   }
 }
