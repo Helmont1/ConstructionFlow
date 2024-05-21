@@ -9,44 +9,39 @@ import { ActivityComponent } from '../activity/activity.component';
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss',
 })
-export class TimelineComponent {
+export class TimelineComponent implements OnInit{
   @Input() atividades: Activity[] = [];
-
-  // ngOnInit(): void {
-  //   this.atividades = [
-  //     {
-  //       id: 1,
-  //       startDate: new Date(2024, 0, 1),
-  //       endDate: new Date(2024, 0, 5),
-  //       status: {
-  //         id: 2,
-  //         statusName: 'Em Andamento',
-  //       },
-  //     },
-  //     {
-  //       id: 2,
-  //       startDate: new Date(2024, 0, 6),
-  //       endDate: new Date(2024, 0, 10),
-  //       status: {
-  //         id: 1,
-  //         statusName: 'Concluído',
-  //       },
-  //     },
-  //     {
-  //       id: 3,
-  //       startDate: new Date(2024, 0, 11),
-  //       endDate: new Date(2024, 0, 15),
-  //       status: {
-  //         id: 3,
-  //         statusName: 'Atrasado',
-  //       },
-  //     },
-  //   ];
-  // }
+  ngOnInit(): void {
+    this.atividades.forEach(atividade => {
+      atividade.startDate = new Date(atividade.startDate);
+      atividade.endDate = new Date(atividade.endDate);
+    });
+    console.log(this.atividades);
+  }
 
   hasTimeLine(atividade: Activity, atividadeNext: Activity) {
+    if (!atividadeNext) return false;
+    console.log(atividade, atividadeNext);
     return (
       atividade.startDate.getFullYear() != atividadeNext.startDate.getFullYear()
     );
+  }
+
+  getMonthName(month: number) {
+    const months = [
+      'Jan',
+      'Fev',
+      'Mar',
+      'Abr',
+      'Mai',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Set',
+      'Out',
+      'Nov',
+      'Dez',
+    ];
+    return months[month];
   }
 }
