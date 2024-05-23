@@ -11,7 +11,7 @@ An application that connects a construction company with its customers, providin
 
 
 ## Online Server
-**Client:** https://master--constructionflow.netlify.app/home
+**Client:** https://master--constructionflow.netlify.app
 
 **Server:** https://constructionflow.azurewebsites.net/swagger/index.html
 
