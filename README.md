@@ -10,6 +10,11 @@ An application that connects a construction company with its customers, providin
 **Quality Assurance:** SonarQube, Jasmine, Nunit
 
 
+## Online Server
+**Client:** https://master--constructionflow.netlify.app/home
+
+**Server:** https://constructionflow.azurewebsites.net/swagger/index.html
+
 ## Run Locally
 
 Dependencies 
