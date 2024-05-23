@@ -29,7 +29,7 @@ namespace ConstructionFlow.Api.Controllers
             return _activityBusiness.GetActivity(activityId);
         }
 
-        [HttpGet("{activityId}/construction/{constructionId}")]
+        [HttpGet("construction/{constructionId}")]
 
         public async Task<IEnumerable<ActivityRequest>> GetActivitiesByConstruction(int constructionId)
         {

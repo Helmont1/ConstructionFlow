@@ -32,6 +32,7 @@ namespace ConstructionFlow.DAL.AutoMapperProfile
 
             CreateMap<Activity, ActivityResponse>();
             CreateMap<ActivityRequest, Activity>();
+            CreateMap<Activity, ActivityRequest>();
         }
     }
 }

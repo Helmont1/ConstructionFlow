@@ -11,6 +11,10 @@ export class ConstructionService {
 
   constructor(private http: HttpClient) { }
 
+  getConstructionById(id: number) {
+    return this.http.get(`${this.url}/${id}`);
+  }
+
   getConstructionsByUser(user: User) {
     return this.http.get(`${this.url}/users/${user.id}`);
   }
