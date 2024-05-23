@@ -7,18 +7,18 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// remove cors security
+
+var origins = new string[] { "http://localhost:4200", "https://constructionflow.netlify.app/" };
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowLocalhost",
                builder =>
                {
-            builder.WithOrigins("http://localhost:4200")
+            builder.WithOrigins(origins)
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
