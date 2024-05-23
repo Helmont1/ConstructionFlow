@@ -29,5 +29,8 @@ namespace ConstructionFlow.Domain.Model
         public string Title { get; set; }
 
         public string? Search { get; set; }
+
+        [Required (ErrorMessage = "Budget is required")]
+        public string Budget { get; set; }
     }
 }

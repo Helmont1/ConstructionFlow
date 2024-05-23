@@ -22,5 +22,7 @@ namespace ConstructionFlow.Domain.Payload
         public UserResponse? User { get; set; }
         public string Title { get; set; }
         public string Search { get; set; }
+
+        public string Budget { get; set; }
     }
 }

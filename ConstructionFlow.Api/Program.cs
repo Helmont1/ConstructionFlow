@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var origins = new string[] { "http://localhost:4200", "https://constructionflow.netlify.app/" };
+var origins = new string[] { "http://localhost:4200", "https://constructionflow.netlify.app" };
 
 builder.Services.AddCors(options =>
 {

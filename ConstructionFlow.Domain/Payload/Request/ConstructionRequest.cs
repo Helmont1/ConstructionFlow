@@ -20,5 +20,7 @@ namespace ConstructionFlow.Domain.Payload.Request
         public int UserId { get; set; }
         public string Title { get; set; }
         public string Search { get; set; }
+
+        public string Budget { get; set; }
     }
 }
