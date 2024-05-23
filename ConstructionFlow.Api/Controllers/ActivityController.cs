@@ -31,7 +31,7 @@ namespace ConstructionFlow.Api.Controllers
 
         [HttpGet("construction/{constructionId}")]
 
-        public async Task<IEnumerable<ActivityRequest>> GetActivitiesByConstruction(int constructionId)
+        public async Task<IEnumerable<ActivityResponse>> GetActivitiesByConstruction(int constructionId)
         {
             return await _activityBusiness.GetActivitiesByConstruction(constructionId);
         }
