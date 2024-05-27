@@ -35,6 +35,7 @@ import { Activity } from '../../_models/activity.model';
 import { DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { Customer } from '../../_models/customer.model';
 import { Observable, catchError, map } from 'rxjs';
+import { ActivityModalComponent } from '../../_components/activity-modal/activity-modal.component';
 
 @Component({
   selector: 'app-construction',
@@ -52,7 +53,8 @@ import { Observable, catchError, map } from 'rxjs';
     NgxMaskPipe,
     CdkDropList,
     CdkDrag,
-    DialogModule
+    DialogModule,
+    ActivityModalComponent
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
@@ -64,33 +66,7 @@ export class ConstructionComponent implements OnInit {
   findById: boolean = true;
   company: boolean = false;
   user: User = {} as User;
-  activities: Activity[] = [
-    {
-      defaultActivity: {
-        defaultActivityName: 'Análise do local e levantamento de informações.'
-      } as DefaultActivity,
-    } as Activity,
-    {
-      defaultActivity: {
-        defaultActivityName: 'Concepção do projeto arquitetônico.'
-      } as DefaultActivity,
-    } as Activity,
-    {
-      defaultActivity: {
-        defaultActivityName: 'Elaboração dos desenhos.'
-      } as DefaultActivity,
-    } as Activity,
-    {
-      defaultActivity: {
-        defaultActivityName: 'Revisão e aprovação.'
-      } as DefaultActivity,
-    } as Activity,
-    {
-      defaultActivity: {
-        defaultActivityName: 'Legalização da obra.'
-      } as DefaultActivity,
-    } as Activity,
-  ];
+  showActivityModal: boolean = false;
 
   alerts: Alert[] = [
     {
@@ -166,8 +142,10 @@ export class ConstructionComponent implements OnInit {
               return response.id;
             }),
             catchError(error => {
-              this.alerts[0].message = 'Erro ao criar cliente';
-              this.alerts[0].type = 'danger';
+              this.alerts.push({
+                type: 'danger',
+                message: 'Erro ao criar cliente',
+              });
               throw error;
             })
           );
@@ -203,13 +181,10 @@ export class ConstructionComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.activities, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.defaultActivities, event.previousIndex, event.currentIndex);
   }
 
-  saveActivities() {
-    this.activities.forEach((activity, index) => {
-      activity.order = index + 1;
-    });
-    console.log(this.activities);
+  reloadPage(){
+    location.reload();
   }
 }

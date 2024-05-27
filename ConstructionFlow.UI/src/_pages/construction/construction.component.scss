@@ -1,8 +1,7 @@
 @import "../../variables.scss";
 
 .register {
-  width: 100vw;
-  height: 100vh;
+  padding-block: 2%;
   display: flex;
   background-repeat: no-repeat;
   background-size: cover;
@@ -73,7 +72,6 @@
     justify-content: center;
     text-align: center;
     min-width: 25%;
-    min-height: 55%;
 
     h1 {
       font-size: 30px;
@@ -90,6 +88,20 @@
         margin-bottom: 5px;
         font-size: 14px;
         color: $h-background-button;
+      }
+
+      .show-modal-btn{
+        background-color: #fff;
+        color: #0066a6;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #0066a6;
+        cursor: pointer;
+        margin-bottom: 10px;
+
+        &:hover {
+          transform: scale(1.01);
+        }
       }
 
       .warning p {
@@ -143,6 +155,37 @@
         border-bottom: 1px solid #ccc;
         outline: none;
         width: 100%;
+      }
+
+      .activities-list{
+        width: 100%;
+
+        .activities-box {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          margin: 5px 0;
+          border-radius: 5px;
+          background-color: lightgray;
+          cursor: move;
+
+          &:hover {
+            background-color: #f5f5f5;
+          }
+
+          i {
+            margin-right: 10px;
+          }
+        }
+
+      }
+
+      .cdk-drag-placeholder {
+        opacity: 0;
+      }
+      .activities-list.cdk-drop-list-dragging .activities-box:not(.cdk-drag-placeholder) {
+        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
       }
     }
     .btn {

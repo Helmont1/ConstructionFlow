@@ -2,7 +2,6 @@ import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../security/auth.service';
-import { CustomerService } from '../../_services/customer.service';
 import { FormsModule } from '@angular/forms';
 import { ConstructionService } from '../../_services/construction.service';
 import { AlertModalComponent } from '../../_components/alert-modal/alert-modal.component';

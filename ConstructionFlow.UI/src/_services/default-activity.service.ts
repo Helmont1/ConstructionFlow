@@ -13,4 +13,8 @@ export class DefaultActivityService {
   getDefaultActivities() {
     return this.http.get<DefaultActivity[]>(this.url);
   }
+
+  createDefaultActivity(defaultActivity: DefaultActivity) {
+    return this.http.post(this.url, defaultActivity);
+  }
 }
