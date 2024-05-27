@@ -6,6 +6,8 @@ import { TimelineComponent } from '../../_components/timeline/timeline.component
 import { Activity } from '../../_models/activity.model';
 import { Construction } from '../../_models/construction.model';
 import { ConstructionService } from '../../_services/construction.service';
+import { catchError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flow',
@@ -16,23 +18,34 @@ import { ConstructionService } from '../../_services/construction.service';
 })
 export class FlowComponent implements OnInit {
   page: string = 'Linha do tempo';
-  @Input('data') data: any;
+  @Input('data') data!: number;
   atividades: Activity[] = [];
-  construction = 0;
+  construction!: Construction;
 
   constructor(
     private activityService: ActivityService,
-    private constructionService: ConstructionService
+    private constructionService: ConstructionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.data = JSON.parse(this.data);
+    this.constructionService
+      .getConstructionById(this.data)
+      .pipe(
+        catchError((error) => {
+          alert('Erro ao encontrar a obra');
+          this.router.navigate(['/home']);
+          return error;
+        })
+      )
+      .subscribe((data) => {
+        this.construction = data as Construction;
+      });
     this.activityService
-      .getActivitiesByConstruction(this.data.id)
+      .getActivitiesByConstruction(this.data)
       .subscribe((data) => {
         this.atividades = data as Activity[];
       });
-    this.construction = this.data;
   }
 
   changePage(page: string) {

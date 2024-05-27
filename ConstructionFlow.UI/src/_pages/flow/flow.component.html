@@ -1,25 +1,25 @@
 <app-left-navbar></app-left-navbar>
 <div class="container">
   <div class="path">
-    <h1>{{data.title}} / {{page}}</h1>
+    <h1>{{construction.title}} / {{page}}</h1>
   </div>
   <div class="subpath">
     <ul>
-      <li>
+      <!-- <li>
         <div class="item" (click)="changePage('Detalhes')" [ngClass]="{'active': page=='Detalhes'}"><i class="fa-regular fa-square"></i>Detalhes</div>
-      </li>
+      </li> -->
       <li>
         <div class="item" (click)="changePage('Linha do tempo')" [ngClass]="{'active': page=='Linha do tempo'}"><i class="fa-regular fa-clock"></i>Linha do tempo</div>
       </li>
-      <li>
+      <!-- <li>
         <div class="item" (click)="changePage('Histórico')" [ngClass]="{'active': page=='Histórico'}"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</div>
-      </li>
+      </li> -->
     </ul>
   </div>
   <div class="container-content">
     <div class="content">
       @if (page == 'Linha do tempo' && atividades.length > 0) {
-        <app-timeline [construction]="data" [atividades]="atividades"></app-timeline>
+        <app-timeline [construction]="construction" [atividades]="atividades"></app-timeline>
       }
 
     </div>
