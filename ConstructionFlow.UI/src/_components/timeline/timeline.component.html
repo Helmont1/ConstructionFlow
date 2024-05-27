@@ -3,14 +3,55 @@
   @for (atividade of atividades; track atividade.id; let i = $index, f = $first,
   l = $last) {
   <app-activity
-    [hasTimeLine]="l? false: hasTimeLine(atividade, atividades[i + 1])"
+    [hasTimeLine]="l ? false : hasTimeLine(atividade, atividades[i + 1])"
     [hasBar]="!l"
-    [stage]="atividade.statusId == 1? 'not started': atividade.statusId == 2? 'half': 'full'"
+    [stage]="
+      atividade.status.id == 1
+        ? 'not started'
+        : atividade.status.id == 2
+        ? 'half'
+        : 'full'
+    "
     [data]="{
       year: atividade.startDate.getFullYear(),
-      date: '' + getMonthName(atividade.startDate.getMonth()) + ' '+atividade.startDate.getDate(),
-      name: 'Need Name'
+      date:
+        '' +
+        getMonthName(atividade.startDate.getMonth()) +
+        ' ' +
+        atividade.startDate.getDate(),
+      name: atividade.defaultActivity.defaultActivityName
     }"
   ></app-activity>
-}
+  }
+</div>
+<hr />
+<div class="progress-container">
+  <div class="progress">
+    <div class="circle-container">
+      <app-progress-circle [porcentage]="conclusionPercentage"></app-progress-circle>
+      <p>Porcentagem de conclusão</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="circle-container">
+      <app-progress-circle [porcentage]="budgetPercentage"></app-progress-circle>
+      <p>Orçamento utilizado</p>
+    </div>
+  </div>
+</div>
+
+<div class="texts">
+  <div class="information">
+    <i class="fa-solid fa-sack-dollar"></i>
+    <p>Orçamento utlizado:
+      <strong
+        [style]="budgetPercentage > 100 ? 'color: red' : 'color: #00a8e8'"
+      >{{Intl.format(budget)}}</strong>
+      de
+      {{Intl.format(construction.budget)}}
+    </p>
+  </div>
+  <div class="information">
+    <i class="fa-solid fa-clock"></i>
+    <p>Tempo estimado de conclusão: {{endExpectedIn}}</p>
+  </div>
 </div>

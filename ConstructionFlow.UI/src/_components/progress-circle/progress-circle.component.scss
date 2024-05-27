@@ -1,0 +1,22 @@
+.progress-circle {
+  aspect-ratio: 1/1;
+  height: 18vh;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-circle::before {
+  content: '';
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.progress-percentage {
+  position: absolute;
+  font-size: 1.2em;
+  font-weight: bold;
+}
