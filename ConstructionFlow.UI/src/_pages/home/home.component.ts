@@ -5,6 +5,8 @@ import { AuthService } from '../../security/auth.service';
 import { CustomerService } from '../../_services/customer.service';
 import { FormsModule } from '@angular/forms';
 import { ConstructionService } from '../../_services/construction.service';
+import { AlertModalComponent } from '../../_components/alert-modal/alert-modal.component';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,8 @@ import { ConstructionService } from '../../_services/construction.service';
   imports: [
     NgStyle,
     RouterLink,
-    FormsModule
+    FormsModule,
+    AlertModalComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -24,6 +27,7 @@ export class HomeComponent implements OnInit{
   isLogged: boolean = false;
   searchText: string = "Digite o ID da obra"
   constructionId: string = '';
+  showAlert: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -51,10 +55,17 @@ export class HomeComponent implements OnInit{
   }
 
   findConstruction(){
-    this.constructionService.getConstructionById(Number(this.constructionId)).subscribe(
+    this.constructionService.getConstructionById(Number(this.constructionId))
+    .pipe(
+      catchError((error) => {
+        this.showAlert = true;
+        return error;
+      })
+    )
+    .subscribe(
       (data) => {
         this.router.navigate(['/flow'], {
-          queryParams: { data: JSON.stringify(data) },
+          queryParams: { data: this.constructionId },
         });
       }
     );

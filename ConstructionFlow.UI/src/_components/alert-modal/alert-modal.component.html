@@ -1,0 +1,12 @@
+<div [class]="show? 'modal':'hidden'">
+  <div class="modal-content">
+    <div class="title">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>Obra não encontrada!</p>
+    </div>
+    <p>
+      Id não encontrado. Verifique o id e tente novamente.
+    </p>
+    <button (click)="show=false">OK</button>
+  </div>
+</div>
