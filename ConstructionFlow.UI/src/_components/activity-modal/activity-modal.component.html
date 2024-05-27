@@ -1,12 +1,13 @@
-<h2 mat-dialog-title>Cadastrar Atividade</h2>
-<mat-dialog-content>
-<p>Selecione uma atividade padrão</p>
-<mat-form-field>
-  <mat-label>Atividade</mat-label>
-  <mat-select [(value)]="activity">
-    <mat-option *ngFor="let activity of activities" [value]="activity">
-      {{activity.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-</mat-dialog-content>
+<div [class]="show? 'modal':'hidden'">
+  <div class="modal-content">
+    <div class="title">
+      <i class="fa-solid fa-circle-plus"></i>
+      <p>Criar nova atividade</p>
+      <i (click)="show=false" class="fa-solid fa-xmark close"></i>
+    </div>
+    <p>Preencha os campos</p>
+    <input type="text" [(ngModel)]="activityName" placeholder="Nome da atividade">
+    <input type="text" [(ngModel)]="iconClasses" placeholder="Classes do ícone">
+    <button (click)="save()">Salvar</button>
+  </div>
+</div>

@@ -1,34 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
-  MatSelect,
-} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
-
-
+import { DefaultActivityService } from '../../_services/default-activity.service';
 @Component({
   selector: 'app-activity-modal',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatSelectModule],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './activity-modal.component.html',
   styleUrl: './activity-modal.component.scss'
 })
 export class ActivityModalComponent {
+  @Input() show: boolean = false;
+  activityName: string = '';
+  iconClasses: string = '';
+  @Output() saved = new EventEmitter<void>();
+
   constructor(
-    public dialogRef: MatDialogRef<ActivityModalComponent>
-  ) { }
+    private defaultActivityService: DefaultActivityService
+  ){}
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  save() {
+    if (!this.activityName || !this.iconClasses) {
+      alert('Preencha todos os campos para continuar');
+      return;
+    }
+    this.defaultActivityService.createDefaultActivity({
+      defaultActivityName: this.activityName,
+      icon: this.iconClasses
+    }).subscribe(() => {
+      this.show = false;
+      this.saved.emit();
+    });
   }
-
 }
