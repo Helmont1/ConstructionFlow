@@ -57,8 +57,8 @@
   .progress-bar {
     display: flex;
     flex-direction: column;
-    margin-left: -2px;
-    width: 5rem;
+    margin-inline: -2px;
+    width: 8rem;
     margin-bottom: 4.5rem;
     justify-content: end;
 
@@ -81,7 +81,7 @@
 
     .bar {
       height: 1rem;
-      width: 5rem;
+      width: 100%;
       border-block: 1px solid black;
       position: relative;
 
