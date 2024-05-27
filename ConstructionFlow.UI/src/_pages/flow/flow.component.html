@@ -19,7 +19,7 @@
   <div class="container-content">
     <div class="content">
       @if (page == 'Linha do tempo' && atividades.length > 0) {
-        <app-timeline [atividades]="atividades"></app-timeline>
+        <app-timeline [construction]="data" [atividades]="atividades"></app-timeline>
       }
 
     </div>

@@ -18,6 +18,7 @@ export class FlowComponent implements OnInit {
   page: string = 'Linha do tempo';
   @Input('data') data: any;
   atividades: Activity[] = [];
+  construction = 0;
 
   constructor(
     private activityService: ActivityService,
@@ -31,6 +32,7 @@ export class FlowComponent implements OnInit {
       .subscribe((data) => {
         this.atividades = data as Activity[];
       });
+    this.construction = this.data;
   }
 
   changePage(page: string) {
