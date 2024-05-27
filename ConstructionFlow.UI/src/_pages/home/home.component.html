@@ -43,7 +43,7 @@
       </button>
     </div>
     <div class="search-field">
-      <input type="text" [(ngModel)]="constructionId" placeholder="{{searchText}}">
+      <input type="text" [(ngModel)]="constructionId" placeholder="{{searchText}}" (keyup.enter)="findConstruction()">
       <button (click)="findConstruction()">
         <img src="assets/imgs/search-icon.png" alt="Pesquisar" />
       </button>
