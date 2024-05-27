@@ -36,8 +36,8 @@ export class TimelineComponent implements OnInit{
         finishedActivities += 0.5;
       }
     });
-    this.conclusionPercentage = (finishedActivities / this.atividades.length) * 100;
-    this.budgetPercentage = (this.budget / this.construction.budget) * 100;
+    this.conclusionPercentage = Math.round((finishedActivities / this.atividades.length) * 10000)/100;
+    this.budgetPercentage = Math.round((this.budget / this.construction.budget) * 10000)/100;
     this.endExpectedIn = this.getEndExpectedIn();
     console.log(this.atividades);
   }
