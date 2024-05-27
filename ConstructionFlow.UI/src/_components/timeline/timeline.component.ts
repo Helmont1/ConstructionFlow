@@ -29,10 +29,10 @@ export class TimelineComponent implements OnInit{
       if (atividade.budget) {
         this.budget += atividade.budget;
       }
-      if (atividade.status.id == 3) {
+      if (atividade.status!.id == 3) {
         finishedActivities++;
       }
-      else if (atividade.status.id == 2) {
+      else if (atividade.status!.id == 2) {
         finishedActivities += 0.5;
       }
     });

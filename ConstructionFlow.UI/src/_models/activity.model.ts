@@ -5,10 +5,13 @@ import { Status } from "./status.model";
 export interface Activity {
   id?: number,
   budget?: number,
-  status: Status,
+  status?: Status,
+  statusId?: number,
   construction?: Construction,
+  constructionId?: number,
   startDate: Date,
   endDate: Date,
-  defaultActivity: DefaultActivity,
+  defaultActivity?: DefaultActivity,
+  defaultActivityId?: string,
   order?: number
 }

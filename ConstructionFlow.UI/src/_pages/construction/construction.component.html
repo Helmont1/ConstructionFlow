@@ -1,4 +1,7 @@
-<app-activity-modal [show]="showActivityModal" (saved)="reloadPage()"></app-activity-modal>
+<app-activity-modal
+  [show]="showActivityModal"
+  (saved)="reloadPage()"
+></app-activity-modal>
 <app-left-navbar></app-left-navbar>
 <section class="register" style="background-color: lightgray">
   <div class="register-container">
@@ -24,7 +27,7 @@
       </div>
       <div class="register-field">
         <p>Atividades</p>
-        <button class="show-modal-btn" (click)="showActivityModal=true">
+        <button class="show-modal-btn" (click)="showActivityModal = true">
           <i class="fa-regular fa-plus"></i>
           Adicionar atividade
         </button>
@@ -33,10 +36,22 @@
           class="activities-list"
           (cdkDropListDropped)="drop($event)"
         >
-          @for (defaultActivity of defaultActivities; track defaultActivity) {
-          <div class="activities-box" cdkDrag>
-            <i [class]="defaultActivity.icon"></i>
-            {{ defaultActivity.defaultActivityName }}
+          @for (defaultActivity of defaultActivities; track defaultActivity; let i = $index) {
+          <div cdkDrag>
+            <div class="activities-box">
+              <i [class]="defaultActivity.icon"></i>
+              {{ defaultActivity.defaultActivityName }}
+            </div>
+            <div class="dates-container">
+              <div class="date-container">
+                <p>Data de ínicio</p>
+                <input type="date" class="form-control" [(ngModel)]="dates[i][0]" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="date-container">
+                <p>Data de fim</p>
+                <input type="date" class="form-control" [(ngModel)]="dates[i][1]" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
           </div>
           }
         </div>

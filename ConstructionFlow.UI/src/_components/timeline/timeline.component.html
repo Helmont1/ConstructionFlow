@@ -6,9 +6,9 @@
     [hasTimeLine]="l ? false : hasTimeLine(atividade, atividades[i + 1])"
     [hasBar]="!l"
     [stage]="
-      atividade.status.id == 1
+      atividade.status!.id == 1
         ? 'not started'
-        : atividade.status.id == 2
+        : atividade.status!.id == 2
         ? 'half'
         : 'full'
     "
@@ -19,7 +19,7 @@
         getMonthName(atividade.startDate.getMonth()) +
         ' ' +
         atividade.startDate.getDate(),
-      name: atividade.defaultActivity.defaultActivityName
+      name: atividade.defaultActivity!.defaultActivityName
     }"
   ></app-activity>
   }

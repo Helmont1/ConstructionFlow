@@ -36,6 +36,7 @@ import { DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { Customer } from '../../_models/customer.model';
 import { Observable, catchError, map } from 'rxjs';
 import { ActivityModalComponent } from '../../_components/activity-modal/activity-modal.component';
+import { ActivityService } from '../../_services/activity.service';
 
 @Component({
   selector: 'app-construction',
@@ -54,7 +55,7 @@ import { ActivityModalComponent } from '../../_components/activity-modal/activit
     CdkDropList,
     CdkDrag,
     DialogModule,
-    ActivityModalComponent
+    ActivityModalComponent,
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',
@@ -67,6 +68,7 @@ export class ConstructionComponent implements OnInit {
   company: boolean = false;
   user: User = {} as User;
   showActivityModal: boolean = false;
+  dates: any;
 
   alerts: Alert[] = [
     {
@@ -85,7 +87,8 @@ export class ConstructionComponent implements OnInit {
     private routerService: Router,
     private customerService: CustomerService,
     private defaultActivityService: DefaultActivityService,
-    private authService: AuthService
+    private authService: AuthService,
+    private activityService: ActivityService
   ) {
     this.registerForm = this.formBuilder.group({
       startDate: ['', [Validators.required]],
@@ -115,6 +118,7 @@ export class ConstructionComponent implements OnInit {
     };
     console.log('vou criar a construcao heim hmhm ');
     console.log(this.construction);
+    this.saveActivities();
     this.constructionService.createConstruction(this.construction).subscribe({
       next: (response) => {
         this.alerts[0].message = 'Construção criada com sucesso!';
@@ -130,28 +134,36 @@ export class ConstructionComponent implements OnInit {
     });
   }
   verifyCustomer() {
-    return this.customerService.getCustomerByCustomerRegister(this.registerForm.controls['register'].value).pipe(
-      map(customer => {
-        if (customer) {
-          this.registerForm.controls['customerId'].setValue(customer.id);
-          return customer.id;
-        } else {
-          return this.customerService.createCustomer(this.mountCustomer()).pipe(
-            map(response => {
-              this.registerForm.controls['customerId'].setValue(response.id);
-              return response.id;
-            }),
-            catchError(error => {
-              this.alerts.push({
-                type: 'danger',
-                message: 'Erro ao criar cliente',
-              });
-              throw error;
-            })
-          );
-        }
-      })
-    );
+    return this.customerService
+      .getCustomerByCustomerRegister(
+        this.registerForm.controls['register'].value
+      )
+      .pipe(
+        map((customer) => {
+          if (customer) {
+            this.registerForm.controls['customerId'].setValue(customer.id);
+            return customer.id;
+          } else {
+            return this.customerService
+              .createCustomer(this.mountCustomer())
+              .pipe(
+                map((response) => {
+                  this.registerForm.controls['customerId'].setValue(
+                    response.id
+                  );
+                  return response.id;
+                }),
+                catchError((error) => {
+                  this.alerts.push({
+                    type: 'danger',
+                    message: 'Erro ao criar cliente',
+                  });
+                  throw error;
+                })
+              );
+          }
+        })
+      );
   }
 
   mountCustomer(): Customer {
@@ -177,14 +189,37 @@ export class ConstructionComponent implements OnInit {
   getDefaultActivities() {
     this.defaultActivityService.getDefaultActivities().subscribe((data) => {
       this.defaultActivities = data;
+      this.dates = new Array(this.defaultActivities.length)
+        .fill(null)
+        .map(() => new Array(2).fill(null));
     });
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.defaultActivities, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.defaultActivities,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
-  reloadPage(){
+  reloadPage() {
     location.reload();
+  }
+
+  saveActivities() {
+    this.defaultActivities.forEach((activity, index) => {
+      this.activityService
+        .createActivity({
+          budget: 0,
+          statusId: 1,
+          constructionId: this.construction.id,
+          startDate: new Date(this.dates[index][0]),
+          endDate: new Date(this.dates[index][1]),
+          defaultActivityId: activity.id,
+          order: index,
+        })
+        .subscribe({});
+    });
   }
 }
