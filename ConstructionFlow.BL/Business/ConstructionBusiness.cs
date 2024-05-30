@@ -45,10 +45,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<ConstructionResponse>(construction);
         }
 
-        public Task AddConstruction(ConstructionRequest construction)
+        public async Task<ConstructionResponse> AddConstruction(ConstructionRequest construction)
         {
-            _unitOfWork.ConstructionRepository.Insert(_mapper.Map<Construction>(construction));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.ConstructionRepository.Insert(_mapper.Map<Construction>(construction));
+            return _mapper.Map<ConstructionResponse>(response);
         }
 
         public Task UpdateConstruction(ConstructionRequest construction)

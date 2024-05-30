@@ -67,9 +67,47 @@ namespace ConstructionFlow.DAL.UnitOfWork
             return query?.ToList();
         }
 
-        public void Insert(T entity)
+        public async Task<T> Insert(T entity)
         {
-            _db.AddAsync(entity);
+
+            _db.Add(entity);
+            await _context.SaveChangesAsync();
+
+            var entityType = typeof(T);
+            var keyProperty = _context.Model.FindEntityType(entityType).FindPrimaryKey().Properties.FirstOrDefault();
+
+            if (keyProperty == null)
+            {
+                throw new InvalidOperationException("No key property found for entity type " + entityType.Name);
+            }
+
+            var keyPropertyName = keyProperty.Name;
+            var keyValue = entityType.GetProperty(keyPropertyName).GetValue(entity);
+
+            IQueryable<T> query = _db;
+
+            var navigationProperties = _context.Model
+                .FindEntityType(entityType)
+                .GetNavigations()
+                .Select(n => n.Name);
+
+            foreach (var navigationProperty in navigationProperties)
+            {
+                query = query.Include(navigationProperty);
+            }
+
+            var parameter = Expression.Parameter(typeof(T), "e");
+            var predicate = Expression.Lambda<Func<T, bool>>(
+                Expression.Equal(
+                    Expression.Property(parameter, keyPropertyName),
+                    Expression.Constant(keyValue)
+                ),
+                parameter
+            );
+
+            var insertedEntity = await query.FirstOrDefaultAsync(predicate);
+
+            return insertedEntity;
         }
 
         public void InsertRange(IEnumerable<T> entities)

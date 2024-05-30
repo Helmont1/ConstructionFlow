@@ -34,10 +34,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<StatusResponse>(status);
         }
 
-        public Task AddStatus(StatusRequest status)
+        public async Task<StatusResponse> AddStatus(StatusRequest status)
         {
-            _unitOfWork.StatusRepository.Insert(_mapper.Map<Status>(status));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.StatusRepository.Insert(_mapper.Map<Status>(status));
+            return _mapper.Map<StatusResponse>(response);
         }
 
         public Task UpdateStatus(StatusRequest status)

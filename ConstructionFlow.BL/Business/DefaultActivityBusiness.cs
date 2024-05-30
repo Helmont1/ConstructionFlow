@@ -34,10 +34,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<DefaultActivityResponse>(defaultActivity);
         }
 
-        public Task AddDefaultActivity(DefaultActivityRequest defaultActivity)
+        public async Task<DefaultActivityResponse> AddDefaultActivity(DefaultActivityRequest defaultActivity)
         {
-            _unitOfWork.DefaultActivityRepository.Insert(_mapper.Map<DefaultActivity>(defaultActivity));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.DefaultActivityRepository.Insert(_mapper.Map<DefaultActivity>(defaultActivity));
+            return _mapper.Map<DefaultActivityResponse>(response);
         }
 
         public Task UpdateDefaultActivity(DefaultActivityRequest defaultActivity)

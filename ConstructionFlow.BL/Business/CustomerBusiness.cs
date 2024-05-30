@@ -39,10 +39,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<CustomerResponse>(customer);
         }
 
-        public Task AddCustomer(CustomerRequest customer)
+        public async Task<CustomerResponse> AddCustomer(CustomerRequest customer)
         {
-            _unitOfWork.CustomerRepository.Insert(_mapper.Map<Customer>(customer));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.CustomerRepository.Insert(_mapper.Map<Customer>(customer));
+            return _mapper.Map<CustomerResponse>(response);
         }
 
         public Task UpdateCustomer(CustomerRequest customer)

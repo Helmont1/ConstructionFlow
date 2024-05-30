@@ -39,7 +39,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddUser(CreateUserDto user)
+        public Task<UserResponse> AddUser(CreateUserDto user)
         {
             return _userBusiness.AddUser(user);
         }

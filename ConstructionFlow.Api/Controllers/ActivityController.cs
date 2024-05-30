@@ -37,7 +37,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddActivity(ActivityRequest activity)
+        public Task<ActivityResponse> AddActivity(ActivityRequest activity)
         {
             return _activityBusiness.AddActivity(activity);
         }

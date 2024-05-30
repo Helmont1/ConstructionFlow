@@ -41,10 +41,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<ActivityResponse>(activity);
         }
 
-        public Task AddActivity(ActivityRequest activity)
+        public async Task<ActivityResponse> AddActivity(ActivityRequest activity)
         {
-            _unitOfWork.ActivityRepository.Insert(_mapper.Map<Activity>(activity));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.ActivityRepository.Insert(_mapper.Map<Activity>(activity));
+            return _mapper.Map<ActivityResponse>(response);
         }
 
         public Task UpdateActivity(ActivityRequest activity)

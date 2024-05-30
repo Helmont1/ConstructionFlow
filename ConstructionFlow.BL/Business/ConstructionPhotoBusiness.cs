@@ -40,10 +40,10 @@ namespace ConstructionFlow.BL.Business
             return _mapper.Map<ConstructionPhotoResponse>(constructionPhoto);
         }
 
-        public Task AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
+        public async Task<ConstructionPhotoResponse> AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
-            _unitOfWork.ConstructionPhotoRepository.Insert(_mapper.Map<ConstructionPhoto>(constructionPhoto));
-            return _unitOfWork.SaveAsync();
+            var response = await _unitOfWork.ConstructionPhotoRepository.Insert(_mapper.Map<ConstructionPhoto>(constructionPhoto));
+            return _mapper.Map<ConstructionPhotoResponse>(response);
         }
 
         public Task UpdateConstructionPhoto(ConstructionPhotoRequest constructionPhoto)

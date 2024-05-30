@@ -35,7 +35,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddCustomer(CustomerRequest customer)
+        public Task<CustomerResponse> AddCustomer(CustomerRequest customer)
         {
             return _customerBusiness.AddCustomer(customer);
         }

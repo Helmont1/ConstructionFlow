@@ -29,7 +29,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddDefaultActivity(DefaultActivityRequest defaultActivity)
+        public Task<DefaultActivityResponse> AddDefaultActivity(DefaultActivityRequest defaultActivity)
         {
             return _defaultActivityBusiness.AddDefaultActivity(defaultActivity);
         }

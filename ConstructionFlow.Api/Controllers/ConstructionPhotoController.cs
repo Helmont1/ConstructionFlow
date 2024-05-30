@@ -35,7 +35,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
+        public Task<ConstructionPhotoResponse> AddConstructionPhoto(ConstructionPhotoRequest constructionPhoto)
         {
             return _constructionPhotoBusiness.AddConstructionPhoto(constructionPhoto);
         }

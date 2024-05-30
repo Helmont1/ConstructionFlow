@@ -42,7 +42,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddConstruction(ConstructionRequest construction)
+        public Task<ConstructionResponse> AddConstruction(ConstructionRequest construction)
         {
             return _constructionBusiness.AddConstruction(construction);
         }

@@ -38,14 +38,14 @@ namespace ConstructionFlow.BL.Business
             return mapper.Map<UserResponse>(user);
         }
 
-        public Task AddUser(CreateUserDto user)
+        public async Task<UserResponse> AddUser(CreateUserDto user)
         {
             byte[] data = Encoding.ASCII.GetBytes(user.UserPassword);
             data = System.Security.Cryptography.SHA256.HashData(data);
             user.UserPassword = Encoding.ASCII.GetString(data);
 
-            unitOfWork.UserRepository.Insert(mapper.Map<User>(user));
-            return unitOfWork.SaveAsync();
+            var response = await unitOfWork.UserRepository.Insert(mapper.Map<User>(user));
+            return mapper.Map<UserResponse>(response);
         }
 
         public Task UpdateUser(UserRequest user)

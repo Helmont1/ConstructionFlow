@@ -29,7 +29,7 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpPost]
-        public Task AddStatus(StatusRequest status)
+        public Task<StatusResponse> AddStatus(StatusRequest status)
         {
             return _statusBusiness.AddStatus(status);
         }
