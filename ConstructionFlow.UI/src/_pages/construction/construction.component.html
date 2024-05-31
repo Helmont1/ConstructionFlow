@@ -24,6 +24,16 @@
             formControlName="name"
           />
         </div>
+        <div
+          class="warning"
+          *ngIf="
+            registerForm.get('name')?.invalid &&
+            (registerForm.get('name')?.dirty ||
+              registerForm.get('name')?.touched)
+          "
+        >
+          <p>Campo obrigatório</p>
+        </div>
       </div>
       <div class="register-field">
         <p>Atividades</p>
@@ -36,7 +46,8 @@
           class="activities-list"
           (cdkDropListDropped)="drop($event)"
         >
-          @for (defaultActivity of defaultActivities; track defaultActivity; let i = $index) {
+          @for (defaultActivity of defaultActivities; track defaultActivity; let
+          i = $index) {
           <div cdkDrag>
             <div class="activities-box">
               <i [class]="defaultActivity.icon"></i>
@@ -45,11 +56,21 @@
             <div class="dates-container">
               <div class="date-container">
                 <p>Data de ínicio</p>
-                <input type="date" class="form-control" [(ngModel)]="dates[i][0]" [ngModelOptions]="{standalone: true}">
+                <input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="dates[i][0]"
+                  [ngModelOptions]="{ standalone: true }"
+                />
               </div>
               <div class="date-container">
                 <p>Data de fim</p>
-                <input type="date" class="form-control" [(ngModel)]="dates[i][1]" [ngModelOptions]="{standalone: true}">
+                <input
+                  type="date"
+                  class="form-control"
+                  [(ngModel)]="dates[i][1]"
+                  [ngModelOptions]="{ standalone: true }"
+                />
               </div>
             </div>
           </div>
@@ -140,6 +161,36 @@
           >
             CNPJ/CPF inválido
           </p>
+        </div>
+      </div>
+      <div class="register-field">
+        <p>Orçamento</p>
+        <div class="input">
+          <i class="fa-solid fa-sack-xmark"></i>
+          <input
+            type="text"
+            placeholder="Digite o orçamento"
+            id="budget"
+            name="budget"
+            formControlName="budget"
+            mask="separator.2"
+            prefix="R$ "
+            thousandSeparator=" "
+          />
+        </div>
+        <div
+          class="warning"
+          *ngIf="
+            registerForm.get('budget')?.invalid &&
+            (registerForm.get('budget')?.touched)
+          "
+        >
+          <div *ngIf="registerForm.get('budget')?.errors?.required">
+            <p>Campo obrigatório</p>
+          </div>
+          <div *ngIf="registerForm.get('budget')?.errors?.min">
+            <p>Valor mínimo: R$ 1,00</p>
+          </div>
         </div>
       </div>
       <button class="btn" type="submit" [disabled]="!registerForm.valid">

@@ -95,6 +95,7 @@ export class ConstructionComponent implements OnInit {
       endDate: ['', [Validators.required]],
       register: ['', [Validators.required, Validators.minLength(11)]],
       name: ['', [Validators.required]],
+      budget: ['', [Validators.required, Validators.min(1)]],
       userId: [0],
       statusId: [1],
       customerId: [1],
@@ -115,12 +116,14 @@ export class ConstructionComponent implements OnInit {
       userId: user.id ?? 0,
       customerId: this.registerForm.value.customerId,
       title: this.registerForm.value.name,
+      budget: ''+this.registerForm.value.budget
     };
     console.log('vou criar a construcao heim hmhm ');
     console.log(this.construction);
-    this.saveActivities();
     this.constructionService.createConstruction(this.construction).subscribe({
       next: (response) => {
+        this.construction = response as Construction;
+        this.saveActivities();
         this.alerts[0].message = 'Construção criada com sucesso!';
         this.alerts[0].type = 'success';
         this.routerService.navigate(['/profile'], {
@@ -209,17 +212,19 @@ export class ConstructionComponent implements OnInit {
 
   saveActivities() {
     this.defaultActivities.forEach((activity, index) => {
-      this.activityService
-        .createActivity({
-          budget: 0,
+      let newActivity: Activity = {
+        budget: 0,
           statusId: 1,
           constructionId: this.construction.id,
           startDate: new Date(this.dates[index][0]),
           endDate: new Date(this.dates[index][1]),
           defaultActivityId: activity.id,
-          order: index,
-        })
-        .subscribe({});
+          order: index
+      }
+      console.log(newActivity);
+      this.activityService
+        .createActivity(newActivity)
+        .subscribe();
     });
   }
 }
