@@ -9,5 +9,7 @@ export interface Construction {
   endDate: Date,
   customerId: number,
   userId: number,
-  title: string
+  title: string,
+  search?: string,
+  budget: string
 }
