@@ -12,11 +12,18 @@ import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.c
 import { AlertComponent } from '../../_components/alert/alert.component';
 import { ConstructionService } from '../../_services/construction.service';
 import { AuthService } from '../../security/auth.service';
+import { StarRatingComponent } from '../../_components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CarouselComponent, RouterLink, LeftNavbarComponent, AlertComponent],
+  imports: [
+    CarouselComponent,
+    RouterLink,
+    LeftNavbarComponent,
+    AlertComponent,
+    StarRatingComponent
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
@@ -27,6 +34,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   finishedConstructions: any;
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
+  defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg9zkf0PWdFupdiDjLIkF1rWzE_oC76dNaQ&s';
+  greenScore: number = 6.9;
 
   constructor(
     private router: Router,
@@ -66,6 +75,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log(this.alerts);
         this.alertComponent.show(JSON.parse(this.alerts));
       });
+  }
+
+  getRating(){
+    return Math.round(this.greenScore * 10)/20;
   }
 
   createConstruction() {

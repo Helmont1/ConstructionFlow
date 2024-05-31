@@ -19,10 +19,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     height: 35vh;
     margin-left: 3.5rem;
     width: calc(100vw - 3.5rem);
+
+    img {
+        height: 11rem;
+        width: 11rem;
+    }
+
+    .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 5%;
+    }
 
     .email{
         display: flex;
@@ -33,6 +45,15 @@
             margin-right: 2%;
             margin-top: 1%;
         }
+    }
+
+    .green-score{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 5%;
+
     }
 }
 

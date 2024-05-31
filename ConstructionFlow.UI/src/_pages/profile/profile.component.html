@@ -2,11 +2,19 @@
 <app-left-navbar></app-left-navbar>
 <div>
   <div class="header">
-    <h1>{{ user.userName }}</h1>
-    <p>CNPJ: {{ formatCnpj(user.userCnpj) }}</p>
-    <div class="email">
-      <i class="fa-regular fa-envelope"></i>
-      <a>{{ user.userEmail }}</a>
+    <img src="{{defaultImage}}" alt="profile">
+    <div class="title">
+      <h1>{{ user.userName }}</h1>
+      <p>CNPJ: {{ formatCnpj(user.userCnpj) }}</p>
+      <div class="email">
+        <i class="fa-regular fa-envelope"></i>
+        <a>{{ user.userEmail }}</a>
+      </div>
+      <div class="green-score">
+        <p>Green Score</p>
+        <app-star-rating [rating]="getRating()"></app-star-rating>
+        <p>{{greenScore.toFixed(1).replace('.', ',') }} / 10</p>
+      </div>
     </div>
   </div>
   <div class="tabs">
