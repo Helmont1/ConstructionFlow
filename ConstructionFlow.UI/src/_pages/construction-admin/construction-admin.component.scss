@@ -1,0 +1,145 @@
+:host {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin: 0;
+  }
+
+  i {
+    margin-top: 0.25rem;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  margin-left: 3.5rem;
+  width: calc(100vw - 3.5rem);
+  border-bottom: 1px solid #ccc;
+  padding-block: 2rem;
+
+  .img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      margin-bottom: 1rem;
+      height: 15rem;
+      max-width: 25rem;
+      border-radius: 10px;
+    }
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    //piscar ao clicar
+    animation: blinker 1s linear infinite;
+
+    i {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .green {
+    border: 1px solid green;
+    color: green;
+  }
+
+  .information {
+    display: flex;
+
+    @keyframes flash {
+      0% { background-color: rgb(252, 252, 169); }
+      50% { background-color: #fffbd4; }
+      100% { background-color: rgb(252, 252, 169); }
+    }
+
+    .flashing {
+      animation: flash 0.2s ease-in-out;
+    }
+
+    .copy-code{
+      display: flex;
+      border-radius: 5px;
+      padding: 0.2rem;
+      border: 1px solid #ccc;
+      background-color: #fffbd4;
+      margin-top: 0.6rem;
+
+      &:hover{
+        background-color: rgb(252, 252, 169);
+      }
+
+      i{
+        margin-left: 0.3rem;
+      }
+    }
+
+    .section{
+      margin-left: 1rem;
+
+      .title{
+        margin-left: 0.5rem;
+      }
+
+      &-border{
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1rem;
+        width: 20rem;
+      }
+
+    }
+
+    .time {
+      p {
+        margin-right: 0.2rem;
+      }
+      .warning{
+        color: red;
+      }
+    }
+    .late {
+      color: red;
+      text-decoration: underline;
+    }
+
+
+    input {
+      color: #818181;
+      border: none;
+      border-bottom: 1px solid #000;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .select{
+      border: none;
+      border-bottom: 1px solid #000;
+      color: #818181;
+    }
+
+    .neutral {
+      border: none;
+      color: #000;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+}
