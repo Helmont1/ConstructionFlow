@@ -11,5 +11,8 @@ export interface Construction {
   userId: number,
   title: string,
   search?: string,
-  budget: string
+  budget: string,
+  status?: Status,
+  customer?: Customer,
+  user?: User,
 }
