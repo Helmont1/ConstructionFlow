@@ -24,7 +24,7 @@ export class ConstructionService {
   }
 
   editConstruction(construction: Construction) {
-    return this.http.put(`${this.url}/${construction.id}`, construction);
+    return this.http.put(`${this.url}`, construction);
   }
 
   deleteConstruction(id: number) {
