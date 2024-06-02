@@ -31,6 +31,10 @@ export class ConstructionAdminComponent {
     { id: 3, name: 'Finalizada' },
   ];
   isFlashing = false;
+  dates = {
+    startDate: '',
+    endDate: '',
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +48,8 @@ export class ConstructionAdminComponent {
       .getConstructionById(this.id)
       .subscribe((construction) => {
         this.construction = construction as Construction;
+        this.dates.startDate = this.getFormattedDate(this.construction.startDate);
+        this.dates.endDate = this.getFormattedDate(this.construction.endDate);
       });
     this.constructionPhotoService.getPhotosByConstructionId(this.id).subscribe((photo) => {
       if ((photo as Array<Object>).length != 0) this.profile_image = photo as ConstructionPhoto;
@@ -55,8 +61,8 @@ export class ConstructionAdminComponent {
     return this.formater.format(numero);
   }
 
-  getDate(date: Date) {
-    date = new Date(date);
+  getDate(dateS: string) {
+    let date = new Date(dateS);
     let dia = date.getUTCDate();
     let mes = date.getUTCMonth() + 1;
     let ano = date.getUTCFullYear();
@@ -67,6 +73,21 @@ export class ConstructionAdminComponent {
       (mes < 10 ? '0' + mes : mes) +
       '/' +
       ano
+    );
+  }
+
+  getFormattedDate(date: Date): string {
+    date = new Date(date);
+    let dia = date.getUTCDate();
+    let mes = date.getUTCMonth() + 1;
+    let ano = date.getUTCFullYear();
+    return (
+      '' +
+      ano +
+      '-' +
+      (mes < 10 ? '0' + mes : mes) +
+      '-' +
+      (dia < 10 ? '0' + dia : dia)
     );
   }
 
@@ -140,14 +161,23 @@ export class ConstructionAdminComponent {
     };
   }
 
+  verifyFinishDate(){
+    let id = this.construction?.status?.id;
+    let endDate = this.dates.endDate;
+    let isFuture = this.compareDate(new Date(endDate));
+    console.log(id, isFuture, endDate)
+    if ((id == 3 && isFuture) || (id != 3 && !isFuture) ) return false;
+    return true;
+  }
+
   toggle() {
     this.readonly = !this.readonly;
     if (this.readonly) {
       let construction: Construction = {
         id: this.construction!.id,
         statusId: this.construction!.status!.id,
-        startDate: this.construction!.startDate,
-        endDate: this.construction!.endDate,
+        startDate: new Date(this.dates.startDate),
+        endDate: new Date(this.dates.endDate),
         customerId: parseInt(this.construction!.customer!.id!),
         userId: this.construction!.user!.id!,
         title: this.construction!.title,

@@ -4,121 +4,138 @@
     <div class="img">
       <img [src]="profile_image.photo" alt="profile" />
       @if(!readonly){
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
       }
     </div>
     @if (construction){
-      <div class="information">
-        <div class="section">
-          <p class="title">Informações gerais</p>
-          <div class="section-border">
-            <div class="field">
-              <p><strong>Nome</strong></p>
+    <div class="information">
+      <div class="section">
+        <p class="title">Informações gerais</p>
+        <div class="section-border">
+          <div class="field">
+            <p><strong>Nome</strong></p>
+            <input
+              [class]="readonly ? 'neutral' : ''"
+              type="text"
+              [(ngModel)]="construction!.title"
+              [readonly]="readonly"
+            />
+          </div>
+          <div class="field">
+            <p><strong>Orçamento</strong></p>
+            @if(readonly){
+            <p>{{ formatarParaReal(construction!.budget) }}</p>
+            } @else{
+            <input
+              type="text"
+              [(ngModel)]="construction!.budget"
+              [readonly]="readonly"
+            />
+            }
+          </div>
+          <div class="field">
+            <p><strong>Cliente</strong></p>
+            @if(isCnpj()){ @if(readonly){
+            <p>{{ formatCnpj(construction!.customer!.customerCnpj!) }}</p>
+            } @else {
+            <input
+              [class]="readonly ? 'neutral' : ''"
+              [readonly]="readonly"
+              type="text"
+              [(ngModel)]="construction!.customer!.customerCnpj"
+            />
+            } } @else{ @if(readonly){
+            <p>{{ formatCpf(construction!.customer!.customerCpf!) }}</p>
+            } @else {
+            <input
+              [class]="readonly ? 'neutral' : ''"
+              [readonly]="readonly"
+              type="text"
+              [(ngModel)]="construction!.customer!.customerCpf"
+            />
+            } }
+          </div>
+          <div class="field">
+            <button
+              [class.flashing]="isFlashing"
+              class="copy-code"
+              (click)="copyCode()"
+            >
+              Código de busca
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <p class="title">Andamento da obra</p>
+        <div class="section-border">
+          <div class="time">
+            <p>
+              <strong
+                >{{
+                  construction!.status!.id != 1 ? "Iniciado" : "Iniciará"
+                }}
+                em:</strong
+              >
+            </p>
+            <div style="display: flex">
+              @if (readonly){
+                <p [class]="isLate() ? 'late' : ''">
+                  {{ getDate(dates.startDate) }}
+                </p>
+                @if (isLate()){
+                <i class="fa-solid fa-exclamation-circle warning"></i>
+                }
+              }
+              @else {
               <input
-                [class]="readonly ? 'neutral' : ''"
-                type="text"
-                [(ngModel)]="construction!.title"
-                [readonly]="readonly"
-              />
-            </div>
-            <div class="field">
-              <p><strong>Orçamento</strong></p>
-              @if(readonly){
-              <p>{{ formatarParaReal(construction!.budget) }}</p>
-              } @else{
-              <input
-                type="text"
-                [(ngModel)]="construction!.budget"
+                type="date"
+                [(ngModel)]="dates.startDate"
                 [readonly]="readonly"
               />
               }
             </div>
-            <div class="field">
-              <p><strong>Cliente</strong></p>
-              @if(isCnpj()){ @if(readonly){
-              <p>{{ formatCnpj(construction!.customer!.customerCnpj!) }}</p>
-              } @else {
+          </div>
+          <div class="time">
+            <p><strong>
+              {{construction!.status!.id != 3 ? "Término estimado" : "Finalizado em"}}:
+            </strong></p>
+            <div style="display: flex">
+              @if(readonly){
+              <p [class]="verifyFinishDate() ? '' : 'late'">
+                {{ getDate(dates.endDate) }}
+              </p>
+              @if(!verifyFinishDate()){
+              <i class="fa-solid fa-exclamation-circle warning"></i>
+              } } @else{
               <input
-                [class]="readonly ? 'neutral' : ''"
+                type="date"
+                [(ngModel)]="dates.endDate"
                 [readonly]="readonly"
-                type="text"
-                [(ngModel)]="construction!.customer!.customerCnpj"
               />
-              } } @else{ @if(readonly){
-              <p>{{ formatCpf(construction!.customer!.customerCpf!) }}</p>
-              } @else {
-              <input
-                [class]="readonly ? 'neutral' : ''"
-                [readonly]="readonly"
-                type="text"
-                [(ngModel)]="construction!.customer!.customerCpf"
-              />
-              } }
-            </div>
-            <div class="field">
-              <button [class.flashing]="isFlashing" class="copy-code" (click)="copyCode()">
-                Código de busca
-                <i class="fa-regular fa-copy"></i>
-              </button>
+              }
             </div>
           </div>
-        </div>
-        <div class="section">
-            <p class="title">Andamento da obra</p>
-            <div class="section-border">
-              <div class="time">
-                <p>
-                <strong>{{ construction!.status!.id != 1 ? "Iniciado" : "Iniciará" }} em:</strong>
-                </p>
-                <div style="display: flex">
-                  <p [class]="isLate() ? 'late' : ''">
-                    {{ getDate(construction!.startDate) }}
-                  </p>
-                  @if (isLate()){
-                  <i class="fa-solid fa-exclamation-circle warning"></i>
-                  }
-                </div>
-              </div>
-              <div class="time">
-                <p><strong>Término estimado:</strong></p>
-                <div style="display: flex">
-                  @if(readonly){
-                  <p [class]="compareDate(construction!.endDate) ? '' : 'late'">
-                    {{ getDate(construction!.endDate) }}
-                  </p>
-                  @if(!compareDate(construction!.endDate)){
-                  <i class="fa-solid fa-exclamation-circle warning"></i>
-                  } } @else{
-                  <input
-                    type="date"
-                    [(ngModel)]="construction!.endDate"
-                    [readonly]="readonly"
-                  />
-                  }
-                </div>
-              </div>
-              <div class="time">
-                <p><strong>Status</strong></p>
-                <!-- dropdown -->
-                <select
-                  [class]="readonly ? 'neutral' : 'select'"
-                  [(ngModel)]="construction!.status!.id"
-                  [disabled]="readonly"
-                >
-                  @for(status of statuses; track status.id){
-                  <option [value]="status.id">{{ status.name }}</option>
-                  }
-                </select>
-              </div>
-            </div>
+          <div class="time">
+            <p><strong>Status</strong></p>
+            <!-- dropdown -->
+            <select
+              [class]="readonly ? 'neutral' : 'select'"
+              [(ngModel)]="construction!.status!.id"
+              [disabled]="readonly"
+            >
+              @for(status of statuses; track status.id){
+              <option [value]="status.id">{{ status.name }}</option>
+              }
+            </select>
           </div>
         </div>
+      </div>
+    </div>
     }
 
-    <button
-      [class]="readonly ? 'toggle' : 'toggle green'"
-      (click)="toggle()"
-    >
+    <button [class]="readonly ? 'toggle' : 'toggle green'" (click)="toggle()">
       @if(readonly){
       <p>Editar</p>
       <i class="fa-regular fa-pen-to-square"></i>
