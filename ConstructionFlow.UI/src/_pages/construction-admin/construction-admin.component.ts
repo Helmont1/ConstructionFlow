@@ -6,11 +6,16 @@ import { Construction } from '../../_models/construction.model';
 import { FormsModule } from '@angular/forms';
 import { ConstructionPhotoService } from '../../_services/construction-photo.service';
 import { ConstructionPhoto } from '../../_models/construction-photo.model';
+import { ActivityAdminComponent } from '../../_components/activity-admin/activity-admin.component';
 
 @Component({
   selector: 'app-construction-admin',
   standalone: true,
-  imports: [LeftNavbarComponent, FormsModule],
+  imports: [
+    LeftNavbarComponent,
+    FormsModule,
+    ActivityAdminComponent
+  ],
   templateUrl: './construction-admin.component.html',
   styleUrl: './construction-admin.component.scss',
 })
@@ -165,7 +170,6 @@ export class ConstructionAdminComponent {
     let id = this.construction?.status?.id;
     let endDate = this.dates.endDate;
     let isFuture = this.compareDate(new Date(endDate));
-    console.log(id, isFuture, endDate)
     if ((id == 3 && isFuture) || (id != 3 && !isFuture) ) return false;
     return true;
   }
@@ -193,7 +197,6 @@ export class ConstructionAdminComponent {
         };
         this.constructionPhotoService.updatePhoto(image).subscribe();
       } else {
-        console.log("Criando")
         let image: ConstructionPhoto = {
           photo: this.profile_image.photo,
           constructionId: this.construction!.id,
