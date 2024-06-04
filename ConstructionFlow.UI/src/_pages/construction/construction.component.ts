@@ -1,7 +1,6 @@
-import { Component, Output, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Construction } from '../../_models/construction.model';
 import { Status } from '../../_models/status.model';
-import { StatusService } from '../../_services/status.service';
 import { ConstructionService } from '../../_services/construction.service';
 import {
   FormBuilder,
@@ -20,9 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { Alert } from '../../_components/alert/alert.component';
-import { DefaultActivity } from '../../_models/default-activity.model';
 import { DefaultActivityService } from '../../_services/default-activity.service';
-import { OnInit } from '@angular/core';
 import { AuthService } from '../../security/auth.service';
 import { User } from '../../_models/user.model';
 import {
@@ -32,11 +29,12 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Activity } from '../../_models/activity.model';
-import { DialogModule, DialogRef } from '@angular/cdk/dialog';
+import { DialogModule } from '@angular/cdk/dialog';
 import { Customer } from '../../_models/customer.model';
 import { Observable, catchError, map } from 'rxjs';
 import { ActivityModalComponent } from '../../_components/activity-modal/activity-modal.component';
 import { ActivityService } from '../../_services/activity.service';
+import { DefaultActivity } from '../../_models/default-activity.model';
 
 @Component({
   selector: 'app-construction',
@@ -68,7 +66,6 @@ export class ConstructionComponent implements OnInit {
   company: boolean = false;
   user: User = {} as User;
   showActivityModal: boolean = false;
-  dates: any;
 
   alerts: Alert[] = [
     {
@@ -79,7 +76,7 @@ export class ConstructionComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  defaultActivities: DefaultActivity[] = [];
+  defaultActivities: Activity[] = [];
 
   constructor(
     private constructionService: ConstructionService,
@@ -116,18 +113,33 @@ export class ConstructionComponent implements OnInit {
       userId: user.id ?? 0,
       customerId: this.registerForm.value.customerId,
       title: this.registerForm.value.name,
-      budget: ''+this.registerForm.value.budget
+      budget: '' + this.registerForm.value.budget,
     };
-    console.log('vou criar a construcao heim hmhm ');
-    console.log(this.construction);
     this.constructionService.createConstruction(this.construction).subscribe({
       next: (response) => {
         this.construction = response as Construction;
-        this.saveActivities();
-        this.alerts[0].message = 'Construção criada com sucesso!';
-        this.alerts[0].type = 'success';
-        this.routerService.navigate(['/profile'], {
-          queryParams: { data: JSON.stringify(this.alerts) },
+        this.saveActivities().subscribe({
+          next: (response) => {
+            this.alerts[0].message = 'Construção criada com sucesso!';
+            this.alerts[0].type = 'success';
+            this.routerService.navigate(['/profile'], {
+              queryParams: { data: JSON.stringify(this.alerts) },
+            });
+          },
+          error: (error) => {
+            this.alerts[0].message = 'Erro ao criar atividades';
+            this.alerts[0].type = 'danger';
+            this.constructionService.deleteConstruction(this.construction.id!).subscribe({
+              next: (response) => {
+                this.routerService.navigate(['/profile'], {
+                  queryParams: { data: JSON.stringify(this.alerts) },
+                });
+              },
+              error: (error) => {
+                console.log(error);
+              },
+            });
+          },
         });
       },
       error: (error) => {
@@ -190,12 +202,19 @@ export class ConstructionComponent implements OnInit {
   }
 
   getDefaultActivities() {
-    this.defaultActivityService.getDefaultActivities().subscribe((data) => {
-      this.defaultActivities = data;
-      this.dates = new Array(this.defaultActivities.length)
-        .fill(null)
-        .map(() => new Array(2).fill(null));
-    });
+    this.defaultActivityService
+      .getDefaultActivities()
+      .subscribe((data: DefaultActivity[]) => {
+        data.forEach((activity) => {
+          this.defaultActivities.push({
+            id: parseInt(activity.id!),
+            activityName: activity.defaultActivityName,
+            icon: activity.icon,
+            startDate: new Date(),
+            endDate: new Date(),
+          });
+        });
+      });
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -206,27 +225,34 @@ export class ConstructionComponent implements OnInit {
     );
   }
 
-  reloadPage() {
-    location.reload();
+  deleteActivity(activity: Activity) {
+    this.defaultActivities = this.defaultActivities.filter(
+      (act) => act.id !== activity.id
+    );
+  }
+
+  addActivity(activity: Activity) {
+    this.showActivityModal = false;
+    this.defaultActivities.push(activity);
   }
 
   saveActivities() {
-    this.defaultActivities.forEach((activity, index) => {
-      let newActivity: Activity = {
-        budget: 0,
-          statusId: 1,
-          constructionId: this.construction.id,
-          startDate: new Date(this.dates[index][0]),
-          endDate: new Date(this.dates[index][1]),
-          defaultActivityId: activity.id,
-          order: index,
-          activityName: activity.defaultActivityName,
-          icon: activity.icon,
-      }
-      console.log(newActivity);
-      this.activityService
-        .createActivity(newActivity)
-        .subscribe();
+    return new Observable((observer) => {
+      this.defaultActivities.forEach((activity, index) => {
+        activity.constructionId = this.construction.id;
+        activity.statusId = 1;
+        activity.startDate = new Date(activity.startDate);
+        activity.endDate = new Date(activity.endDate);
+        activity.order = index + 1;
+        this.activityService.createActivity(activity).subscribe({
+          next: (response) => {
+            observer.next(response);
+          },
+          error: (error) => {
+            observer.error(error);
+          },
+        });
+      });
     });
   }
 }

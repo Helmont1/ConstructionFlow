@@ -1,6 +1,6 @@
 <app-activity-modal
   [show]="showActivityModal"
-  (saved)="reloadPage()"
+  (saved)="addActivity($event)"
   (closed)="showActivityModal = false"
 ></app-activity-modal>
 <app-left-navbar></app-left-navbar>
@@ -38,7 +38,7 @@
       </div>
       <div class="register-field">
         <p>Atividades</p>
-        <button class="show-modal-btn" (click)="showActivityModal = true">
+        <button type="button" class="show-modal-btn" (click)="showActivityModal = true">
           <i class="fa-regular fa-plus"></i>
           Adicionar atividade
         </button>
@@ -53,9 +53,9 @@
             <div class="activities-box">
               <div>
                 <i [class]="defaultActivity.icon"></i>
-                {{ defaultActivity.defaultActivityName }}
+                {{ defaultActivity.activityName }}
               </div>
-              <i class="fa-solid fa-trash delete"></i>
+              <i class="fa-solid fa-trash delete" (click)="deleteActivity(defaultActivity)"></i>
             </div>
             <div class="dates-container">
               <div class="date-container">
@@ -63,7 +63,7 @@
                 <input
                   type="date"
                   class="form-control"
-                  [(ngModel)]="dates[i][0]"
+                  [(ngModel)]="defaultActivity.startDate"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </div>
@@ -72,7 +72,7 @@
                 <input
                   type="date"
                   class="form-control"
-                  [(ngModel)]="dates[i][1]"
+                  [(ngModel)]="defaultActivity.endDate"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </div>
