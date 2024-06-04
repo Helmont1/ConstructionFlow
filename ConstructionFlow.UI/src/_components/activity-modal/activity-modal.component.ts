@@ -2,10 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Activity } from '../../_models/activity.model';
 import { Status } from '../../_models/status.model';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'app-activity-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [provideNgxMask()],
   templateUrl: './activity-modal.component.html',
   styleUrl: './activity-modal.component.scss',
 })
