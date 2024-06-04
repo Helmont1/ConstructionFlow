@@ -1,9 +1,10 @@
 <app-activity-modal
   [show]="showActivityModal"
   (saved)="reloadPage()"
+  (closed)="showActivityModal = false"
 ></app-activity-modal>
 <app-left-navbar></app-left-navbar>
-<section class="register" style="background-color: lightgray">
+<section class="register">
   <div class="register-container">
     <h1>Cadastrar nova obra</h1>
     <form
@@ -48,10 +49,13 @@
         >
           @for (defaultActivity of defaultActivities; track defaultActivity; let
           i = $index) {
-          <div cdkDrag>
+          <div cdkDrag class="card">
             <div class="activities-box">
-              <i [class]="defaultActivity.icon"></i>
-              {{ defaultActivity.defaultActivityName }}
+              <div>
+                <i [class]="defaultActivity.icon"></i>
+                {{ defaultActivity.defaultActivityName }}
+              </div>
+              <i class="fa-solid fa-trash delete"></i>
             </div>
             <div class="dates-container">
               <div class="date-container">

@@ -219,7 +219,9 @@ export class ConstructionComponent implements OnInit {
           startDate: new Date(this.dates[index][0]),
           endDate: new Date(this.dates[index][1]),
           defaultActivityId: activity.id,
-          order: index
+          order: index,
+          activityName: activity.defaultActivityName,
+          icon: activity.icon,
       }
       console.log(newActivity);
       this.activityService
