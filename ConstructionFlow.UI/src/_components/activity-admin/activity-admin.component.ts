@@ -50,6 +50,7 @@ export class ActivityAdminComponent implements OnInit{
     activity.startDate = new Date(activity.startDate);
     activity.endDate = new Date(activity.endDate);
     if(this.isEditing){
+      activity.statusId = activity.status!.id;
       this.activityService.editActivity(activity).subscribe(() => {
         this.ngOnInit();
       }
