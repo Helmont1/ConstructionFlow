@@ -23,7 +23,7 @@ export class AuthService {
         this.routerService.navigate(['/home']);
       },
       error: (error) => {
-        alert('Usuário ou senha inválidos');
+        if (error.status === 400) alert('Usuário ou senha inválidos');
       }
     });
   }
