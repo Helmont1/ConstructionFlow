@@ -69,8 +69,20 @@ export class TimelineComponent implements OnInit{
     if (!atividadeNext) return false;
     console.log(atividade, atividadeNext);
     return (
-      atividade.startDate.getFullYear() != atividadeNext.startDate.getFullYear()
+      new Date(atividade.startDate).getFullYear() != new Date(atividadeNext.startDate).getFullYear()
     );
+  }
+
+  getData(atividade: Activity){
+    return {
+      year: new Date(atividade.startDate).getFullYear(),
+      date:
+        '' +
+        this.getMonthName( new Date(atividade.startDate).getMonth()) +
+        ' ' +
+        new Date(atividade.startDate).getDate(),
+      name: atividade.defaultActivity!.defaultActivityName
+    }
   }
 
   getMonthName(month: number) {

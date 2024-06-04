@@ -9,9 +9,13 @@ export interface Activity {
   statusId?: number,
   construction?: Construction,
   constructionId?: number,
-  startDate: Date,
-  endDate: Date,
+  startDate: Date | string,
+  endDate: Date | string,
   defaultActivity?: DefaultActivity,
   defaultActivityId?: string,
-  order?: number
+  activityName: string,
+  icon: string,
+  order?: number,
+  usedMaterial?: 0,
+  wastedMaterial?: 0
 }
