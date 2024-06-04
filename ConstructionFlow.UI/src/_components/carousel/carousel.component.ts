@@ -1,9 +1,10 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [NgClass, CommonModule],
+  imports: [NgClass, CommonModule, RouterLink],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
