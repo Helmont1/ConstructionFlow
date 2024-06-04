@@ -30,8 +30,8 @@ import { StarRatingComponent } from '../../_components/star-rating/star-rating.c
 export class ProfileComponent implements OnInit, AfterViewInit {
   showPending: boolean = true;
   user: User = {} as User;
-  constructions: any;
-  finishedConstructions: any;
+  constructions: any[] = [];
+  finishedConstructions: any[] = [];
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
   defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg9zkf0PWdFupdiDjLIkF1rWzE_oC76dNaQ&s';
@@ -71,8 +71,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.alerts)
       setTimeout(() => {
-        console.log(this.alertComponent);
-        console.log(this.alerts);
         this.alertComponent.show(JSON.parse(this.alerts));
       });
   }
