@@ -66,17 +66,18 @@ export class ConstructionComponent implements OnInit {
   company: boolean = false;
   user: User = {} as User;
   showActivityModal: boolean = false;
-
   alerts: Alert[] = [
     {
       type: 'success',
       message: 'Construção criada com sucesso!',
     },
   ];
-
   registerForm: FormGroup;
-
   defaultActivities: Activity[] = [];
+  currencyFormat = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   constructor(
     private constructionService: ConstructionService,
@@ -212,6 +213,7 @@ export class ConstructionComponent implements OnInit {
             icon: activity.icon,
             startDate: new Date(),
             endDate: new Date(),
+            budget: 0,
           });
         });
       });
