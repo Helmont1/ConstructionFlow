@@ -23,6 +23,7 @@ export class ActivityModalComponent{
 
   save() {
     this.saved.emit(this.activity);
+    this.activity = {} as Activity;
   }
 
 }
