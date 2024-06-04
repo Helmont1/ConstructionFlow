@@ -42,7 +42,6 @@ export class TimelineComponent implements OnInit{
     this.conclusionPercentage = Math.round((finishedActivities / this.atividades.length) * 10000)/100;
     this.budgetPercentage = Math.round((this.budget / this.construction.budget) * 10000)/100;
     this.endExpectedIn = this.getEndExpectedIn();
-    console.log(this.atividades);
   }
 
   getEndExpectedIn() {
@@ -70,7 +69,6 @@ export class TimelineComponent implements OnInit{
 
   hasTimeLine(atividade: Activity, atividadeNext: Activity) {
     if (!atividadeNext) return false;
-    console.log(atividade, atividadeNext);
     return (
       new Date(atividade.startDate).getFullYear() != new Date(atividadeNext.startDate).getFullYear()
     );
