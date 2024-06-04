@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 offset-md-9 text-end">
+      <button class="btn btn-primary">Criar Atividade</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Status</th>
+            <th>Emoji</th>
+            <th>Custo</th>
+            <th>Data de Início</th>
+            <th>Data de Término</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(activity of activities; track activity){
+            <tr>
+              <td>{{activity.id}}</td>
+              <td>Vai ter</td>
+              <td>{{activity.status?.statusName}}</td>
+              <td>Vai ter</td>
+              <td>{{currencyFormatter.format(activity.budget!)}}</td>
+              <td>{{getDate(activity.startDate)}}</td>
+              <td>{{getDate(activity.endDate)}}</td>
+              <td>
+                <button class="btn btn-dark me-2" (click)="editActivity(activity)">Editar</button>
+                <button class="btn btn-danger" (click)="deleteActivity(activity.id!)">Excluir</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
