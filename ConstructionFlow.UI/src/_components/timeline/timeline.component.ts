@@ -27,7 +27,10 @@ export class TimelineComponent implements OnInit{
       atividade.startDate = new Date(atividade.startDate);
       atividade.endDate = new Date(atividade.endDate);
       if (atividade.budget) {
-        this.budget += atividade.budget;
+        if (atividade.status!.id == 3)
+          this.budget += atividade.budget;
+        else if (atividade.status!.id == 2)
+          this.budget += atividade.budget/2;
       }
       if (atividade.status!.id == 3) {
         finishedActivities++;
@@ -81,7 +84,7 @@ export class TimelineComponent implements OnInit{
         this.getMonthName( new Date(atividade.startDate).getMonth()) +
         ' ' +
         new Date(atividade.startDate).getDate(),
-      name: atividade.defaultActivity!.defaultActivityName
+      name: atividade.activityName
     }
   }
 
