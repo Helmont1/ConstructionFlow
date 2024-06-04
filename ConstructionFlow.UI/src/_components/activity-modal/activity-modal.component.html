@@ -1,13 +1,39 @@
-<div [class]="show? 'modal':'hidden'">
-  <div class="modal-content">
+<div [class]="show? 'modal-custom':'hidden'">
+  <div class="modal-custom-content">
     <div class="title">
       <i class="fa-solid fa-circle-plus"></i>
       <p>Criar nova atividade</p>
-      <i (click)="show=false" class="fa-solid fa-xmark close"></i>
+      <i (click)="closed.emit()" class="fa-solid fa-xmark close"></i>
     </div>
     <p>Preencha os campos</p>
-    <input type="text" [(ngModel)]="activityName" placeholder="Nome da atividade">
-    <input type="text" [(ngModel)]="iconClasses" placeholder="Classes do ícone">
-    <button (click)="save()">Salvar</button>
+    <p>Nome</p>
+    <input type="text" [(ngModel)]="activity.activityName" placeholder="Nome da atividade">
+    <p>Classes do ícone</p>
+    <input type="text" [(ngModel)]="activity.icon" placeholder="Digite as classes fontawesome do ícone">
+    <p>Orçamento</p>
+    <input type="text" [(ngModel)]="activity.budget" placeholder="Insira o custo estimado">
+    @if(showOrderField){
+      <p>Ordem</p>
+      <input type="number" [(ngModel)]="activity.order" placeholder="(1-primeiro, 2-segundo...)">
+      <p>Status</p>
+      <select [(ngModel)]="activity.status!.id">
+        @for(status of statuses; track status){
+          <option [value]="status.id">{{status.statusName}}</option>
+        }
+      </select>
+      @if(activity.status!.id == 3){
+        <p>Material comprado</p>
+        <input type="number" [(ngModel)]="activity.usedMaterial" placeholder="Quantidade de material comprado">
+        <p>Material usado</p>
+        <input type="number" [(ngModel)]="activity.wastedMaterial" placeholder="(mesma unidade de medida do comprado)">
+      }
+    }
+    <p>Data de Início</p>
+    <input type="date" [(ngModel)]="activity.startDate">
+    <p>Data de Término</p>
+    <input type="date" [(ngModel)]="activity.endDate">
+    <div class="btn-container">
+      <button (click)="save()">Salvar</button>
+    </div>
   </div>
 </div>
