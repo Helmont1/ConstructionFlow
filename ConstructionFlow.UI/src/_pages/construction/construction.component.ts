@@ -241,6 +241,7 @@ export class ConstructionComponent implements OnInit {
   saveActivities() {
     return new Observable((observer) => {
       this.defaultActivities.forEach((activity, index) => {
+        activity.id = undefined;
         activity.constructionId = this.construction.id;
         activity.statusId = 1;
         activity.startDate = new Date(activity.startDate);
