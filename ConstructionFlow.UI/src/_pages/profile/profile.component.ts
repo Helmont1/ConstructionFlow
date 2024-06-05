@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   @Input('data') alerts: any;
   defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg9zkf0PWdFupdiDjLIkF1rWzE_oC76dNaQ&s';
-  greenScore: number = 6.9;
+  greenScore: number = 10;
 
   constructor(
     private router: Router,
@@ -47,6 +47,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.authService.getUser().then((user) => {
       this.user = user;
+      console.log(user)
+      this.greenScore = user.score?? 100;
+      this.greenScore = this.greenScore/10
       this.constructionService
         .getConstructionsByUser(this.user)
         .subscribe((data) => {

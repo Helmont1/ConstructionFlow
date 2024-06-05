@@ -3,12 +3,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Activity } from '../../_models/activity.model';
 import { Construction } from '../../_models/construction.model';
 import { ActivityModalComponent } from '../activity-modal/activity-modal.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-activity-admin',
   standalone: true,
   imports: [
-    ActivityModalComponent
+    ActivityModalComponent,
+    RouterLink
   ],
   templateUrl: './activity-admin.component.html',
   styleUrls: ['./activity-admin.component.scss']

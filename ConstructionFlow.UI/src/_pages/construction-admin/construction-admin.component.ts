@@ -178,7 +178,6 @@ export class ConstructionAdminComponent {
   }
 
   deleteConstruction() {
-    console.log(this.profile_image.id)
     if(this.profile_image.id)
       this.constructionPhotoService.deletePhoto(this.profile_image.id).subscribe();
     if(this.construction?.id)

@@ -1,5 +1,10 @@
 <app-alert-modal [show]="showAlert"></app-alert-modal>
-
+<app-construction-list
+  (closed)="showConstructionList = false"
+  (choosed)="goToConstruction($event)"
+  [show]="showConstructionList"
+  [constructions]="constructions"
+></app-construction-list>
 <section
   class="home"
   style="background-image: url('assets/imgs/home-background.jpg')"
@@ -14,7 +19,7 @@
         <li (click)="goTo('login')"><a>Entrar</a></li>
         <li (click)="goTo('register')"><a>Cadastre-se</a></li>
         } @else {
-          <li (click)="logout()"><a>Encerrar sessão</a></li>
+        <li (click)="logout()"><a>Encerrar sessão</a></li>
         <li (click)="goTo('profile')"><a>Ver Perfil</a></li>
         }
       </ul>
@@ -45,7 +50,12 @@
       </button>
     </div>
     <div class="search-field">
-      <input type="text" [(ngModel)]="constructionId" placeholder="{{searchText}}" (keyup.enter)="findConstruction()">
+      <input
+        type="text"
+        [(ngModel)]="constructionId"
+        placeholder="{{ searchText }}"
+        (keyup.enter)="findConstruction()"
+      />
       <button (click)="findConstruction()">
         <img src="assets/imgs/search-icon.png" alt="Pesquisar" />
       </button>
@@ -56,9 +66,11 @@
           <p>Sobre o Construction Flow</p>
         </button>
       </a>
-      <button>
-        <p>Precisa de ajuda? Contate-nos</p>
-      </button>
+      <a href="https://constructionflow.azurewebsites.net/swagger/index.html">
+        <button>
+          <p>Precisa de ajuda? Contate-nos</p>
+        </button>
+      </a>
     </div>
   </main>
 </section>

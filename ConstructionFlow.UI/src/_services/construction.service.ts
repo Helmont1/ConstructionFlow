@@ -19,6 +19,10 @@ export class ConstructionService {
     return this.http.get(`${this.url}/users/${user.id}`);
   }
 
+  getConstructionByCustomer(customerId: string) {
+    return this.http.get(`${this.url}/customer/${customerId}`);
+  }
+
   createConstruction(construction: Construction) {
     return this.http.post(this.url, construction);
   }

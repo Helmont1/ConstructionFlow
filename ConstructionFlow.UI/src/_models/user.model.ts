@@ -3,5 +3,6 @@ export interface User {
   userName: string,
   userEmail: string,
   userCnpj: string,
-  userPassword?: string
+  userPassword?: string,
+  score?: number,
 }

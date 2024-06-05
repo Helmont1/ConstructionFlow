@@ -1,0 +1,40 @@
+@if (show){
+<div class="modal-custom">
+  <div class="modal-custom-content">
+    <!-- table activities -->
+    <div class="table-responsive">
+      <div class="title">
+        <i class="fa-solid fa-circle-plus"></i>
+        <p>Escolha a construção</p>
+        <i (click)="closed.emit()" class="fa-solid fa-xmark close"></i>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Construção</th>
+            <th>Status</th>
+            <th>Empresa</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(construction of constructions; track construction){
+          <tr>
+            <td>{{ construction.id }}</td>
+            <td>{{ construction.title }}</td>
+            <td>{{ construction.status?.statusName }}</td>
+            <td>{{ construction.user?.userName }}</td>
+            <td>
+              <button (click)="choose(construction)" class="btn btn-primary">
+                Ver Detalhes
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+}

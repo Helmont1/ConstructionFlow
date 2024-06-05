@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 import { CustomerService } from '../../_services/customer.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,6 +54,7 @@ import { DefaultActivity } from '../../_models/default-activity.model';
     CdkDrag,
     DialogModule,
     ActivityModalComponent,
+    RouterLink
   ],
   providers: [provideNgxMask()],
   templateUrl: './construction.component.html',

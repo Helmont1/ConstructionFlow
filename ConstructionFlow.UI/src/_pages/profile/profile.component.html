@@ -13,7 +13,7 @@
       <div class="green-score">
         <p>Green Score</p>
         <app-star-rating [rating]="getRating()"></app-star-rating>
-        <p>{{greenScore.toFixed(1).replace('.', ',') }} / 10</p>
+        <p>{{(greenScore/2).toFixed(1).replace('.', ',') }} / 5</p>
       </div>
     </div>
   </div>

@@ -1,3 +1,15 @@
+@import '../../variables.scss';
+
 .container{
   margin-block: 20px;
+
+  .back{
+    position: fixed;
+    top: 1rem;
+    left: 4.5rem;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: $h-background-button;
+  }
 }
