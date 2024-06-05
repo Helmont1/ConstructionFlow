@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 import { ConstructionService } from '../../_services/construction.service';
 import { Construction } from '../../_models/construction.model';
@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ConstructionPhotoService } from '../../_services/construction-photo.service';
 import { ConstructionPhoto } from '../../_models/construction-photo.model';
 import { ActivityAdminComponent } from '../../_components/activity-admin/activity-admin.component';
+import { Alert } from '../../_components/alert/alert.component';
 
 @Component({
   selector: 'app-construction-admin',
@@ -39,12 +40,14 @@ export class ConstructionAdminComponent {
   dates = {
     startDate: '',
     endDate: '',
-  }
+  };
+  alerts: Alert[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private constructionService: ConstructionService,
-    private constructionPhotoService: ConstructionPhotoService
+    private constructionPhotoService: ConstructionPhotoService,
+    private router: Router
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -57,7 +60,7 @@ export class ConstructionAdminComponent {
         this.dates.endDate = this.getFormattedDate(this.construction.endDate);
       });
     this.constructionPhotoService.getPhotosByConstructionId(this.id).subscribe((photo) => {
-      if ((photo as Array<Object>).length != 0) this.profile_image = photo as ConstructionPhoto;
+      if (photo && (photo as Array<Object>).length != 0) this.profile_image = photo as ConstructionPhoto;
     });
   }
 
@@ -172,6 +175,27 @@ export class ConstructionAdminComponent {
     let isFuture = this.compareDate(new Date(endDate));
     if ((id == 3 && isFuture) || (id != 3 && !isFuture) ) return false;
     return true;
+  }
+
+  deleteConstruction() {
+    console.log(this.profile_image.id)
+    if(this.profile_image.id)
+      this.constructionPhotoService.deletePhoto(this.profile_image.id).subscribe();
+    if(this.construction?.id)
+      this.constructionService.deleteConstruction(this.construction.id).subscribe({
+        next: () => {
+          this.alerts.push({ type: 'success', message: 'Construção deletada com sucesso!' });
+          this.router.navigate(['/profile'], {
+            queryParams: { data: JSON.stringify(this.alerts) },
+          });
+        },
+        error: (error) => {
+          this.alerts.push({ type: 'danger', message: 'Erro ao deletar construção' });
+          this.router.navigate(['/profile'], {
+            queryParams: { data: JSON.stringify(this.alerts) },
+          });
+        }
+    });
   }
 
   toggle() {

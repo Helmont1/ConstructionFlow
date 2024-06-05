@@ -135,15 +135,21 @@
     </div>
     }
 
-    <button [class]="readonly ? 'toggle' : 'toggle green'" (click)="toggle()">
-      @if(readonly){
-      <p>Editar</p>
-      <i class="fa-regular fa-pen-to-square"></i>
-      } @else{
-      <p>Salvar</p>
-      <i class="fa-solid fa-check"></i>
-      }
-    </button>
+    <div>
+      <button [class]="readonly ? 'toggle' : 'toggle green'" (click)="toggle()">
+        @if(readonly){
+        <p>Editar</p>
+        <i class="fa-regular fa-pen-to-square"></i>
+        } @else{
+        <p>Salvar</p>
+        <i class="fa-solid fa-check"></i>
+        }
+      </button>
+      <button class="toggle danger" (click)="deleteConstruction()">
+        <p>Excluir</p>
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
   </div>
 
   @if (construction){
