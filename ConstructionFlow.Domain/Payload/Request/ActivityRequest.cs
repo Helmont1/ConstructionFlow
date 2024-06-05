@@ -19,7 +19,14 @@ namespace ConstructionFlow.Domain.Payload.Request
         public DateTime EndDate { get; set; }
         public int? DefaultActivityId { get; set; }
 
-        public int Order { get; set; }
+        public int? Order { get; set; }
 
+        public string? ActivityName { get; set; }
+
+        public string? Icon { get; set; }
+
+        public double? UsedMaterial { get; set; }
+
+        public double? WastedMaterial { get; set; }
     }
 }

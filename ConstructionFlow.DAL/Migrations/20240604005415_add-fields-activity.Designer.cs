@@ -4,6 +4,7 @@ using ConstructionFlow.DAL.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConstructionFlow.DAL.Migrations
 {
     [DbContext(typeof(ConstructionFlowDbContext))]
-    partial class ConstructionFlowDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240604005415_add-fields-activity")]
+    partial class addfieldsactivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,9 +210,6 @@ namespace ConstructionFlow.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double?>("Score")
-                        .HasColumnType("float");
 
                     b.Property<string>("UserCnpj")
                         .IsRequired()

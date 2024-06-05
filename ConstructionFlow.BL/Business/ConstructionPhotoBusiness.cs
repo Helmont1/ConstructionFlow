@@ -58,13 +58,13 @@ namespace ConstructionFlow.BL.Business
             return _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<ConstructionPhotoResponse> GetConstructionPhotoByConstruction(int constructionId)
         {
-            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.GetAllAsync(
+            var constructionPhotos = await _unitOfWork.ConstructionPhotoRepository.Get(
                 x => x.ConstructionId == constructionId,
                 include: query => query.Include(x => x.Construction)
             );
-            return _mapper.Map<IEnumerable<ConstructionPhotoResponse>>(constructionPhotos);
+            return _mapper.Map<ConstructionPhotoResponse>(constructionPhotos);
         }
     }
 }

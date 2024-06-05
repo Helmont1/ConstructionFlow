@@ -4,6 +4,7 @@ using ConstructionFlow.DAL.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConstructionFlow.DAL.Migrations
 {
     [DbContext(typeof(ConstructionFlowDbContext))]
-    partial class ConstructionFlowDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240604003157_change-photo-type")]
+    partial class changephototype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace ConstructionFlow.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ActivityName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Budget")
                         .HasColumnType("float");
 
@@ -45,9 +45,6 @@ namespace ConstructionFlow.DAL.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -56,12 +53,6 @@ namespace ConstructionFlow.DAL.Migrations
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
-
-                    b.Property<double?>("UsedMaterial")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("WastedMaterial")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -207,9 +198,6 @@ namespace ConstructionFlow.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double?>("Score")
-                        .HasColumnType("float");
 
                     b.Property<string>("UserCnpj")
                         .IsRequired()
