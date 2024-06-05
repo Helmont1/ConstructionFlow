@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CarouselComponent } from '../../_components/carousel/carousel.component';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { User } from '../../_models/user.model';
 import { LeftNavbarComponent } from '../../_components/left-navbar/left-navbar.component';
 import { AlertComponent } from '../../_components/alert/alert.component';
@@ -40,7 +40,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private constructionService: ConstructionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -69,10 +70,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.alerts)
-      setTimeout(() => {
-        this.alertComponent.show(JSON.parse(this.alerts));
-      });
+    if (this.alerts){
+      this.alertComponent.show(JSON.parse(this.alerts));
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {},
+        queryParamsHandling: '',
+        replaceUrl: true
+      })
+    }
   }
 
   getRating(){
