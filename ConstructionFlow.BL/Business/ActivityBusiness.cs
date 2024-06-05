@@ -43,6 +43,14 @@ namespace ConstructionFlow.BL.Business
 
         public async Task<ActivityResponse> AddActivity(ActivityRequest activity)
         {
+            if (activity.Order == null)
+            {
+                var maxOrder = await _unitOfWork.ActivityRepository.GetAllAsync(
+                    x => x.ConstructionId == activity.ConstructionId
+                );
+                maxOrder = maxOrder.OrderByDescending(x => x.Order).ToList();
+                activity.Order = maxOrder.Count > 0 ? maxOrder.First().Order + 1 : 1;
+            }
             var response = await _unitOfWork.ActivityRepository.Insert(_mapper.Map<Activity>(activity));
             return _mapper.Map<ActivityResponse>(response);
         }

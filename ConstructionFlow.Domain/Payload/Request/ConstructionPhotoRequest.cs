@@ -10,7 +10,7 @@ namespace ConstructionFlow.Domain.Payload.Request
     {
         public int Id { get; set; }
 
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
 
         public int ConstructionId { get; set; }
     }

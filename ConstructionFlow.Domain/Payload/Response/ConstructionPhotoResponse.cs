@@ -9,7 +9,7 @@ namespace ConstructionFlow.Domain.Payload.Response
     {
         public int Id { get; set; }
 
-        public byte[]? Photo { get; set; }
+        public string? Photo { get; set; }
 
         public ConstructionResponse? Construction { get; set; }
     }

@@ -19,5 +19,13 @@ namespace ConstructionFlow.Domain.Payload.Response
         public DefaultActivityResponse? DefaultActivity { get; set; }
 
         public int Order { get; set; }
+
+        public string? ActivityName { get; set; }
+
+        public string? Icon { get; set; }
+
+        public double? UsedMaterial { get; set; }
+
+        public double? WastedMaterial { get; set; }
     }
 }

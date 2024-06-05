@@ -29,9 +29,9 @@ namespace ConstructionFlow.Api.Controllers
         }
 
         [HttpGet("construction/{constructionId}")]
-        public async Task<IEnumerable<ConstructionPhotoResponse>> GetConstructionPhotosByConstruction(int constructionId)
+        public async Task<ConstructionPhotoResponse> GetConstructionPhotoByConstruction(int constructionId)
         {
-            return await _constructionPhotoBusiness.GetConstructionPhotosByConstruction(constructionId);
+            return await _constructionPhotoBusiness.GetConstructionPhotoByConstruction(constructionId);
         }
 
         [HttpPost]
