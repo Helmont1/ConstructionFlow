@@ -14,5 +14,7 @@ namespace ConstructionFlow.Domain.Payload.Response
         public string UserEmail { get; set; }
 
         public string UserCnpj { get; set; }
+
+        public double? Score { get; set; }
     }
 }

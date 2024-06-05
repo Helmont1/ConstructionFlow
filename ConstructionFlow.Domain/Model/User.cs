@@ -25,5 +25,7 @@ namespace ConstructionFlow.Domain.Model
         [Required]
         [MaxLength (14)]
         public required string UserCnpj { get; set; }
+
+        public double? Score { get; set; }
     }
 }
