@@ -1,4 +1,4 @@
-<app-alert-modal [show]="showAlert"></app-alert-modal>
+<app-alert-modal (closed)="showAlert=false" [show]="showAlert"></app-alert-modal>
 <app-construction-list
   (closed)="showConstructionList = false"
   (choosed)="goToConstruction($event)"
