@@ -12,15 +12,7 @@
         ? 'half'
         : 'full'
     "
-    [data]="{
-      year: atividade.startDate.getFullYear(),
-      date:
-        '' +
-        getMonthName(atividade.startDate.getMonth()) +
-        ' ' +
-        atividade.startDate.getDate(),
-      name: atividade.defaultActivity!.defaultActivityName
-    }"
+    [data]="getData(atividade)"
   ></app-activity>
   }
 </div>

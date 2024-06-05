@@ -1,7 +1,16 @@
+@if(construction){
+  <app-activity-modal
+    [show]="showActivityModal"
+    (saved)="saveActivity($event)"
+    (closed)="showActivityModal=false"
+    [showOrderField]="isEditing"
+    [activity]="activityEditing"
+  ></app-activity-modal>
+}
 <div class="container">
   <div class="row">
     <div class="col-md-2 offset-md-9 text-end">
-      <button class="btn btn-primary">Criar Atividade</button>
+      <button class="btn btn-primary" (click)="showModal()">Criar Atividade</button>
     </div>
   </div>
   <div class="row">
@@ -23,9 +32,9 @@
           @for(activity of activities; track activity){
             <tr>
               <td>{{activity.id}}</td>
-              <td>Vai ter</td>
+              <td>{{activity.activityName}}</td>
               <td>{{activity.status?.statusName}}</td>
-              <td>Vai ter</td>
+              <td><i [class]="activity.icon"></i></td>
               <td>{{currencyFormatter.format(activity.budget!)}}</td>
               <td>{{getDate(activity.startDate)}}</td>
               <td>{{getDate(activity.endDate)}}</td>

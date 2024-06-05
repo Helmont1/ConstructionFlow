@@ -1,9 +1,10 @@
 <app-activity-modal
   [show]="showActivityModal"
-  (saved)="reloadPage()"
+  (saved)="addActivity($event)"
+  (closed)="showActivityModal = false"
 ></app-activity-modal>
 <app-left-navbar></app-left-navbar>
-<section class="register" style="background-color: lightgray">
+<section class="register">
   <div class="register-container">
     <h1>Cadastrar nova obra</h1>
     <form
@@ -37,7 +38,11 @@
       </div>
       <div class="register-field">
         <p>Atividades</p>
-        <button class="show-modal-btn" (click)="showActivityModal = true">
+        <button
+          type="button"
+          class="show-modal-btn"
+          (click)="showActivityModal = true"
+        >
           <i class="fa-regular fa-plus"></i>
           Adicionar atividade
         </button>
@@ -48,10 +53,16 @@
         >
           @for (defaultActivity of defaultActivities; track defaultActivity; let
           i = $index) {
-          <div cdkDrag>
+          <div cdkDrag class="card">
             <div class="activities-box">
-              <i [class]="defaultActivity.icon"></i>
-              {{ defaultActivity.defaultActivityName }}
+              <div>
+                <i [class]="defaultActivity.icon"></i>
+                {{ defaultActivity.activityName }}
+              </div>
+              <i
+                class="fa-solid fa-trash delete"
+                (click)="deleteActivity(defaultActivity)"
+              ></i>
             </div>
             <div class="dates-container">
               <div class="date-container">
@@ -59,7 +70,7 @@
                 <input
                   type="date"
                   class="form-control"
-                  [(ngModel)]="dates[i][0]"
+                  [(ngModel)]="defaultActivity.startDate"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </div>
@@ -68,7 +79,19 @@
                 <input
                   type="date"
                   class="form-control"
-                  [(ngModel)]="dates[i][1]"
+                  [(ngModel)]="defaultActivity.endDate"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              <div class="date-container">
+                <p>Orçamento da atividade (R$):</p>
+                <input
+                  class="form-control"
+                  type="text"
+                  mask="separator.0"
+                  prefix="R$ "
+                  thousandSeparator="."
+                  [(ngModel)]="defaultActivity.budget"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </div>
@@ -173,7 +196,7 @@
             id="budget"
             name="budget"
             formControlName="budget"
-            mask="separator.2"
+            mask="separator.0"
             prefix="R$ "
             thousandSeparator=" "
           />
@@ -182,7 +205,7 @@
           class="warning"
           *ngIf="
             registerForm.get('budget')?.invalid &&
-            (registerForm.get('budget')?.touched)
+            registerForm.get('budget')?.touched
           "
         >
           <div *ngIf="registerForm.get('budget')?.errors?.required">

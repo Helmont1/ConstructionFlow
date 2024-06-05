@@ -27,7 +27,10 @@ export class TimelineComponent implements OnInit{
       atividade.startDate = new Date(atividade.startDate);
       atividade.endDate = new Date(atividade.endDate);
       if (atividade.budget) {
-        this.budget += atividade.budget;
+        if (atividade.status!.id == 3)
+          this.budget += atividade.budget;
+        else if (atividade.status!.id == 2)
+          this.budget += atividade.budget/2;
       }
       if (atividade.status!.id == 3) {
         finishedActivities++;
@@ -39,7 +42,6 @@ export class TimelineComponent implements OnInit{
     this.conclusionPercentage = Math.round((finishedActivities / this.atividades.length) * 10000)/100;
     this.budgetPercentage = Math.round((this.budget / this.construction.budget) * 10000)/100;
     this.endExpectedIn = this.getEndExpectedIn();
-    console.log(this.atividades);
   }
 
   getEndExpectedIn() {
@@ -67,10 +69,21 @@ export class TimelineComponent implements OnInit{
 
   hasTimeLine(atividade: Activity, atividadeNext: Activity) {
     if (!atividadeNext) return false;
-    console.log(atividade, atividadeNext);
     return (
-      atividade.startDate.getFullYear() != atividadeNext.startDate.getFullYear()
+      new Date(atividade.startDate).getFullYear() != new Date(atividadeNext.startDate).getFullYear()
     );
+  }
+
+  getData(atividade: Activity){
+    return {
+      year: new Date(atividade.startDate).getFullYear(),
+      date:
+        '' +
+        this.getMonthName( new Date(atividade.startDate).getMonth()) +
+        ' ' +
+        new Date(atividade.startDate).getDate(),
+      name: atividade.activityName
+    }
   }
 
   getMonthName(month: number) {

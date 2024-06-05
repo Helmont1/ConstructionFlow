@@ -1,36 +1,35 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DefaultActivityService } from '../../_services/default-activity.service';
+import { Activity } from '../../_models/activity.model';
+import { Status } from '../../_models/status.model';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'app-activity-modal',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
+  providers: [provideNgxMask()],
   templateUrl: './activity-modal.component.html',
-  styleUrl: './activity-modal.component.scss'
+  styleUrl: './activity-modal.component.scss',
 })
-export class ActivityModalComponent {
+export class ActivityModalComponent{
   @Input() show: boolean = false;
-  activityName: string = '';
-  iconClasses: string = '';
-  @Output() saved = new EventEmitter<void>();
-
-  constructor(
-    private defaultActivityService: DefaultActivityService
-  ){}
+  @Input() activity: Activity = {} as Activity;
+  @Output() saved = new EventEmitter<Activity>();
+  @Output() closed = new EventEmitter<void>();
+  @Input() showOrderField: boolean = false;
+  statuses: Status[] = [
+    {id: 1, statusName: 'Não Inciado'},
+    {id: 2, statusName: 'Em andamento'},
+    {id: 3, statusName: 'Finalizado'},
+  ];
 
   save() {
-    if (!this.activityName || !this.iconClasses) {
-      alert('Preencha todos os campos para continuar');
-      return;
-    }
-    this.defaultActivityService.createDefaultActivity({
-      defaultActivityName: this.activityName,
-      icon: this.iconClasses
-    }).subscribe(() => {
-      this.show = false;
-      this.saved.emit();
-    });
+    this.saved.emit(this.activity);
+    this.activity = {} as Activity;
   }
+
 }

@@ -3,68 +3,15 @@
 .register {
   padding-block: 2%;
   display: flex;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-color: l;
+  background-color: lightgray;
   align-items: center;
   justify-content: center;
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2% 5%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-
-    &-logo {
-      img {
-        width: 5vw;
-      }
-    }
-
-    &-menu {
-      ul {
-        list-style: none;
-
-        li {
-          display: inline;
-          margin-right: 20px;
-          font-size: 1rem;
-          font-weight: 500;
-          cursor: pointer;
-
-          a {
-            text-decoration: none;
-            color: white;
-            font-weight: normal;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-
-        li:nth-child(2) {
-          background-color: $h-background-button;
-          padding: 10px 20px;
-          border-radius: 100px;
-        }
-      }
-    }
-  }
-
-  h6 {
-    color: rgb(156, 16, 16);
-    margin-bottom: 10px;
-  }
 
   &-container {
     display: flex;
     flex-direction: column;
     padding: 30px;
+    width: 40%;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -85,11 +32,11 @@
 
       p {
         margin-bottom: 5px;
-        font-size: 14px;
+        font-size: 1rem;
         color: $h-background-button;
       }
 
-      .show-modal-btn{
+      .show-modal-btn {
         background-color: #fff;
         color: #0066a6;
         padding: 5px 10px;
@@ -156,58 +103,8 @@
         width: 100%;
       }
 
-      .activities-list{
+      .activities-list {
         width: 100%;
-
-        .activities-box {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          margin: 5px 0;
-          border-radius: 5px;
-          background-color: lightgray;
-          cursor: move;
-
-          &:hover {
-            background-color: #f5f5f5;
-          }
-
-          i {
-            margin-right: 10px;
-          }
-        }
-        .dates-container{
-          display: flex;
-          padding-inline: 10px;
-          justify-content: center;
-          align-items: center;
-          border: 1px solid #ccc;
-          margin-top: -3px;
-          border-top: none;
-          width: 96%;
-          margin-left: 2%;
-
-          p{
-            font-size: 0.7rem;
-          }
-
-          .date-container{
-            display: block;
-
-            input{
-              width: 95%;
-            }
-          }
-        }
-
-      }
-
-      .cdk-drag-placeholder {
-        opacity: 0;
-      }
-      .activities-list.cdk-drop-list-dragging .activities-box:not(.cdk-drag-placeholder) {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
       }
     }
     .btn {
@@ -259,4 +156,74 @@
   .mdc-snackbar__label {
     color: white !important;
   }
+}
+
+.card {
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  .activities-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgray;
+    cursor: move;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    i {
+      margin-right: 10px;
+    }
+    .delete {
+      color: $danger;
+      cursor: pointer;
+
+      &:hover {
+        color: red;
+        transform: scale(1.1);
+      }
+    }
+
+    .budget{
+      min-width: 10%;
+      width: 10%;
+      max-width: 25%;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid black;
+      margin-left: 0.2rem;
+    }
+  }
+  .dates-container {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 96%;
+    margin-left: 2%;
+
+    p {
+      font-size: 0.7rem;
+    }
+
+    .date-container {
+      display: block;
+      padding: 5px;
+    }
+  }
+}
+
+.cdk-drag-preview {
+  @extend .card;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
 }

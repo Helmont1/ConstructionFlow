@@ -12,7 +12,6 @@ export class StarRatingComponent {
   @Input() size: number=5;
 
   get stars() {
-    console.log(this.rating)
     return Array(Math.floor(this.size)).fill(0);
   }
 }
